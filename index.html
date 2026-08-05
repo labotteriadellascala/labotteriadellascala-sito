@@ -20,6 +20,7 @@
      FormSubmit -> grazie.html, form allineato al registro lead,
      copy e prezzi aggiornati (range indicativi), garanzia in risalto,
      og/social preview + favicon.
+     v10.1: banner cookie rialzato sopra WhatsApp/menu, revoca consenso da footer, copy opt-in.
      Cerca «MODIFICA» per i punti modificabili (contatti, testi).
      ═══════════════════════════════════════════════════════════════════ -->
 
@@ -317,11 +318,16 @@ footer{border-top:1px solid var(--line-soft);padding:40px 0;background:var(--pap
 .pdlg h4{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin:20px 0 8px}
 .pdlg p{font-size:14px;color:var(--ink-soft);line-height:1.65}
 .pdate{margin-top:20px;font-size:12px !important;color:var(--ink-faint) !important}
-.ckbar{position:fixed;left:12px;right:12px;bottom:64px;z-index:85;background:var(--plaster);
-  border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:0 14px 40px rgba(40,30,18,.25)}
-.ckbar p{font-size:13.5px;color:var(--ink-soft);line-height:1.55;margin-bottom:12px}
+.ckbar{position:fixed;left:12px;right:12px;bottom:64px;z-index:200;background:var(--plaster);
+  border:1px solid var(--line);border-radius:14px;padding:17px 19px;box-shadow:0 16px 46px rgba(40,30,18,.3)}
+.ckbar p{font-size:13.5px;color:var(--ink-soft);line-height:1.55;margin-bottom:13px}
+.ckbar p a,.ckbar p .plink{color:var(--gold)}
 .ckbtns{display:flex;gap:10px}
-@media(min-width:721px){.ckbar{left:auto;right:24px;bottom:24px;max-width:380px}}
+.ckbtns .btn{flex:1}
+#ckYes{background:#47714f;color:#f5f1e8;border-color:#47714f}
+#ckYes:hover{background:#3c5f43}
+.ckbtns .ck-no{background:transparent;border-color:var(--line);color:var(--ink-soft);flex:0 0 auto;padding-left:18px;padding-right:18px}
+@media(min-width:721px){.ckbar{left:auto;right:24px;bottom:24px;max-width:392px}}
 .foot{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
 .foot p{font-size:13px;color:var(--ink-faint)}
 
@@ -680,7 +686,7 @@ footer{border-top:1px solid var(--line-soft);padding:40px 0;background:var(--pap
     </div>
     <div class="legal">
       <p>Steel Head di Andrea Canovi · Via Caduti sul Lavoro 22, 37063 Isola della Scala (VR) · P.IVA 04775640230</p>
-      <p>Artigianato italiano su misura · <button type="button" class="plink" onclick="document.getElementById('privacyDlg').showModal()">Privacy &amp; Cookie Policy</button></p>
+      <p>Artigianato italiano su misura · <button type="button" class="plink" onclick="document.getElementById('privacyDlg').showModal()">Privacy &amp; Cookie Policy</button> · <button type="button" class="plink" onclick="lbdsCookieReopen()">Gestisci cookie</button></p>
     </div>
   </div>
 </footer>
@@ -764,10 +770,10 @@ document.querySelectorAll('.cmp').forEach(cmp=>{
 
 <!-- Consenso cookie + tracciamento (Meta Pixel + GA4) -->
 <div class="ckbar" id="ckbar" hidden>
-  <p>Usiamo cookie di misurazione (Meta Pixel e Google Analytics) per capire come migliorare il sito. <button type="button" class="plink" onclick="document.getElementById('privacyDlg').showModal()">Informativa</button></p>
+  <p>Usiamo cookie di misurazione per capire cosa funziona e mostrarti progetti in linea con i tuoi interessi. Ci dai una mano? <button type="button" class="plink" onclick="document.getElementById('privacyDlg').showModal()">Leggi l'informativa</button></p>
   <div class="ckbtns">
     <button type="button" class="btn btn-solid btn-sm" id="ckYes">Accetta</button>
-    <button type="button" class="btn btn-line btn-sm" id="ckNo">Rifiuta</button>
+    <button type="button" class="btn btn-sm ck-no" id="ckNo">Rifiuta</button>
   </div>
 </div>
 <script>
@@ -801,13 +807,26 @@ function loadTracking(){
   gtag('js',new Date());
   gtag('config','G-RD4JSPQP91');
 }
+function lbdsCookieReopen(){
+  var dlg=document.getElementById('privacyDlg'); if(dlg&&dlg.open) dlg.close();
+  var bar=document.getElementById('ckbar'); if(bar) bar.hidden=false;
+}
 (function(){
-  const bar=document.getElementById('ckbar');
-  const c=localStorage.getItem('lbds_consent');
-  if(c==='yes'){loadTracking();}
-  else if(c!=='no'){bar.hidden=false;}
-  document.getElementById('ckYes').addEventListener('click',()=>{localStorage.setItem('lbds_consent','yes');bar.hidden=true;loadTracking();});
-  document.getElementById('ckNo').addEventListener('click',()=>{localStorage.setItem('lbds_consent','no');bar.hidden=true;});
+  var bar=document.getElementById('ckbar');
+  if(!bar) return;
+  var c=null;
+  try{ c=localStorage.getItem('lbds_consent'); }catch(e){}
+  if(c==='yes'){ loadTracking(); }
+  else { bar.hidden=false; }   // mostra il banner sia ai nuovi sia a chi non ha ancora scelto; 'no' verra' gestito dai click
+  if(c==='no'){ bar.hidden=true; }
+  document.getElementById('ckYes').addEventListener('click',function(){
+    try{ localStorage.setItem('lbds_consent','yes'); }catch(e){}
+    bar.hidden=true; loadTracking();
+  });
+  document.getElementById('ckNo').addEventListener('click',function(){
+    try{ localStorage.setItem('lbds_consent','no'); }catch(e){}
+    bar.hidden=true;
+  });
 })();
 </script>
 </body>
