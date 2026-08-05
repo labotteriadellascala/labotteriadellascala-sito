@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Richiesta ricevuta — La Botteria della Scala</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--plaster:#faf7f0;--paper:#f2ecdf;--line:#d3c6ae;--ink:#32281c;--ink-soft:#6b5c49;
+--ink-faint:#95866f;--gold:#7d2a35;--sans:"Geist",system-ui,sans-serif;--mono:"Geist Mono",monospace}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);min-height:100dvh;
+display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px;text-align:center}
+img.logo{height:44px;width:auto;margin-bottom:38px}
+.tick{width:74px;height:74px;border-radius:50%;background:var(--gold);color:#f5f1e8;display:flex;
+align-items:center;justify-content:center;font-size:34px;margin:0 auto 26px}
+h1{font-size:clamp(26px,6vw,38px);font-weight:600;letter-spacing:-.03em;line-height:1.1;margin-bottom:14px}
+p{font-size:17px;color:var(--ink-soft);line-height:1.6;max-width:44ch;margin:0 auto 30px}
+.btn{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:16px;
+padding:15px 28px;border-radius:999px;background:#25d366;color:#fff;text-decoration:none}
+.back{display:block;margin-top:22px;font-size:14px;color:var(--ink-faint);text-decoration:underline}
+</style>
+</head>
+<body>
+<img class="logo" src="img/logo-colore.png" alt="La Botteria della Scala" width="512" height="119">
+<div class="tick">✓</div>
+<h1>Richiesta ricevuta!</h1>
+<p>Grazie: il tuo progetto è già sul nostro banco. <b>Ti rispondiamo entro poche ore</b> con le prime idee per la tua botte. Se vuoi anticiparci qualcosa — foto dello spazio, misure, ispirazioni — scrivici pure su WhatsApp.</p>
+<a class="btn" href="https://wa.me/393515466834" target="_blank" rel="noopener">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1112 20z"/><path d="M16.6 14.2c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a6.5 6.5 0 01-3.2-2.8c-.1-.2 0-.4.1-.5l.4-.5c.1-.2.1-.3 0-.5l-.7-1.6c-.2-.4-.4-.4-.5-.4h-.5c-.2 0-.5.1-.7.3-.7.7-.9 1.6-.6 2.6.4 1.4 1.3 2.7 2.5 3.7 1.5 1.3 3 1.8 4.1 1.8.6 0 1.2-.2 1.6-.6.3-.3.5-.7.5-1.1v-.5c0-.1-.1-.2-.2-.2z"/></svg>
+Scrivici su WhatsApp</a>
+<a class="back" href="index.html">Torna al sito</a>
+<script>
+function loadTracking(){
+  if(window.__trk) return; window.__trk = true;
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','3500501163531510');
+  fbq('track','PageView');
+  fbq('track','Lead');
+  var g=document.createElement('script');g.async=true;
+  g.src='https://www.googletagmanager.com/gtag/js?id=G-RD4JSPQP91';
+  document.head.appendChild(g);
+  window.dataLayer=window.dataLayer||[];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js',new Date());
+  gtag('config','G-RD4JSPQP91');
+  gtag('event','generate_lead');
+}
+if(localStorage.getItem('lbds_consent')==='yes'){loadTracking();}
+</script>
+</body>
+</html>

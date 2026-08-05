@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Botteria della Scala — Mobili bar a forma di botte, su misura</title>
+<meta name="description" content="Mobili bar a forma di botte, fatti a mano e su misura per la tua casa. Ricevi il tuo rendering 3D gratuito, senza impegno.">
+<meta property="og:title" content="La Botteria della Scala — Mobili bar a forma di botte, su misura">
+<meta property="og:description" content="Fatti a mano in Italia, su misura per il tuo spazio. Rendering 3D gratuito, senza impegno.">
+<meta property="og:image" content="https://www.labotteriadellascala.it/img/hero-social.jpg">
+<meta property="og:url" content="https://www.labotteriadellascala.it/">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     LA BOTTERIA DELLA SCALA — sito vetrina · VERSIONE v10.0 (lancio)
+     Tutte le immagini sono DEFINITIVE (foto ufficiali, cartella img/).
+     Changelog v10.0: immagini esternalizzate e ottimizzate (lazy loading),
+     Meta Pixel + GA4 con banner di consenso, cattura UTM nel form,
+     FormSubmit -> grazie.html, form allineato al registro lead,
+     copy e prezzi aggiornati (range indicativi), garanzia in risalto,
+     og/social preview + favicon.
+     Cerca «MODIFICA» per i punti modificabili (contatti, testi).
+     ═══════════════════════════════════════════════════════════════════ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --plaster:#faf7f0;   /* intonaco chiarissimo */
+  --paper:#f2ecdf;     /* fondo principale */
+  --sand:#e7dcc8;      /* sezione alternata */
+  --sand-2:#d9cbb1;
+  --line:#d3c6ae;
+  --line-soft:#e2d8c4;
+  --ink:#32281c;       /* testo principale */
+  --ink-soft:#6b5c49;  /* testo secondario */
+  --ink-faint:#95866f;
+  --gold:#7d2a35;      /* accento su testo */
+  --gold-warm:#9c3a47; /* accento decorativo */
+  --wa:#25d366;
+
+  --r-card:14px;
+  --r-field:10px;
+  --sans:"Geist",system-ui,-apple-system,sans-serif;
+  --mono:"Geist Mono",ui-monospace,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%;height:auto}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1280px;margin:0 auto;padding:0 28px}
+
+.display{font-weight:600;letter-spacing:-.03em;line-height:1.03}
+.h1{font-size:clamp(38px,5.2vw,64px)}
+.h2{font-size:clamp(30px,3.9vw,48px)}
+.h3{font-size:clamp(20px,2vw,25px);letter-spacing:-.02em;font-weight:600;line-height:1.16}
+.body-lg{font-size:18px;color:var(--ink-soft);line-height:1.58}
+.body{font-size:15.5px;color:var(--ink-soft);line-height:1.62}
+.label{font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+
+/* pulsanti */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--sans);
+  font-weight:600;font-size:15px;white-space:nowrap;padding:14px 26px;border-radius:999px;
+  border:1px solid transparent;cursor:pointer;transition:background .25s,color .25s,border-color .25s,transform .1s}
+.btn-solid{background:var(--ink);color:var(--plaster)}
+.btn-solid:hover{background:#3a3025}
+.btn-solid:active{transform:translateY(1px)}
+.btn-line{border-color:var(--line);color:var(--ink);background:transparent}
+.btn-line:hover{border-color:var(--ink);background:rgba(36,29,22,.04)}
+.btn-line:active{transform:translateY(1px)}
+.btn-sm{padding:9px 18px;font-size:13.5px}
+
+/* header */
+header{position:fixed;inset:0 0 auto 0;z-index:80;transition:background .35s,border-color .35s,box-shadow .35s}
+header.on{background:rgba(250,247,240,.97);border-bottom:1px solid var(--line-soft)}
+.bar{height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px;max-width:1280px;margin:0 auto;padding:0 28px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px;letter-spacing:-.02em;white-space:nowrap}
+.brand img{height:38px;width:auto;display:block}
+.brand .logo-w{display:none}
+@media(max-width:1000px){
+  header:not(.on) .brand .logo-c{display:none}
+  header:not(.on) .brand .logo-w{display:block}
+}
+.nav{display:flex;align-items:center;gap:28px}
+.nav a{font-size:14px;color:var(--ink-soft);transition:color .2s;white-space:nowrap}
+.nav a:hover{color:var(--ink)}
+.burger{display:none;background:none;border:none;color:var(--ink);cursor:pointer;padding:6px}
+body.menu-open{overflow:hidden}
+.navbg{position:fixed;inset:0;background:rgba(28,21,14,.45);opacity:0;pointer-events:none;transition:opacity .3s;z-index:74}
+.navbg.open{opacity:1;pointer-events:auto}
+
+/* hero */
+/* HERO variante B: mobile = foto piena sopra + testo sotto; desktop = affiancati */
+.hero{position:relative;background:var(--plaster)}
+.hero-shot{position:relative;height:63dvh;min-height:430px;overflow:hidden;background:var(--sand)}
+.hero-shot img{width:100%;height:100%;object-fit:cover;object-position:center 32%}
+.hero-shot::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(30,22,14,.42) 0%,rgba(30,22,14,0) 24%);pointer-events:none}
+.hero-say{padding:26px 0 40px}
+.hero .label{display:block;margin-bottom:14px}
+.hero h1{margin-bottom:14px}
+.hero .body-lg{max-width:46ch;margin-bottom:24px}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+/* header leggibile sopra la foto (mobile) */
+header:not(.on) .brand{color:#f5f1e8}
+header:not(.on) .nav>a{color:rgba(250,246,239,.88)}
+header:not(.on) .nav .btn-solid{background:#f5f1e8;color:#32281c}
+header:not(.on) .burger{color:#f5f1e8}
+header:not(.on) .nav.open>a{color:var(--ink)}
+@media(min-width:1001px){
+  /* desktop: torna l'affiancato, foto a destra senza testo sopra */
+  .hero{min-height:100dvh;display:flex;align-items:center;padding:96px 0 60px;overflow:hidden;
+    background:radial-gradient(120% 80% at 72% 18%,rgba(154,58,71,.10),transparent 62%),var(--plaster)}
+  .hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:56px;align-items:center;width:100%}
+  .hero-shot{height:auto;min-height:0;aspect-ratio:4/5;border-radius:var(--r-card);border:1px solid var(--line);
+    box-shadow:0 26px 60px -30px rgba(70,55,35,.28)}
+  .hero-shot::after{display:none}
+  .hero-say{padding:0}
+  header:not(.on) .brand{color:var(--ink)}
+  header:not(.on) .nav>a{color:var(--ink-soft)}
+  header:not(.on) .nav .btn-solid{background:var(--ink);color:var(--plaster)}
+}
+
+/* sezioni */
+.sec{padding:104px 0}
+.sec-sand{background:var(--sand)}
+.claim{max-width:900px}
+.claim p.big{font-size:clamp(23px,2.9vw,34px);font-weight:500;letter-spacing:-.02em;line-height:1.32;color:var(--ink)}
+.claim p.big strong{color:var(--gold);font-weight:500}
+.claim .body{margin-top:22px;max-width:60ch}
+.claim .body b.hl{color:var(--gold);font-weight:600}
+.claim-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:44px}
+.claim-strip figure{border-radius:var(--r-card);overflow:hidden;border:1px solid var(--line);aspect-ratio:3/2;background:var(--sand-2)}
+.claim-strip img{width:100%;height:100%;object-fit:cover}
+
+/* processo */
+.rail{margin-top:52px;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.rail .stepcell{padding:30px 26px 0 0;border-right:1px solid var(--line-soft);position:relative}
+.rail .stepcell:last-child{border-right:none}
+.rail .stepcell::before{content:"";position:absolute;top:-5px;left:0;width:9px;height:9px;border-radius:50%;background:var(--gold-warm)}
+.rail .num{font-family:var(--mono);font-size:12px;color:var(--gold);letter-spacing:.14em;margin-bottom:14px}
+.rail h3{margin-bottom:10px}
+.rail p{font-size:14.5px;color:var(--ink-soft);line-height:1.58}
+.rail p b.hl{color:var(--gold);font-weight:600}
+
+/* bento */
+.bento{display:grid;grid-template-columns:1.5fr 1fr 1fr;grid-template-rows:auto auto;gap:14px;margin-top:46px}
+.tile{position:relative;border-radius:var(--r-card);overflow:hidden;border:1px solid var(--line);background:var(--sand-2);min-height:210px;transition:border-color .3s,transform .3s,box-shadow .3s}
+.tile:hover{border-color:var(--gold-warm);transform:translateY(-3px);box-shadow:0 18px 40px -24px rgba(50,45,38,.42)}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tile .veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(28,22,16,.88) 10%,rgba(28,22,16,.2) 58%,transparent)}
+.tile .txt{position:absolute;left:20px;right:20px;bottom:18px;color:var(--plaster)}
+.tile .txt h3{margin-bottom:5px}
+.tile .txt p{font-size:13.5px;color:rgba(236,231,222,.85);line-height:1.45}
+.tile.big{grid-row:span 2;min-height:0}
+.tile.wide{grid-column:span 2}
+
+.optbox{margin-top:14px;border:1px solid var(--line);border-radius:var(--r-card);padding:26px;background:var(--plaster)}
+.optbox .cap{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:16px}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{font-size:14px;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 16px;background:var(--paper)}
+.pill.hi{border-color:var(--gold-warm);color:var(--gold);background:rgba(154,58,71,.10)}
+.opt-text{font-size:16.5px;line-height:1.65;color:var(--ink-soft)}
+.opt-text b{color:var(--gold);font-weight:600}
+.optbox .after{margin-top:20px;font-size:16px;color:var(--ink-soft)}
+.optbox .after b{color:var(--ink);font-weight:600}
+
+/* prova */
+.figures{display:flex;gap:clamp(34px,8vw,96px);flex-wrap:wrap;align-items:flex-end;padding-bottom:16px}
+.figures .n{font-size:clamp(44px,6.4vw,74px);font-weight:600;letter-spacing:-.045em;line-height:.95;color:var(--ink)}
+.figures .k{font-size:13.5px;color:var(--ink-soft);margin-top:9px}
+.figlink{display:block}
+.figlink .k{color:var(--gold)}
+.figlink:hover .n{color:var(--gold)}
+.figlink .k svg{color:var(--gold)}
+.honest{display:grid;grid-template-columns:1fr 1fr;gap:52px;margin-top:56px;padding-top:44px;border-top:1px solid var(--line)}
+.honest h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:22px}
+.honest .yes h4{color:var(--gold)}
+.honest .no h4{color:var(--ink-faint)}
+.honest ul{list-style:none;display:flex;flex-direction:column;gap:20px}
+.honest li{font-size:15px;color:var(--ink-soft);line-height:1.55;padding-left:18px;position:relative}
+.honest li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%}
+.honest .yes li::before{background:var(--gold-warm)}
+.honest .no li::before{background:var(--ink-faint)}
+.honest li b{color:var(--ink);font-weight:600}
+
+.voices-top{display:flex;align-items:baseline;justify-content:space-between;gap:18px;flex-wrap:wrap;margin:72px 0 22px}
+.voices-top span{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);letter-spacing:.12em}
+.voices{display:flex;gap:16px;overflow-x:auto;padding-bottom:14px;scroll-snap-type:x mandatory}
+.voices::-webkit-scrollbar{height:5px}
+.voices::-webkit-scrollbar-thumb{background:var(--line);border-radius:99px}
+.voice{scroll-snap-align:start;flex:0 0 300px;border:1px solid var(--line);border-radius:var(--r-card);overflow:hidden;background:var(--plaster);display:flex;flex-direction:column;position:relative}
+.voice::before{content:"\201C";position:absolute;top:2px;left:14px;font-size:54px;line-height:1;color:var(--gold-warm);opacity:.35;font-family:Georgia,serif}
+.voice figure{aspect-ratio:16/11;background:var(--sand-2)}
+.voice img{width:100%;height:100%;object-fit:cover}
+.voice .said{padding:34px 20px 20px}
+.voice blockquote{font-size:16.5px;line-height:1.42;letter-spacing:-.01em;font-weight:500;margin-bottom:14px;color:var(--ink)}
+.voice cite{font-style:normal;font-size:13px;color:var(--ink-faint)}
+.warranty{margin-top:30px;border:2px dashed rgba(250,247,240,.55);border-radius:var(--r-card);padding:30px 26px;background:var(--gold);text-align:center}
+.w-lab{font-family:var(--mono);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#f3d9a8;font-weight:700;margin-bottom:12px}
+.warranty p{font-size:clamp(16.5px,2vw,19px);color:rgba(250,247,240,.92);line-height:1.65;max-width:56ch;margin:0 auto}
+.warranty b{color:#fff;font-weight:700}
+
+/* chi siamo */
+.duo{max-width:780px}
+.duo .body-lg{margin-bottom:16px}
+.duo .who{margin-top:24px;font-size:15px;font-weight:600;color:var(--ink)}
+.duo .who span{display:block;font-weight:400;color:var(--ink-faint);font-size:13.5px;margin-top:3px}
+.duo figure{border-radius:var(--r-card);overflow:hidden;border:1px solid var(--line);aspect-ratio:5/4;background:var(--sand-2);
+  box-shadow:0 26px 60px -34px rgba(70,55,35,.28)}
+.duo img{width:100%;height:100%;object-fit:cover}
+
+/* contatti */
+.talk{background:radial-gradient(110% 70% at 30% 0%,rgba(154,58,71,.08),transparent 60%),var(--plaster)}
+.talk-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:52px;margin-top:44px}
+form{display:flex;flex-direction:column;gap:20px}
+.field>label{display:block;font-size:13px;color:var(--ink-soft);margin-bottom:9px;font-weight:500}
+.field input[type=text]{width:100%;background:var(--plaster);border:1px solid var(--line);border-radius:var(--r-field);
+  padding:13px 15px;color:var(--ink);font-family:var(--sans);font-size:15.5px}
+.field input[type=text]::placeholder{color:var(--ink-faint)}
+.field input[type=text]:focus{outline:none;border-color:var(--gold)}
+.field .q{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:10px;display:block}
+.fcards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.fcard{border:1px solid var(--line);border-radius:12px;background:var(--plaster);padding:16px 8px 13px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;transition:.2s;font-size:14px;color:var(--ink-soft)}
+.fcard svg{width:34px;height:34px;color:var(--ink-faint);transition:.2s}
+.fcard input{position:absolute;opacity:0;pointer-events:none}
+.fcard:has(input:checked){border-color:var(--gold);background:rgba(154,58,71,.07);color:var(--ink)}
+.fcard:has(input:checked) svg{color:var(--gold)}
+.fcard:has(input:focus-visible){outline:2px solid var(--gold);outline-offset:2px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt label{display:inline-block;font-size:14px;color:var(--ink-soft);border:1px solid var(--line);border-radius:999px;
+  padding:8px 16px;cursor:pointer;transition:.2s;margin:0;font-weight:400;background:var(--paper)}
+.opt input:checked+label{background:var(--ink);border-color:var(--ink);color:var(--plaster);font-weight:600}
+.opt input:focus-visible+label{outline:2px solid var(--gold);outline-offset:2px}
+.reach{border:1px solid var(--line);border-radius:var(--r-card);background:var(--paper);padding:8px 24px}
+.reach a,.reach div.row{display:flex;align-items:center;gap:15px;padding:19px 0;border-bottom:1px solid var(--line-soft)}
+.reach>*:last-child{border-bottom:none}
+.reach .ico{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--gold)}
+.reach .k{font-size:12px;color:var(--ink-faint)}
+.reach .v{font-size:16px;color:var(--ink)}
+.reach a:hover .v{color:var(--gold)}
+
+/* ── confronto normale/refrigerata ── */
+.cmp-wrap{margin-top:14px}
+.cmp-head{display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:12px}
+.cmp-head h3{font-size:clamp(19px,2vw,23px);letter-spacing:-.02em;font-weight:600}
+.cmp-head span{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);letter-spacing:.1em}
+.cmp{position:relative;border-radius:var(--r-card);overflow:hidden;border:1px solid var(--line);
+  aspect-ratio:1/1;user-select:none;box-shadow:0 18px 44px -26px rgba(70,55,35,.35)}
+.cmp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.cmp .top{clip-path:inset(0 calc(100% - var(--x,50%)) 0 0)}
+.cmp .cmp-line{position:absolute;top:0;bottom:0;left:var(--x,50%);width:2px;background:#fff;
+  box-shadow:0 0 0 1px rgba(0,0,0,.15);transform:translateX(-1px);pointer-events:none}
+.cmp .grip{position:absolute;top:50%;left:var(--x,50%);transform:translate(-50%,-50%);
+  width:46px;height:46px;border-radius:50%;background:var(--plaster);border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;color:var(--ink);
+  box-shadow:0 6px 18px rgba(40,30,18,.3);pointer-events:none;font-size:13px;font-weight:700}
+.cmp .tagL,.cmp .tagR{position:absolute;bottom:14px;font-size:12px;font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;padding:7px 13px;border-radius:999px;backdrop-filter:blur(6px);pointer-events:none;z-index:2}
+.cmp .tagL{left:14px;background:rgba(250,247,240,.85);color:var(--ink)}
+.cmp .tagR{right:14px;background:rgba(125,42,53,.88);color:#f5f1e8}
+.cmp.anim .top{transition:clip-path .55s cubic-bezier(.25,.8,.3,1)}
+.cmp.anim .cmp-line,.cmp.anim .grip{transition:left .55s cubic-bezier(.25,.8,.3,1)}
+.cmp-bar{position:absolute;left:0;right:0;bottom:0;z-index:4;display:grid;
+  grid-template-columns:1fr auto 1fr;grid-template-areas:"p p p" "l . r";row-gap:8px;align-items:center;
+  padding:12px 12px 11px;background:linear-gradient(to top,rgba(22,17,12,.85),rgba(22,17,12,.5) 62%,transparent)}
+.cmp-bar .bL{grid-area:l;justify-self:start}
+.cmp-bar .bR{grid-area:r;justify-self:end}
+.cmp-bar .cmp-p{grid-area:p}
+.cmp-btn{font-family:var(--sans);font-size:11.5px;font-weight:600;letter-spacing:.04em;white-space:nowrap;
+  padding:7px 12px;border-radius:999px;border:1px solid rgba(250,247,240,.45);background:rgba(250,247,240,.12);
+  color:#f5f1e8;cursor:pointer;transition:background .25s,border-color .25s,color .25s}
+.cmp-btn.on{background:#f5f1e8;border-color:#f5f1e8;color:#32281c}
+.cmp-btn.bR.on{background:var(--gold);border-color:var(--gold);color:#f5f1e8}
+.cmp-p{text-align:center;font-family:var(--mono);font-size:14.5px;font-weight:600;color:#f5f1e8;
+  text-shadow:0 1px 6px rgba(0,0,0,.45);white-space:nowrap}
+.cmp-range{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;touch-action:none;-webkit-appearance:none;appearance:none;z-index:3}
+.cmp-range::-webkit-slider-thumb{-webkit-appearance:none;width:60px;height:100%}
+.cmp-range::-moz-range-thumb{width:60px;height:100%;border:none;background:transparent}
+.cmp-grid{display:grid;gap:16px}
+.cmp-lab{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:8px}
+@media(min-width:1001px){.cmp-grid{grid-template-columns:repeat(3,1fr)}}
+.cmp-note{font-size:13.5px;color:var(--ink-faint);margin-top:10px;text-align:center}
+.cmp-desc{font-size:13.5px;color:var(--ink-soft);margin-top:9px;line-height:1.5}
+.cmp-lab{display:flex;align-items:center;gap:8px}
+.cmp-ico{width:26px;height:26px;color:var(--gold);flex-shrink:0}
+.cmp-price{margin-top:10px;display:flex;flex-direction:column;gap:3px}
+.cmp-price .p1{font-family:var(--mono);font-size:14px;color:var(--ink-soft)}
+.cmp-price .p1 b{font-size:19px;color:var(--ink);font-weight:600}
+.cmp-price .p2{font-family:var(--mono);font-size:11.5px;color:var(--gold);letter-spacing:.02em}
+.sumisura{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:16px;
+  border:1px solid var(--gold-warm);border-radius:var(--r-card);padding:20px 24px;background:rgba(154,58,71,.06);
+  transition:background .25s,transform .25s}
+.sumisura:hover{background:rgba(154,58,71,.11);transform:translateY(-2px)}
+.sm-lab{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:5px}
+.sm-txt{font-size:16px;color:var(--ink-soft)}
+.sm-txt b{color:var(--ink);font-weight:600}
+.sm-arrow{font-size:22px;color:var(--gold);flex-shrink:0}
+footer{border-top:1px solid var(--line-soft);padding:40px 0;background:var(--paper)}
+.foot{margin-bottom:18px}
+.fsocial{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--ink-soft)}
+.fsocial:hover{color:var(--gold)}
+.legal p{font-size:12.5px;color:var(--ink-faint);line-height:1.7}
+.plink{background:none;border:none;padding:0;font:inherit;color:var(--gold);text-decoration:underline;cursor:pointer}
+.consent{font-size:12.5px;color:var(--ink-faint);margin-top:-6px}
+.pdlg{border:none;border-radius:14px;padding:0;max-width:640px;width:calc(100% - 40px);background:var(--plaster);color:var(--ink)}
+.pdlg::backdrop{background:rgba(24,18,12,.55)}
+.pdlg-in{padding:26px 26px 30px;max-height:80vh;overflow:auto}
+.pdlg-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.pdlg-head h3{font-size:20px;font-weight:600;letter-spacing:-.02em}
+.pdlg-x{background:none;border:1px solid var(--line);border-radius:50%;width:34px;height:34px;cursor:pointer;color:var(--ink-soft);font-size:14px}
+.pdlg h4{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin:20px 0 8px}
+.pdlg p{font-size:14px;color:var(--ink-soft);line-height:1.65}
+.pdate{margin-top:20px;font-size:12px !important;color:var(--ink-faint) !important}
+.ckbar{position:fixed;left:12px;right:12px;bottom:64px;z-index:85;background:var(--plaster);
+  border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:0 14px 40px rgba(40,30,18,.25)}
+.ckbar p{font-size:13.5px;color:var(--ink-soft);line-height:1.55;margin-bottom:12px}
+.ckbtns{display:flex;gap:10px}
+@media(min-width:721px){.ckbar{left:auto;right:24px;bottom:24px;max-width:380px}}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.foot p{font-size:13px;color:var(--ink-faint)}
+
+.fab{position:fixed;right:24px;bottom:24px;z-index:70;width:56px;height:56px;border-radius:50%;
+  background:var(--wa);color:#fff;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 12px 30px rgba(70,55,35,.24);transition:transform .2s}
+.fab:hover{transform:scale(1.06)}
+.dock{display:none}
+
+.rise{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.22,.7,.25,1),transform .7s cubic-bezier(.22,.7,.25,1)}
+.rise.seen{opacity:1;transform:none}
+.hero .hero-shot.rise{transition-delay:.16s}
+@media(prefers-reduced-motion:reduce){.rise{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}.tile:hover,.fab:hover{transform:none}}
+
+@media(max-width:1000px){
+  .hero-grid{display:flex;flex-direction:column}
+  .hero-say{order:2 !important}
+  .hero-shot{order:1}
+  .talk-grid{grid-template-columns:1fr;gap:40px}
+  .rail{grid-template-columns:1fr 1fr}
+  .rail .stepcell{padding-bottom:26px;border-bottom:1px solid var(--line-soft)}
+  .rail .stepcell:nth-child(2n){border-right:none}
+  .bento{grid-template-columns:1fr 1fr}
+  .tile.big{grid-row:auto;min-height:210px}
+  .honest{grid-template-columns:1fr;gap:34px}
+}
+@media(max-width:720px){
+  .sec{padding:70px 0}
+  .nav{position:fixed;inset:0 0 0 auto;width:82%;max-width:320px;flex-direction:column;justify-content:center;
+    align-items:flex-start;gap:26px;padding:36px;background:var(--plaster);border-left:1px solid var(--line);
+    transform:translateX(100%);transition:transform .32s ease;z-index:75}
+  .nav.open{transform:none}
+  .nav a{font-size:19px;color:var(--ink)}
+  .nav a.btn-solid{color:var(--plaster)}
+  .nav .btn{width:100%}
+  .burger{display:block;z-index:78}
+  .claim-strip,.bento,.rail{grid-template-columns:1fr}
+  .tile.wide{grid-column:auto}
+  .rail .stepcell{border-right:none}
+  .fab{display:none}
+  .dock{display:flex;position:fixed;inset:auto 0 0 0;z-index:75;background:rgba(250,247,240,.97);
+    backdrop-filter:blur(12px);border-top:1px solid var(--line)}
+  .dock a{flex:1;display:flex;align-items:center;justify-content:center;padding:15px 0;font-size:15px;font-weight:600}
+  .dock .primary{background:var(--wa);color:#fff}
+  .dock .second{color:var(--ink)}
+  body{padding-bottom:54px}
+  .voice{flex:0 0 84%}
+}
+</style>
+</head>
+<body>
+
+<header id="head">
+  <div class="bar">
+    <a class="brand" href="#top" aria-label="La Botteria della Scala">
+      <img class="logo-c" src="img/logo-colore.png" alt="La Botteria della Scala" width="512" height="119">
+      <img class="logo-w" src="img/logo-bianco.png" alt="" aria-hidden="true" width="512" height="119">
+    </a>
+    <nav class="nav" id="nav">
+      <a href="#processo">Come funziona</a>
+      <a href="#configura">Configura</a>
+      <a href="#voci">Dicono di noi</a>
+      <a href="#contatti">Contatti</a>
+      <!-- MODIFICA-CONTATTI -->
+      <a class="btn btn-solid btn-sm" href="#contatti">Rendering gratuito</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Apri il menu" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- 1. HERO -->
+<section class="hero" id="top">
+  <div class="hero-grid">
+    <div class="hero-shot">
+      <!-- MODIFICA-FOTO · stessa scena in due tagli: verticale per telefono, orizzontale largo per computer -->
+      <picture>
+        <source media="(min-width:1001px)" srcset="img/hero-desktop.jpg">
+        <img src="img/hero-mobile.jpg" alt="Mobile bar a forma di botte in un salotto" width="1200" height="1500" fetchpriority="high" decoding="async">
+      </picture>
+    </div>
+    <div class="wrap hero-say rise" style="order:-1">
+      <span class="label">Mobili bar su misura</span>
+      <!-- MODIFICA-TESTO -->
+      <h1 class="display h1">Hai sempre desiderato il tuo angolo bar. Costruiamolo insieme.</h1>
+      <p class="body-lg">Una botte rivisitata in chiave moderna, su misura per il tuo spazio. La vedi in 3D prima di decidere.</p>
+      <div class="hero-cta">
+        <!-- MODIFICA-CONTATTI -->
+        <a class="btn btn-solid" href="#contatti">Rendering gratuito</a>
+        <a class="btn btn-line" href="#configura">Guarda le forme</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. COS'È -->
+<section class="sec">
+  <div class="wrap">
+    <div class="claim rise">
+      <!-- MODIFICA-TESTO -->
+      <p class="big display" style="font-weight:500">Creiamo mobili bar a forma di botte, su misura per la tua casa. <strong>Vino, calore e convivialità</strong>, racchiusi in una botte rivisitata in chiave moderna.</p>
+      <p class="body">Elegante, funzionale, adatta a ogni stile d'arredo. Intera, mezza o ad angolo, <b class="hl">nelle dimensioni che servono a te</b>. Fatta a mano, pensata con te.</p>
+    </div>
+    <div class="claim-strip rise">
+      <!-- MODIFICA-FOTO · tre scatti di atmosfera 3:2 -->
+      <figure><img src="img/dettaglio-costruzione.jpg" width="900" height="600" loading="lazy" decoding="async" alt="Dettaglio del legno lavorato a mano"></figure>
+      <figure><img src="img/dettaglio-ripiano.jpg" width="900" height="601" loading="lazy" decoding="async" alt="Interno con bottiglie e calici"></figure>
+      <figure><img src="img/incisione-laser.jpg" width="900" height="600" loading="lazy" decoding="async" alt="Incisione laser personalizzata sul ripiano"></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 3. PROCESSO -->
+<section class="sec sec-sand" id="processo">
+  <div class="wrap">
+    <div class="rise" style="max-width:640px">
+      <h2 class="display h2">Come nasce la tua botte</h2>
+      <p class="body" style="margin-top:16px">Tre passi, zero sorprese. La vedi finita prima di decidere, e il saldo si paga solo a botte pronta.</p>
+    </div>
+    <div class="rail rise">
+      <div class="stepcell"><div class="num">01</div><h3 class="h3">Raccontaci la tua idea</h3><p>Ci scrivi com'è il tuo spazio e cosa immagini: dimensioni, colore, accessori, cantinetta. Ti guidiamo noi, anche se parti da zero.</p></div>
+      <div class="stepcell"><div class="num">02</div><h3 class="h3">Ricevi il rendering 3D</h3><p>Ti mostriamo la tua botte in 3D, com'è davvero, prima di qualsiasi impegno. La aggiustiamo insieme finché non è come la vuoi. È gratis.</p></div>
+      <div class="stepcell"><div class="num">03</div><h3 class="h3">La costruiamo e arriva a casa</h3><p>Confermi con una piccola caparra e la realizziamo a mano in Italia in 20-40 giorni (salvo diverse indicazioni o richieste). <b class="hl">Il saldo solo quando è pronta: contrassegno o rate senza interessi con Klarna.</b> Consegna concordata in tutta Italia.</p></div>
+      
+    </div>
+  </div>
+</section>
+
+<!-- 4. CONFIGURA -->
+<section class="sec" id="configura">
+  <div class="wrap">
+    <div class="rise" style="max-width:640px">
+      <span class="label">Configura</span>
+      <h2 class="display h2" style="margin-top:18px">Una base, infinite possibilità</h2>
+      <p class="body" style="margin-top:16px">Si parte dalla forma giusta per il tuo spazio. Poi la rendi tua. Nessuna misura standard: ogni botte è disegnata sui centimetri che hai tu — per questo non troverai schede tecniche, ma un progetto sul tuo spazio.</p>
+    </div>
+    <div class="cmp-wrap rise">
+      <div class="cmp-head">
+        <h3>Normale o refrigerata? Confrontale tu.</h3>
+        <span>trascina il cursore</span>
+      </div>
+            <div class="cmp-grid">
+        <div class="cmp-item">
+          <div class="cmp-lab"><svg class="cmp-ico" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="10.5" stroke="currentColor" stroke-width="1.8"/></svg><span>Intera</span></div>
+          <div class="cmp" style="--x:50%" data-p1="range indicativo 550 – 850 €" data-p2="con cantinetta · 1.050 – 1.200 €">
+            <img src="img/intera-refrigerata.jpg" width="900" height="900" loading="lazy" decoding="async" alt="Botte intera con cantinetta refrigerata">
+            <img class="top" src="img/intera-aperta.jpg" width="900" height="900" loading="lazy" decoding="async" alt="Botte intera con scaffale aperto">
+            <div class="cmp-line"></div>
+            <div class="grip">‹ ›</div>
+            <input type="range" class="cmp-range" min="2" max="98" value="50" step="0.5" aria-label="Confronta Intera: scaffale aperto e cantinetta refrigerata">
+            <div class="cmp-bar">
+              <button type="button" class="cmp-btn bL">Non refrigerata</button>
+              <span class="cmp-p"></span>
+              <button type="button" class="cmp-btn bR">Refrigerata</button>
+            </div>
+          </div>
+          <p class="cmp-desc">Quando hai spazio e vuoi il pezzo che si fa notare.</p>
+        </div>
+        <div class="cmp-item">
+          <div class="cmp-lab"><svg class="cmp-ico" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M6 13h20a10 10 0 0 1-20 0Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span>Mezza</span></div>
+          <div class="cmp" style="--x:50%" data-p1="range indicativo 450 – 750 €" data-p2="con cantinetta · 950 – 1.100 €">
+            <img src="img/mezza-refrigerata.jpg" width="900" height="900" loading="lazy" decoding="async" alt="Botte mezza con cantinetta refrigerata">
+            <img class="top" src="img/mezza-aperta.jpg" width="900" height="900" loading="lazy" decoding="async" alt="Botte mezza con scaffale aperto">
+            <div class="cmp-line"></div>
+            <div class="grip">‹ ›</div>
+            <input type="range" class="cmp-range" min="2" max="98" value="50" step="0.5" aria-label="Confronta Mezza: scaffale aperto e cantinetta refrigerata">
+            <div class="cmp-bar">
+              <button type="button" class="cmp-btn bL">Non refrigerata</button>
+              <span class="cmp-p"></span>
+              <button type="button" class="cmp-btn bR">Refrigerata</button>
+            </div>
+          </div>
+          <p class="cmp-desc">Elegante e salvaspazio, perfetta contro una parete.</p>
+        </div>
+        <div class="cmp-item">
+          <div class="cmp-lab"><svg class="cmp-ico" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 5.5 8.5 21a10.6 10.6 0 0 0 15 0Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span>Ad angolo</span></div>
+          <div class="cmp" style="--x:50%" data-p1="range indicativo 450 – 750 €" data-p2="con cantinetta · 950 – 1.100 €">
+            <img src="img/angolo-refrigerata.jpg" width="900" height="900" loading="lazy" decoding="async" alt="Botte ad angolo con cantinetta refrigerata">
+            <img class="top" src="img/angolo-aperta.jpg" width="900" height="900" loading="lazy" decoding="async" alt="Botte ad angolo con scaffale aperto">
+            <div class="cmp-line"></div>
+            <div class="grip">‹ ›</div>
+            <input type="range" class="cmp-range" min="2" max="98" value="50" step="0.5" aria-label="Confronta Ad angolo: scaffale aperto e cantinetta refrigerata">
+            <div class="cmp-bar">
+              <button type="button" class="cmp-btn bL">Non refrigerata</button>
+              <span class="cmp-p"></span>
+              <button type="button" class="cmp-btn bR">Refrigerata</button>
+            </div>
+          </div>
+          <p class="cmp-desc">Sfrutta l'angolo che non sapevi come riempire.</p>
+        </div>
+      </div>
+      <p class="cmp-note">Ogni forma — intera, mezza o ad angolo — può ospitare la cantinetta refrigerata.<br>Prezzi indicativi — il prezzo esatto arriva col progetto gratuito.</p>
+    <a class="sumisura rise" href="#contatti">
+      <div>
+        <div class="sm-lab">Su misura</div>
+        <div class="sm-txt">Hai un'idea in testa o uno spazio che non sai come sfruttare? <b>Noi te la realizziamo!</b></div>
+      </div>
+      <span class="sm-arrow">→</span>
+    </a>
+    </div>
+
+    <div class="optbox rise">
+      <div class="cap">Scegli tu come accessoriare il tuo mobile bar</div>
+      <p class="opt-text"><b>Cantinetta refrigerata</b>, portabottiglie, appendicalici, illuminazione interna, cassetto, ante, <b>incisioni laser</b>, colore e finitura: ogni dettaglio si sceglie insieme, sul tuo progetto.</p>
+      <p class="after">La tua botte non sarà come nessun'altra. <b>Letteralmente.</b></p>
+    </div>
+  </div>
+</section>
+
+<!-- 5. PROVA -->
+<section class="sec sec-sand" id="voci">
+  <div class="wrap">
+    <div class="figures rise">
+      <div><div class="n display">1000+</div><div class="k">Mobili consegnati</div></div>
+      <a class="figlink" href="https://www.instagram.com/labotteriadellascala" target="_blank" rel="noopener"><div class="n display">85.000</div><div class="k">Persone nella community <svg width="15" height="15" viewBox="0 0 24 24" fill="none" style="vertical-align:-2px"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.3" fill="currentColor"/></svg> @labotteriadellascala</div></a>
+      <div><div class="n display">20-40</div><div class="k">Giorni di lavorazione</div></div>
+    </div>
+    <div class="honest rise">
+      <div class="yes">
+        <h4>Perché sceglierci</h4>
+        <ul>
+          <li><b>Personalizzazione totale.</b> Ogni pezzo è cucito su misura: dimensioni, finiture, spazi interni. Niente mobili in serie.</li>
+          <li><b>Accessibile, senza compromessi.</b> Rendiamo possibile a tutti l'angolo bar dei propri sogni. Qualità alta, prezzo giusto.</li>
+          <li><b>Assistenza garantita.</b> Siamo prima di tutto persone: in prima linea, prima e dopo l'acquisto. Non sei mai lasciato solo.</li>
+        </ul>
+      </div>
+      <div class="no">
+        <h4>Cosa non siamo</h4>
+        <ul>
+          <li><b>Veloci come una fabbrica.</b> Non spediamo in 24 ore: ogni botte richiede tempo, e una lista d'attesa da rispettare.</li>
+          <li><b>Perfettini come l'industria.</b> Lavoriamo solo legno vero: venature e sfumature variano da pezzo a pezzo. Per noi è la firma dell'artigianalità.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="voices-top rise">
+      <h2 class="display h2" style="font-size:clamp(24px,2.8vw,34px)">Le parole dei clienti</h2>
+      <span>Trascritte dai messaggi che riceviamo</span>
+    </div>
+    <!-- MODIFICA-RECENSIONE -->
+    <div class="voices rise">
+      <article class="voice"><div class="said"><blockquote>«Arrivata con un giorno di anticipo! Stupenda, incisione perfetta. Ha superato le mie aspettative.»</blockquote><cite>Da un messaggio WhatsApp</cite></div></article>
+      <article class="voice"><div class="said"><blockquote>«Tutte le persone venute a casa nostra per Natale hanno fatto i complimenti per la bellissima botte!»</blockquote><cite>Da Instagram</cite></div></article>
+      <article class="voice"><div class="said"><blockquote>«È una meraviglia, quello che cercavo da tempo. Avete accontentato ogni mia richiesta particolare: ne è uscito un capolavoro.»</blockquote><cite>Da un messaggio WhatsApp</cite></div></article>
+      <article class="voice"><div class="said"><blockquote>«Vi ringrazio per l'opera che avete fatto. I genitori sono rimasti a bocca aperta.»</blockquote><cite>Da un messaggio WhatsApp</cite></div></article>
+      <article class="voice"><div class="said"><blockquote>«Fantastica. Si è fatta attendere, ma ne è valsa la pena!»</blockquote><cite>Da un messaggio WhatsApp</cite></div></article>
+      <article class="voice"><div class="said"><blockquote>«La cantinetta è arrivata: siamo molto soddisfatti, è molto bella e sta benissimo in casa.»</blockquote><cite>Da un messaggio WhatsApp</cite></div></article>
+      <article class="voice"><div class="said"><blockquote>«Vi faccio pubblicità ovunque: è una cosa che tutti dovrebbero avere in casa.»</blockquote><cite>Da Instagram</cite></div></article>
+      <article class="voice"><div class="said"><blockquote>«Gentile e corretto come pochi.»</blockquote><cite>Da un messaggio WhatsApp</cite></div></article>
+    </div>
+
+    <div class="warranty rise">
+      <div class="w-lab">Garanzia</div>
+      <p>Se non sei soddisfatto della tua botte <b>(praticamente impossibile)</b>, hai <b>15 giorni</b> per restituirla, senza costi aggiuntivi. Arriva danneggiata? Ti mandiamo il corriere a ritirarla e <b>te la sostituiamo, tutto a nostre spese</b>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 6. CHI SIAMO -->
+<section class="sec">
+  <div class="wrap duo">
+    <div class="rise">
+      <h2 class="display h2" style="margin-bottom:24px">Più di un angolo bar: il cuore dei tuoi brindisi</h2>
+      <!-- MODIFICA-TESTO -->
+      <p class="body-lg">Tutto è nato da una semplice idea: un angolo bar che non fosse solo un mobile, ma il cuore dei momenti più belli da condividere. Intorno a quella prima creazione sono nati sorrisi, brindisi e una convivialità nuova, così autentica che abbiamo voluto renderla possibile per chiunque.</p>
+      <p class="body-lg">Oggi realizziamo ogni botte interamente a mano, come un lavoro sartoriale. Colori, dimensioni e accessori prendono forma nel progetto che disegniamo per te: tu ci metti i desideri, noi la soluzione. Per questo non ne esistono due identiche, e la tua sarà soltanto tua.</p>
+      <div class="who">Andrea<span>La Botteria della Scala, Isola della Scala (VR)</span></div>
+    </div>
+    
+  </div>
+</section>
+
+<!-- 7. CONTATTI -->
+<section class="sec talk" id="contatti">
+  <div class="wrap">
+    <div class="rise" style="max-width:620px">
+      <h2 class="display h2">Iniziamo a creare la tua botte</h2>
+      <p class="body-lg" style="margin-top:16px">Tre scelte e due righe: al resto pensiamo noi. Il rendering è gratuito, senza impegno.</p>
+    </div>
+    <div class="talk-grid">
+      <!-- MODIFICA-CONTATTI: la tua email nell'action -->
+      <form class="rise" action="https://formsubmit.co/info@labotteriadellascala.it" method="POST">
+        <input type="hidden" name="_subject" value="Nuova richiesta progetto dal sito">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://www.labotteriadellascala.it/grazie.html">
+        <input type="hidden" name="fonte_utm" id="fonte_utm" value="">
+        <input type="hidden" name="mezzo_utm" id="mezzo_utm" value="">
+        <input type="hidden" name="campagna_utm" id="campagna_utm" value="">
+        <div class="field">
+          <label class="q">1 · Che forma immagini?</label>
+          <div class="fcards">
+            <label class="fcard"><input type="radio" name="forma" value="Mezza"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M6 13h20a10 10 0 0 1-20 0Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span>Mezza</span></label>
+            <label class="fcard"><input type="radio" name="forma" value="Intera"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="10.5" stroke="currentColor" stroke-width="1.8"/></svg><span>Intera</span></label>
+            <label class="fcard"><input type="radio" name="forma" value="Angolare"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 5.5 8.5 21a10.6 10.6 0 0 0 15 0Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span>Angolare</span></label>
+          </div>
+          <div class="opts" style="margin-top:8px">
+            <span class="opt"><input type="radio" id="f-cons" name="forma" value="Consigliatemi"><label for="f-cons">Consigliatemi voi</label></span>
+            <span class="opt"><input type="radio" id="f-prog" name="forma" value="Progetto nuovo"><label for="f-prog">Ho un progetto nuovo in testa e vorrei svilupparlo</label></span>
+          </div>
+        </div>
+        <div class="field">
+          <label class="q">2 · Con zona refrigerata?</label>
+          <div class="opts">
+            <span class="opt"><input type="radio" id="r-si" name="refrigerata" value="Sì"><label for="r-si">Sì</label></span>
+            <span class="opt"><input type="radio" id="r-no" name="refrigerata" value="No"><label for="r-no">No</label></span>
+            <span class="opt"><input type="radio" id="r-cons" name="refrigerata" value="Consigliatemi"><label for="r-cons">Consigliatemi</label></span>
+          </div>
+        </div>
+        <div class="field">
+          <label class="q">3 · Per chi è?</label>
+          <div class="opts">
+            <span class="opt"><input type="radio" id="p-me" name="per_chi" value="Per sé"><label for="p-me">Per me</label></span>
+            <span class="opt"><input type="radio" id="p-reg" name="per_chi" value="Regalo"><label for="p-reg">È un regalo</label></span>
+            <span class="opt"><input type="radio" id="p-loc" name="per_chi" value="Locale"><label for="p-loc">Locale / Attività commerciale</label></span>
+          </div>
+        </div>
+        <div class="field"><label for="nome">Nome</label><input type="text" id="nome" name="nome" placeholder="Come ti chiami" required></div>
+        <div class="field"><label for="rec">WhatsApp o email</label><input type="text" id="rec" name="contatto" placeholder="Dove ti ricontattiamo" required></div>
+        <button type="submit" class="btn btn-solid">Rendering gratuito</button>
+        <p class="consent">Inviando il modulo accetti la nostra <button type="button" class="plink" onclick="document.getElementById('privacyDlg').showModal()">informativa privacy</button>.</p>
+      </form>
+
+      <div class="reach rise">
+        <!-- MODIFICA-CONTATTI -->
+        <a href="https://wa.me/393515466834" target="_blank" rel="noopener">
+          <span class="ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1112 20z"/><path d="M16.6 14.2c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a6.5 6.5 0 01-3.2-2.8c-.1-.2 0-.4.1-.5l.4-.5c.1-.2.1-.3 0-.5l-.7-1.6c-.2-.4-.4-.4-.5-.4h-.5c-.2 0-.5.1-.7.3-.7.7-.9 1.6-.6 2.6.4 1.4 1.3 2.7 2.5 3.7 1.5 1.3 3 1.8 4.1 1.8.6 0 1.2-.2 1.6-.6.3-.3.5-.7.5-1.1v-.5c0-.1-.1-.2-.2-.2z"/></svg></span>
+          <span><span class="k">WhatsApp</span><span class="v">351 546 6834</span></span>
+        </a>
+        <a href="https://www.instagram.com/labotteriadellascala" target="_blank" rel="noopener">
+          <span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.6"/><circle cx="17.2" cy="6.8" r="1.3" fill="currentColor"/></svg></span>
+          <span><span class="k">Instagram</span><span class="v">@labotteriadellascala</span></span>
+        </a>
+        <a href="tel:+393515466834">
+          <span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 4h3l2 5-2 1a11 11 0 005 5l1-2 5 2v3a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+          <span><span class="k">Telefono</span><span class="v">351 546 6834</span></span>
+        </a>
+        <a href="mailto:info@labotteriadellascala.it">
+          <span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="1.6"/><path d="M4 7l8 5.5L20 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+          <span><span class="k">Email</span><span class="v">info@labotteriadellascala.it</span></span>
+        </a>
+        <div class="row">
+          <span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-5.5 7-11a7 7 0 10-14 0c0 5.5 7 11 7 11z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.6"/></svg></span>
+          <span><span class="k">Spedizioni</span><span class="v">In tutta Italia</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <span class="brand"><img class="logo-c" src="img/logo-colore.png" alt="La Botteria della Scala" style="height:34px;width:auto" width="512" height="119" loading="lazy" decoding="async"></span>
+      <a class="fsocial" href="https://www.instagram.com/labotteriadellascala" target="_blank" rel="noopener" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.6"/><circle cx="17.2" cy="6.8" r="1.3" fill="currentColor"/></svg><span>@labotteriadellascala</span></a>
+    </div>
+    <div class="legal">
+      <p>Steel Head di Andrea Canovi · Via Caduti sul Lavoro 22, 37063 Isola della Scala (VR) · P.IVA 04775640230</p>
+      <p>Artigianato italiano su misura · <button type="button" class="plink" onclick="document.getElementById('privacyDlg').showModal()">Privacy &amp; Cookie Policy</button></p>
+    </div>
+  </div>
+</footer>
+
+<dialog id="privacyDlg" class="pdlg">
+  <div class="pdlg-in">
+    <div class="pdlg-head">
+      <h3>Privacy &amp; Cookie Policy</h3>
+      <button type="button" class="pdlg-x" onclick="document.getElementById('privacyDlg').close()" aria-label="Chiudi">✕</button>
+    </div>
+    <h4>Titolare del trattamento</h4>
+    <p>Steel Head di Andrea Canovi, Via Caduti sul Lavoro 22, 37063 Isola della Scala (VR), P.IVA 04775640230 — email: info@labotteriadellascala.it</p>
+    <h4>Quali dati raccogliamo e perché</h4>
+    <p>Attraverso il modulo di contatto raccogliamo i dati che ci fornisci volontariamente: nome, recapito (numero WhatsApp o indirizzo email) e le preferenze sul prodotto (forma, zona refrigerata, destinatario). Li usiamo esclusivamente per ricontattarti, preparare il progetto e il rendering richiesti e gestire l'eventuale ordine. Base giuridica: esecuzione di misure precontrattuali adottate su tua richiesta (art. 6, par. 1, lett. b GDPR).</p>
+    <h4>Come vengono trattati</h4>
+    <p>Il modulo è gestito tramite il servizio FormSubmit, che inoltra i dati alla nostra casella email e agisce come responsabile esterno del trattamento. I dati non vengono diffusi né ceduti a terzi per finalità commerciali; possono essere comunicati ai corrieri esclusivamente per la consegna. Conserviamo i dati per il tempo necessario a gestire la richiesta e gli eventuali obblighi contrattuali e fiscali.</p>
+    <h4>I tuoi diritti</h4>
+    <p>Puoi chiedere in ogni momento accesso, rettifica, cancellazione, limitazione o portabilità dei tuoi dati, oppure opporti al trattamento, scrivendo a info@labotteriadellascala.it. Hai inoltre diritto di proporre reclamo al Garante per la protezione dei dati personali.</p>
+    <h4>Cookie</h4>
+    <p>Previo tuo consenso, questo sito utilizza il pixel di Meta (Meta Platforms Ireland Ltd) e Google Analytics 4 (Google Ireland Ltd) per misurare le visite e l'efficacia delle campagne pubblicitarie. Questi strumenti si attivano solo se premi «Accetta» nel banner; se premi «Rifiuta» non viene installato alcun cookie di misurazione e la navigazione resta pienamente disponibile. Puoi cambiare idea cancellando i cookie del browser. Restano attivi i soli cookie tecnici necessari al funzionamento del sito.</p>
+    <p class="pdate">Ultimo aggiornamento: agosto 2026</p>
+  </div>
+</dialog>
+
+<!-- MODIFICA-CONTATTI -->
+<a class="fab" href="https://wa.me/393515466834" target="_blank" rel="noopener" aria-label="Scrivici su WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1112 20z"/><path d="M16.6 14.2c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a6.5 6.5 0 01-3.2-2.8c-.1-.2 0-.4.1-.5l.4-.5c.1-.2.1-.3 0-.5l-.7-1.6c-.2-.4-.4-.4-.5-.4h-.5c-.2 0-.5.1-.7.3-.7.7-.9 1.6-.6 2.6.4 1.4 1.3 2.7 2.5 3.7 1.5 1.3 3 1.8 4.1 1.8.6 0 1.2-.2 1.6-.6.3-.3.5-.7.5-1.1v-.5c0-.1-.1-.2-.2-.2z"/></svg>
+</a>
+<div class="navbg" id="navbg"></div>
+<div class="dock">
+  <a class="primary" href="https://wa.me/393515466834" target="_blank" rel="noopener">WhatsApp</a>
+  <a class="second" href="tel:+393515466834">Chiama</a>
+</div>
+
+<script>
+const head=document.getElementById('head');
+addEventListener('scroll',()=>head.classList.toggle('on',scrollY>24),{passive:true});
+const burger=document.getElementById('burger'),nav=document.getElementById('nav'),navbg=document.getElementById('navbg');
+const setMenu=o=>{
+  nav.classList.toggle('open',o);
+  navbg.classList.toggle('open',o);
+  document.body.classList.toggle('menu-open',o);
+  burger.setAttribute('aria-expanded',o);
+};
+burger.addEventListener('click',()=>setMenu(!nav.classList.contains('open')));
+navbg.addEventListener('click',()=>setMenu(false));
+nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('seen');io.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rise').forEach(el=>io.observe(el));
+
+// slider confronto normale/refrigerata
+document.querySelectorAll('.cmp').forEach(cmp=>{
+  const rng=cmp.querySelector('.cmp-range');
+  const pTxt=cmp.querySelector('.cmp-p');
+  const bL=cmp.querySelector('.bL'), bR=cmp.querySelector('.bR');
+  const apply=()=>{
+    cmp.style.setProperty('--x',rng.value+'%');
+    const normale = rng.value>=50;
+    pTxt.textContent = normale ? cmp.dataset.p1 : cmp.dataset.p2;
+    bL.classList.toggle('on',normale);
+    bR.classList.toggle('on',!normale);
+  };
+  rng.addEventListener('input',()=>{cmp.classList.remove('anim');apply();});
+  const goto=v=>{cmp.classList.add('anim');rng.value=v;apply();};
+  bL.addEventListener('click',()=>goto(98));
+  bR.addEventListener('click',()=>goto(2));
+  const fromX=x=>{
+    const r=cmp.getBoundingClientRect();
+    rng.value=Math.max(2,Math.min(98,(x-r.left)/r.width*100));
+    cmp.classList.remove('anim');apply();
+  };
+  let drag=false;
+  rng.addEventListener('pointerdown',e=>{drag=true;fromX(e.clientX);});
+  window.addEventListener('pointermove',e=>{if(drag)fromX(e.clientX);},{passive:true});
+  window.addEventListener('pointerup',()=>drag=false);
+  window.addEventListener('pointercancel',()=>drag=false);
+  apply();
+});
+
+</script>
+
+<!-- Consenso cookie + tracciamento (Meta Pixel + GA4) -->
+<div class="ckbar" id="ckbar" hidden>
+  <p>Usiamo cookie di misurazione (Meta Pixel e Google Analytics) per capire come migliorare il sito. <button type="button" class="plink" onclick="document.getElementById('privacyDlg').showModal()">Informativa</button></p>
+  <div class="ckbtns">
+    <button type="button" class="btn btn-solid btn-sm" id="ckYes">Accetta</button>
+    <button type="button" class="btn btn-line btn-sm" id="ckNo">Rifiuta</button>
+  </div>
+</div>
+<script>
+// ---- cattura UTM nel form ----
+(function(){
+  const p = new URLSearchParams(location.search);
+  const map = {utm_source:'fonte_utm', utm_medium:'mezzo_utm', utm_campaign:'campagna_utm'};
+  for(const k in map){
+    const el = document.getElementById(map[k]);
+    if(el && p.get(k)) el.value = p.get(k);
+  }
+})();
+// ---- consenso e caricamento tracker ----
+function loadTracking(){
+  if(window.__trk) return; window.__trk = true;
+  // Meta Pixel
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','3500501163531510');
+  fbq('track','PageView');
+  // GA4
+  var g=document.createElement('script');g.async=true;
+  g.src='https://www.googletagmanager.com/gtag/js?id=G-RD4JSPQP91';
+  document.head.appendChild(g);
+  window.dataLayer=window.dataLayer||[];
+  function gtag(){dataLayer.push(arguments);}
+  window.gtag=gtag;
+  gtag('js',new Date());
+  gtag('config','G-RD4JSPQP91');
+}
+(function(){
+  const bar=document.getElementById('ckbar');
+  const c=localStorage.getItem('lbds_consent');
+  if(c==='yes'){loadTracking();}
+  else if(c!=='no'){bar.hidden=false;}
+  document.getElementById('ckYes').addEventListener('click',()=>{localStorage.setItem('lbds_consent','yes');bar.hidden=true;loadTracking();});
+  document.getElementById('ckNo').addEventListener('click',()=>{localStorage.setItem('lbds_consent','no');bar.hidden=true;});
+})();
+</script>
+</body>
+</html>
