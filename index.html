@@ -22,6 +22,7 @@
      og/social preview + favicon.
      v10.1: banner cookie rialzato sopra WhatsApp/menu, revoca consenso da footer, copy opt-in.
      v10.2: doppio invio lead (email FormSubmit + RPC Supabase keepalive), campo honeypot anti-bot. Config Supabase inserita (URL + anon key del progetto wdlfzdjzynlnkqjhectg).
+     v10.3: cattura utm_content + utm_term nel form (compaiono nella mail lead per distinguere il video). Payload RPC Supabase INVARIATO: la funzione non e' ancora aggiornata, quindi nessun rischio di rompere il salvataggio nel gestionale.
      Cerca «MODIFICA» per i punti modificabili (contatti, testi).
      ═══════════════════════════════════════════════════════════════════ -->
 
@@ -619,6 +620,8 @@ footer{border-top:1px solid var(--line-soft);padding:40px 0;background:var(--pap
         <input type="hidden" name="fonte_utm" id="fonte_utm" value="">
         <input type="hidden" name="mezzo_utm" id="mezzo_utm" value="">
         <input type="hidden" name="campagna_utm" id="campagna_utm" value="">
+        <input type="hidden" name="contenuto_utm" id="contenuto_utm" value="">
+        <input type="hidden" name="termine_utm" id="termine_utm" value="">
         <div class="hp-field" aria-hidden="true"><label>Azienda<input type="text" name="azienda_extra" id="azienda_extra" tabindex="-1" autocomplete="off"></label></div>
         <div class="field">
           <label class="q">1 · Che forma immagini?</label>
@@ -825,7 +828,7 @@ document.querySelectorAll('.cmp').forEach(cmp=>{
 // ---- cattura UTM nel form ----
 (function(){
   const p = new URLSearchParams(location.search);
-  const map = {utm_source:'fonte_utm', utm_medium:'mezzo_utm', utm_campaign:'campagna_utm'};
+  const map = {utm_source:'fonte_utm', utm_medium:'mezzo_utm', utm_campaign:'campagna_utm', utm_content:'contenuto_utm', utm_term:'termine_utm'};
   for(const k in map){
     const el = document.getElementById(map[k]);
     if(el && p.get(k)) el.value = p.get(k);
