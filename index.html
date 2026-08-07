@@ -23,6 +23,7 @@
      v10.1: banner cookie rialzato sopra WhatsApp/menu, revoca consenso da footer, copy opt-in.
      v10.2: doppio invio lead (email FormSubmit + RPC Supabase keepalive), campo honeypot anti-bot. Config Supabase inserita (URL + anon key del progetto wdlfzdjzynlnkqjhectg).
      v10.3: cattura utm_content + utm_term nel form (compaiono nella mail lead per distinguere il video). Payload RPC Supabase INVARIATO: la funzione non e' ancora aggiornata, quindi nessun rischio di rompere il salvataggio nel gestionale.
+     v10.4: payload RPC Supabase ora invia anche p_contenuto_utm + p_termine_utm (funzione aggiornata lato DB con colonne contenuto/termine). Anello chiuso: il video del lead arriva ora anche nel registro del gestionale, non solo nella mail.
      Cerca «MODIFICA» per i punti modificabili (contatti, testi).
      ═══════════════════════════════════════════════════════════════════ -->
 
@@ -799,6 +800,7 @@ document.querySelectorAll('.cmp').forEach(cmp=>{
         p_forma: r('forma'), p_refrigerata: r('refrigerata'), p_per_chi: r('per_chi'),
         p_note: g('racconto'),
         p_fonte_utm: g('fonte_utm'), p_mezzo_utm: g('mezzo_utm'), p_campagna_utm: g('campagna_utm'),
+        p_contenuto_utm: g('contenuto_utm'), p_termine_utm: g('termine_utm'),
         p_honeypot: g('azienda_extra')
       };
       // fetch con keepalive: il browser la completa anche mentre naviga verso grazie.html
