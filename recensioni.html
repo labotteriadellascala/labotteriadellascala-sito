@@ -65,10 +65,7 @@ header.on{background:rgba(250,247,240,.97);border-bottom:1px solid var(--line-so
 .brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px;letter-spacing:-.02em;white-space:nowrap}
 .brand img{height:38px;width:auto;display:block}
 .brand .logo-w{display:none}
-@media(max-width:1000px){
-  header:not(.on) .brand .logo-c{display:none}
-  header:not(.on) .brand .logo-w{display:block}
-}
+/* Pagina galleria: sfondo chiaro anche in cima -> logo sempre bordeaux (niente scambio col bianco su mobile) */
 .nav{display:flex;align-items:center;gap:28px}
 .nav a{font-size:14px;color:var(--ink-soft);transition:color .2s;white-space:nowrap}
 .nav a:hover{color:var(--ink)}
