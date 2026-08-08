@@ -22,8 +22,6 @@
      og/social preview + favicon.
      v10.1: banner cookie rialzato sopra WhatsApp/menu, revoca consenso da footer, copy opt-in.
      v10.2: doppio invio lead (email FormSubmit + RPC Supabase keepalive), campo honeypot anti-bot. Config Supabase inserita (URL + anon key del progetto wdlfzdjzynlnkqjhectg).
-     v10.3: cattura utm_content + utm_term nel form (compaiono nella mail lead per distinguere il video). Payload RPC Supabase INVARIATO: la funzione non e' ancora aggiornata, quindi nessun rischio di rompere il salvataggio nel gestionale.
-     v10.4: payload RPC Supabase ora invia anche p_contenuto_utm + p_termine_utm (funzione aggiornata lato DB con colonne contenuto/termine). Anello chiuso: il video del lead arriva ora anche nel registro del gestionale, non solo nella mail.
      Cerca «MODIFICA» per i punti modificabili (contatti, testi).
      ═══════════════════════════════════════════════════════════════════ -->
 
@@ -208,6 +206,9 @@ header:not(.on) .nav.open>a{color:var(--ink)}
 .w-lab{font-family:var(--mono);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#f3d9a8;font-weight:700;margin-bottom:12px}
 .warranty p{font-size:clamp(16.5px,2vw,19px);color:rgba(250,247,240,.92);line-height:1.65;max-width:56ch;margin:0 auto}
 .warranty b{color:#fff;font-weight:700}
+.more-links{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:26px}
+.more-link{font-size:15px;font-weight:600;color:var(--gold);padding:12px 22px;border:1.5px solid var(--gold-warm);border-radius:999px;transition:.2s}
+.more-link:hover{background:var(--gold);color:#f5f1e8}
 
 /* chi siamo */
 .duo{max-width:780px}
@@ -394,6 +395,8 @@ footer{border-top:1px solid var(--line-soft);padding:40px 0;background:var(--pap
       <a href="#processo">Come funziona</a>
       <a href="#configura">Configura</a>
       <a href="#voci">Dicono di noi</a>
+      <a href="recensioni.html">Recensioni</a>
+      <a href="ispirazioni.html">Ispirazioni</a>
       <a href="#contatti">Contatti</a>
       <!-- MODIFICA-CONTATTI -->
       <a class="btn btn-solid btn-sm" href="#contatti">Rendering gratuito</a>
@@ -410,8 +413,8 @@ footer{border-top:1px solid var(--line-soft);padding:40px 0;background:var(--pap
     <div class="hero-shot">
       <!-- MODIFICA-FOTO · stessa scena in due tagli: verticale per telefono, orizzontale largo per computer -->
       <picture>
-        <source media="(min-width:1001px)" srcset="img/hero-desktop.jpg">
-        <img src="img/hero-mobile.jpg" alt="Mobile bar a forma di botte in un salotto" width="1200" height="1500" fetchpriority="high" decoding="async">
+        <source media="(min-width:1001px)" srcset="img/hero-desktop.webp">
+        <img src="img/hero-mobile.webp" alt="Mobile bar a forma di botte in un salotto" width="1200" height="1500" fetchpriority="high" decoding="async">
       </picture>
     </div>
     <div class="wrap hero-say rise" style="order:-1">
@@ -438,9 +441,9 @@ footer{border-top:1px solid var(--line-soft);padding:40px 0;background:var(--pap
     </div>
     <div class="claim-strip rise">
       <!-- MODIFICA-FOTO · tre scatti di atmosfera 3:2 -->
-      <figure><img src="img/dettaglio-costruzione.jpg" width="900" height="600" loading="lazy" decoding="async" alt="Dettaglio del legno lavorato a mano"></figure>
-      <figure><img src="img/dettaglio-ripiano.jpg" width="900" height="601" loading="lazy" decoding="async" alt="Interno con bottiglie e calici"></figure>
-      <figure><img src="img/incisione-laser.jpg" width="900" height="600" loading="lazy" decoding="async" alt="Incisione laser personalizzata sul ripiano"></figure>
+      <figure><img src="img/dettaglio-costruzione.webp" width="900" height="600" loading="lazy" decoding="async" alt="Dettaglio del legno lavorato a mano"></figure>
+      <figure><img src="img/dettaglio-ripiano.webp" width="900" height="601" loading="lazy" decoding="async" alt="Interno con bottiglie e calici"></figure>
+      <figure><img src="img/incisione-laser.webp" width="900" height="600" loading="lazy" decoding="async" alt="Incisione laser personalizzata sul ripiano"></figure>
     </div>
   </div>
 </section>
@@ -478,8 +481,8 @@ footer{border-top:1px solid var(--line-soft);padding:40px 0;background:var(--pap
         <div class="cmp-item">
           <div class="cmp-lab"><svg class="cmp-ico" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="10.5" stroke="currentColor" stroke-width="1.8"/></svg><span>Intera</span></div>
           <div class="cmp" style="--x:50%" data-p1="range indicativo 550 – 850 €" data-p2="con cantinetta · 1.050 – 1.200 €">
-            <img src="img/intera-refrigerata.jpg" width="900" height="900" loading="lazy" decoding="async" alt="Botte intera con cantinetta refrigerata">
-            <img class="top" src="img/intera-aperta.jpg" width="900" height="900" loading="lazy" decoding="async" alt="Botte intera con scaffale aperto">
+            <img src="img/intera-refrigerata.webp" width="900" height="900" loading="lazy" decoding="async" alt="Botte intera con cantinetta refrigerata">
+            <img class="top" src="img/intera-aperta.webp" width="900" height="900" loading="lazy" decoding="async" alt="Botte intera con scaffale aperto">
             <div class="cmp-line"></div>
             <div class="grip">‹ ›</div>
             <input type="range" class="cmp-range" min="2" max="98" value="50" step="0.5" aria-label="Confronta Intera: scaffale aperto e cantinetta refrigerata">
@@ -494,8 +497,8 @@ footer{border-top:1px solid var(--line-soft);padding:40px 0;background:var(--pap
         <div class="cmp-item">
           <div class="cmp-lab"><svg class="cmp-ico" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M6 13h20a10 10 0 0 1-20 0Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span>Mezza</span></div>
           <div class="cmp" style="--x:50%" data-p1="range indicativo 450 – 750 €" data-p2="con cantinetta · 950 – 1.100 €">
-            <img src="img/mezza-refrigerata.jpg" width="900" height="900" loading="lazy" decoding="async" alt="Botte mezza con cantinetta refrigerata">
-            <img class="top" src="img/mezza-aperta.jpg" width="900" height="900" loading="lazy" decoding="async" alt="Botte mezza con scaffale aperto">
+            <img src="img/mezza-refrigerata.webp" width="900" height="900" loading="lazy" decoding="async" alt="Botte mezza con cantinetta refrigerata">
+            <img class="top" src="img/mezza-aperta.webp" width="900" height="900" loading="lazy" decoding="async" alt="Botte mezza con scaffale aperto">
             <div class="cmp-line"></div>
             <div class="grip">‹ ›</div>
             <input type="range" class="cmp-range" min="2" max="98" value="50" step="0.5" aria-label="Confronta Mezza: scaffale aperto e cantinetta refrigerata">
@@ -510,8 +513,8 @@ footer{border-top:1px solid var(--line-soft);padding:40px 0;background:var(--pap
         <div class="cmp-item">
           <div class="cmp-lab"><svg class="cmp-ico" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 5.5 8.5 21a10.6 10.6 0 0 0 15 0Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span>Ad angolo</span></div>
           <div class="cmp" style="--x:50%" data-p1="range indicativo 450 – 750 €" data-p2="con cantinetta · 950 – 1.100 €">
-            <img src="img/angolo-refrigerata.jpg" width="900" height="900" loading="lazy" decoding="async" alt="Botte ad angolo con cantinetta refrigerata">
-            <img class="top" src="img/angolo-aperta.jpg" width="900" height="900" loading="lazy" decoding="async" alt="Botte ad angolo con scaffale aperto">
+            <img src="img/angolo-refrigerata.webp" width="900" height="900" loading="lazy" decoding="async" alt="Botte ad angolo con cantinetta refrigerata">
+            <img class="top" src="img/angolo-aperta.webp" width="900" height="900" loading="lazy" decoding="async" alt="Botte ad angolo con scaffale aperto">
             <div class="cmp-line"></div>
             <div class="grip">‹ ›</div>
             <input type="range" class="cmp-range" min="2" max="98" value="50" step="0.5" aria-label="Confronta Ad angolo: scaffale aperto e cantinetta refrigerata">
@@ -585,6 +588,10 @@ footer{border-top:1px solid var(--line-soft);padding:40px 0;background:var(--pap
 
     <div class="warranty rise">
       <div class="w-lab">Garanzia</div>
+    <div class="more-links rise">
+      <a href="recensioni.html" class="more-link">Vedi tutti i messaggi dei clienti →</a>
+      <a href="ispirazioni.html" class="more-link">Guarda le botti nelle case dei clienti →</a>
+    </div>
       <p>Se non sei soddisfatto della tua botte <b>(praticamente impossibile)</b>, hai <b>15 giorni</b> per restituirla, senza costi aggiuntivi. Arriva danneggiata? Ti mandiamo il corriere a ritirarla e <b>te la sostituiamo, tutto a nostre spese</b>.</p>
     </div>
   </div>
@@ -621,8 +628,6 @@ footer{border-top:1px solid var(--line-soft);padding:40px 0;background:var(--pap
         <input type="hidden" name="fonte_utm" id="fonte_utm" value="">
         <input type="hidden" name="mezzo_utm" id="mezzo_utm" value="">
         <input type="hidden" name="campagna_utm" id="campagna_utm" value="">
-        <input type="hidden" name="contenuto_utm" id="contenuto_utm" value="">
-        <input type="hidden" name="termine_utm" id="termine_utm" value="">
         <div class="hp-field" aria-hidden="true"><label>Azienda<input type="text" name="azienda_extra" id="azienda_extra" tabindex="-1" autocomplete="off"></label></div>
         <div class="field">
           <label class="q">1 · Che forma immagini?</label>
@@ -800,7 +805,6 @@ document.querySelectorAll('.cmp').forEach(cmp=>{
         p_forma: r('forma'), p_refrigerata: r('refrigerata'), p_per_chi: r('per_chi'),
         p_note: g('racconto'),
         p_fonte_utm: g('fonte_utm'), p_mezzo_utm: g('mezzo_utm'), p_campagna_utm: g('campagna_utm'),
-        p_contenuto_utm: g('contenuto_utm'), p_termine_utm: g('termine_utm'),
         p_honeypot: g('azienda_extra')
       };
       // fetch con keepalive: il browser la completa anche mentre naviga verso grazie.html
@@ -830,7 +834,7 @@ document.querySelectorAll('.cmp').forEach(cmp=>{
 // ---- cattura UTM nel form ----
 (function(){
   const p = new URLSearchParams(location.search);
-  const map = {utm_source:'fonte_utm', utm_medium:'mezzo_utm', utm_campaign:'campagna_utm', utm_content:'contenuto_utm', utm_term:'termine_utm'};
+  const map = {utm_source:'fonte_utm', utm_medium:'mezzo_utm', utm_campaign:'campagna_utm'};
   for(const k in map){
     const el = document.getElementById(map[k]);
     if(el && p.get(k)) el.value = p.get(k);

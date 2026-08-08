@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ispirazioni — La Botteria della Scala</title>
+<meta name="description" content="Le botti dei nostri clienti nelle loro case. Foto autentiche, per prendere spunto su come allestire la tua.">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --plaster:#faf7f0;   /* intonaco chiarissimo */
+  --paper:#f2ecdf;     /* fondo principale */
+  --sand:#e7dcc8;      /* sezione alternata */
+  --sand-2:#d9cbb1;
+  --line:#d3c6ae;
+  --line-soft:#e2d8c4;
+  --ink:#32281c;       /* testo principale */
+  --ink-soft:#6b5c49;  /* testo secondario */
+  --ink-faint:#95866f;
+  --gold:#7d2a35;      /* accento su testo */
+  --gold-warm:#9c3a47; /* accento decorativo */
+  --wa:#25d366;
+
+  --r-card:14px;
+  --r-field:10px;
+  --sans:"Geist",system-ui,-apple-system,sans-serif;
+  --mono:"Geist Mono",ui-monospace,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%;height:auto}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1280px;margin:0 auto;padding:0 28px}
+
+.display{font-weight:600;letter-spacing:-.03em;line-height:1.03}
+.h1{font-size:clamp(38px,5.2vw,64px)}
+.h2{font-size:clamp(30px,3.9vw,48px)}
+.h3{font-size:clamp(20px,2vw,25px);letter-spacing:-.02em;font-weight:600;line-height:1.16}
+.body-lg{font-size:18px;color:var(--ink-soft);line-height:1.58}
+.body{font-size:15.5px;color:var(--ink-soft);line-height:1.62}
+.label{font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+
+/* pulsanti */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--sans);
+  font-weight:600;font-size:15px;white-space:nowrap;padding:14px 26px;border-radius:999px;
+  border:1px solid transparent;cursor:pointer;transition:background .25s,color .25s,border-color .25s,transform .1s}
+.btn-solid{background:var(--ink);color:var(--plaster)}
+.btn-solid:hover{background:#3a3025}
+.btn-solid:active{transform:translateY(1px)}
+.btn-line{border-color:var(--line);color:var(--ink);background:transparent}
+.btn-line:hover{border-color:var(--ink);background:rgba(36,29,22,.04)}
+.btn-line:active{transform:translateY(1px)}
+.btn-sm{padding:9px 18px;font-size:13.5px}
+
+/* header */
+header{position:fixed;inset:0 0 auto 0;z-index:80;transition:background .35s,border-color .35s,box-shadow .35s}
+header.on{background:rgba(250,247,240,.97);border-bottom:1px solid var(--line-soft)}
+.bar{height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px;max-width:1280px;margin:0 auto;padding:0 28px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px;letter-spacing:-.02em;white-space:nowrap}
+.brand img{height:38px;width:auto;display:block}
+.brand .logo-w{display:none}
+@media(max-width:1000px){
+  header:not(.on) .brand .logo-c{display:none}
+  header:not(.on) .brand .logo-w{display:block}
+}
+.nav{display:flex;align-items:center;gap:28px}
+.nav a{font-size:14px;color:var(--ink-soft);transition:color .2s;white-space:nowrap}
+.nav a:hover{color:var(--ink)}
+.burger{display:none;background:none;border:none;color:var(--ink);cursor:pointer;padding:6px}
+body.menu-open{overflow:hidden}
+.navbg{position:fixed;inset:0;background:rgba(28,21,14,.45);opacity:0;pointer-events:none;transition:opacity .3s;z-index:74}
+.navbg.open{opacity:1;pointer-events:auto}
+
+/* hero */
+/* HERO variante B: mobile = foto piena sopra + testo sotto; desktop = affiancati */
+.hero{position:relative;background:var(--plaster)}
+.hero-shot{position:relative;height:63dvh;min-height:430px;overflow:hidden;background:var(--sand)}
+.hero-shot img{width:100%;height:100%;object-fit:cover;object-position:center 32%}
+.hero-shot::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(30,22,14,.42) 0%,rgba(30,22,14,0) 24%);pointer-events:none}
+.hero-say{padding:26px 0 40px}
+.hero .label{display:block;margin-bottom:14px}
+.hero h1{margin-bottom:14px}
+.hero .body-lg{max-width:46ch;margin-bottom:24px}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+/* header leggibile sopra la foto (mobile) */
+header:not(.on) .brand{color:#f5f1e8}
+header:not(.on) .nav>a{color:rgba(250,246,239,.88)}
+header:not(.on) .nav .btn-solid{background:#f5f1e8;color:#32281c}
+header:not(.on) .burger{color:#f5f1e8}
+header:not(.on) .nav.open>a{color:var(--ink)}
+@media(min-width:1001px){
+  /* desktop: torna l'affiancato, foto a destra senza testo sopra */
+  .hero{min-height:100dvh;display:flex;align-items:center;padding:96px 0 60px;overflow:hidden;
+    background:radial-gradient(120% 80% at 72% 18%,rgba(154,58,71,.10),transparent 62%),var(--plaster)}
+  .hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:56px;align-items:center;width:100%}
+  .hero-shot{height:auto;min-height:0;aspect-ratio:4/5;border-radius:var(--r-card);border:1px solid var(--line);
+    box-shadow:0 26px 60px -30px rgba(70,55,35,.28)}
+  .hero-shot::after{display:none}
+  .hero-say{padding:0}
+  header:not(.on) .brand{color:var(--ink)}
+  header:not(.on) .nav>a{color:var(--ink-soft)}
+  header:not(.on) .nav .btn-solid{background:var(--ink);color:var(--plaster)}
+}
+
+/* sezioni */
+.sec{padding:104px 0}
+.sec-sand{background:var(--sand)}
+.claim{max-width:900px}
+.claim p.big{font-size:clamp(23px,2.9vw,34px);font-weight:500;letter-spacing:-.02em;line-height:1.32;color:var(--ink)}
+.claim p.big strong{color:var(--gold);font-weight:500}
+.claim .body{margin-top:22px;max-width:60ch}
+.claim .body b.hl{color:var(--gold);font-weight:600}
+.claim-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:44px}
+.claim-strip figure{border-radius:var(--r-card);overflow:hidden;border:1px solid var(--line);aspect-ratio:3/2;background:var(--sand-2)}
+.claim-strip img{width:100%;height:100%;object-fit:cover}
+
+/* processo */
+.rail{margin-top:52px;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.rail .stepcell{padding:30px 26px 0 0;border-right:1px solid var(--line-soft);position:relative}
+.rail .stepcell:last-child{border-right:none}
+.rail .stepcell::before{content:"";position:absolute;top:-5px;left:0;width:9px;height:9px;border-radius:50%;background:var(--gold-warm)}
+.rail .num{font-family:var(--mono);font-size:12px;color:var(--gold);letter-spacing:.14em;margin-bottom:14px}
+.rail h3{margin-bottom:10px}
+.rail p{font-size:14.5px;color:var(--ink-soft);line-height:1.58}
+.rail p b.hl{color:var(--gold);font-weight:600}
+
+/* bento */
+.bento{display:grid;grid-template-columns:1.5fr 1fr 1fr;grid-template-rows:auto auto;gap:14px;margin-top:46px}
+.tile{position:relative;border-radius:var(--r-card);overflow:hidden;border:1px solid var(--line);background:var(--sand-2);min-height:210px;transition:border-color .3s,transform .3s,box-shadow .3s}
+.tile:hover{border-color:var(--gold-warm);transform:translateY(-3px);box-shadow:0 18px 40px -24px rgba(50,45,38,.42)}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tile .veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(28,22,16,.88) 10%,rgba(28,22,16,.2) 58%,transparent)}
+.tile .txt{position:absolute;left:20px;right:20px;bottom:18px;color:var(--plaster)}
+.tile .txt h3{margin-bottom:5px}
+.tile .txt p{font-size:13.5px;color:rgba(236,231,222,.85);line-height:1.45}
+.tile.big{grid-row:span 2;min-height:0}
+.tile.wide{grid-column:span 2}
+
+.optbox{margin-top:14px;border:1px solid var(--line);border-radius:var(--r-card);padding:26px;background:var(--plaster)}
+.optbox .cap{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:16px}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{font-size:14px;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 16px;background:var(--paper)}
+.pill.hi{border-color:var(--gold-warm);color:var(--gold);background:rgba(154,58,71,.10)}
+.opt-text{font-size:16.5px;line-height:1.65;color:var(--ink-soft)}
+.opt-text b{color:var(--gold);font-weight:600}
+.optbox .after{margin-top:20px;font-size:16px;color:var(--ink-soft)}
+.optbox .after b{color:var(--ink);font-weight:600}
+
+/* prova */
+.figures{display:flex;gap:clamp(34px,8vw,96px);flex-wrap:wrap;align-items:flex-end;padding-bottom:16px}
+.figures .n{font-size:clamp(44px,6.4vw,74px);font-weight:600;letter-spacing:-.045em;line-height:.95;color:var(--ink)}
+.figures .k{font-size:13.5px;color:var(--ink-soft);margin-top:9px}
+.figlink{display:block}
+.figlink .k{color:var(--gold)}
+.figlink:hover .n{color:var(--gold)}
+.figlink .k svg{color:var(--gold)}
+.honest{display:grid;grid-template-columns:1fr 1fr;gap:52px;margin-top:56px;padding-top:44px;border-top:1px solid var(--line)}
+.honest h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:22px}
+.honest .yes h4{color:var(--gold)}
+.honest .no h4{color:var(--ink-faint)}
+.honest ul{list-style:none;display:flex;flex-direction:column;gap:20px}
+.honest li{font-size:15px;color:var(--ink-soft);line-height:1.55;padding-left:18px;position:relative}
+.honest li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%}
+.honest .yes li::before{background:var(--gold-warm)}
+.honest .no li::before{background:var(--ink-faint)}
+.honest li b{color:var(--ink);font-weight:600}
+
+.voices-top{display:flex;align-items:baseline;justify-content:space-between;gap:18px;flex-wrap:wrap;margin:72px 0 22px}
+.voices-top span{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);letter-spacing:.12em}
+.voices{display:flex;gap:16px;overflow-x:auto;padding-bottom:14px;scroll-snap-type:x mandatory}
+.voices::-webkit-scrollbar{height:5px}
+.voices::-webkit-scrollbar-thumb{background:var(--line);border-radius:99px}
+.voice{scroll-snap-align:start;flex:0 0 300px;border:1px solid var(--line);border-radius:var(--r-card);overflow:hidden;background:var(--plaster);display:flex;flex-direction:column;position:relative}
+.voice::before{content:"\201C";position:absolute;top:2px;left:14px;font-size:54px;line-height:1;color:var(--gold-warm);opacity:.35;font-family:Georgia,serif}
+.voice figure{aspect-ratio:16/11;background:var(--sand-2)}
+.voice img{width:100%;height:100%;object-fit:cover}
+.voice .said{padding:34px 20px 20px}
+.voice blockquote{font-size:16.5px;line-height:1.42;letter-spacing:-.01em;font-weight:500;margin-bottom:14px;color:var(--ink)}
+.voice cite{font-style:normal;font-size:13px;color:var(--ink-faint)}
+.warranty{margin-top:30px;border:2px dashed rgba(250,247,240,.55);border-radius:var(--r-card);padding:30px 26px;background:var(--gold);text-align:center}
+.w-lab{font-family:var(--mono);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#f3d9a8;font-weight:700;margin-bottom:12px}
+.warranty p{font-size:clamp(16.5px,2vw,19px);color:rgba(250,247,240,.92);line-height:1.65;max-width:56ch;margin:0 auto}
+.warranty b{color:#fff;font-weight:700}
+
+/* chi siamo */
+.duo{max-width:780px}
+.duo .body-lg{margin-bottom:16px}
+.duo .who{margin-top:24px;font-size:15px;font-weight:600;color:var(--ink)}
+.duo .who span{display:block;font-weight:400;color:var(--ink-faint);font-size:13.5px;margin-top:3px}
+.duo figure{border-radius:var(--r-card);overflow:hidden;border:1px solid var(--line);aspect-ratio:5/4;background:var(--sand-2);
+  box-shadow:0 26px 60px -34px rgba(70,55,35,.28)}
+.duo img{width:100%;height:100%;object-fit:cover}
+
+/* contatti */
+.talk{background:radial-gradient(110% 70% at 30% 0%,rgba(154,58,71,.08),transparent 60%),var(--plaster)}
+.talk-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:52px;margin-top:44px}
+form{display:flex;flex-direction:column;gap:20px}
+.field>label{display:block;font-size:13px;color:var(--ink-soft);margin-bottom:9px;font-weight:500}
+.field input[type=text]{width:100%;background:var(--plaster);border:1px solid var(--line);border-radius:var(--r-field);
+  padding:13px 15px;color:var(--ink);font-family:var(--sans);font-size:15.5px}
+.field input[type=text]::placeholder{color:var(--ink-faint)}
+.field input[type=text]:focus{outline:none;border-color:var(--gold)}
+.field .q{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:10px;display:block}
+.fcards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.fcard{border:1px solid var(--line);border-radius:12px;background:var(--plaster);padding:16px 8px 13px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;transition:.2s;font-size:14px;color:var(--ink-soft)}
+.fcard svg{width:34px;height:34px;color:var(--ink-faint);transition:.2s}
+.fcard input{position:absolute;opacity:0;pointer-events:none}
+.fcard:has(input:checked){border-color:var(--gold);background:rgba(154,58,71,.07);color:var(--ink)}
+.fcard:has(input:checked) svg{color:var(--gold)}
+.fcard:has(input:focus-visible){outline:2px solid var(--gold);outline-offset:2px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt label{display:inline-block;font-size:14px;color:var(--ink-soft);border:1px solid var(--line);border-radius:999px;
+  padding:8px 16px;cursor:pointer;transition:.2s;margin:0;font-weight:400;background:var(--paper)}
+.opt input:checked+label{background:var(--ink);border-color:var(--ink);color:var(--plaster);font-weight:600}
+.opt input:focus-visible+label{outline:2px solid var(--gold);outline-offset:2px}
+.reach{border:1px solid var(--line);border-radius:var(--r-card);background:var(--paper);padding:8px 24px}
+.reach a,.reach div.row{display:flex;align-items:center;gap:15px;padding:19px 0;border-bottom:1px solid var(--line-soft)}
+.reach>*:last-child{border-bottom:none}
+.reach .ico{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--gold)}
+.reach .k{font-size:12px;color:var(--ink-faint)}
+.reach .v{font-size:16px;color:var(--ink)}
+.reach a:hover .v{color:var(--gold)}
+
+/* ── confronto normale/refrigerata ── */
+.cmp-wrap{margin-top:14px}
+.cmp-head{display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:12px}
+.cmp-head h3{font-size:clamp(19px,2vw,23px);letter-spacing:-.02em;font-weight:600}
+.cmp-head span{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);letter-spacing:.1em}
+.cmp{position:relative;border-radius:var(--r-card);overflow:hidden;border:1px solid var(--line);
+  aspect-ratio:1/1;user-select:none;box-shadow:0 18px 44px -26px rgba(70,55,35,.35)}
+.cmp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.cmp .top{clip-path:inset(0 calc(100% - var(--x,50%)) 0 0)}
+.cmp .cmp-line{position:absolute;top:0;bottom:0;left:var(--x,50%);width:2px;background:#fff;
+  box-shadow:0 0 0 1px rgba(0,0,0,.15);transform:translateX(-1px);pointer-events:none}
+.cmp .grip{position:absolute;top:50%;left:var(--x,50%);transform:translate(-50%,-50%);
+  width:46px;height:46px;border-radius:50%;background:var(--plaster);border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;color:var(--ink);
+  box-shadow:0 6px 18px rgba(40,30,18,.3);pointer-events:none;font-size:13px;font-weight:700}
+.cmp .tagL,.cmp .tagR{position:absolute;bottom:14px;font-size:12px;font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;padding:7px 13px;border-radius:999px;backdrop-filter:blur(6px);pointer-events:none;z-index:2}
+.cmp .tagL{left:14px;background:rgba(250,247,240,.85);color:var(--ink)}
+.cmp .tagR{right:14px;background:rgba(125,42,53,.88);color:#f5f1e8}
+.cmp.anim .top{transition:clip-path .55s cubic-bezier(.25,.8,.3,1)}
+.cmp.anim .cmp-line,.cmp.anim .grip{transition:left .55s cubic-bezier(.25,.8,.3,1)}
+.cmp-bar{position:absolute;left:0;right:0;bottom:0;z-index:4;display:grid;
+  grid-template-columns:1fr auto 1fr;grid-template-areas:"p p p" "l . r";row-gap:8px;align-items:center;
+  padding:12px 12px 11px;background:linear-gradient(to top,rgba(22,17,12,.85),rgba(22,17,12,.5) 62%,transparent)}
+.cmp-bar .bL{grid-area:l;justify-self:start}
+.cmp-bar .bR{grid-area:r;justify-self:end}
+.cmp-bar .cmp-p{grid-area:p}
+.cmp-btn{font-family:var(--sans);font-size:11.5px;font-weight:600;letter-spacing:.04em;white-space:nowrap;
+  padding:7px 12px;border-radius:999px;border:1px solid rgba(250,247,240,.45);background:rgba(250,247,240,.12);
+  color:#f5f1e8;cursor:pointer;transition:background .25s,border-color .25s,color .25s}
+.cmp-btn.on{background:#f5f1e8;border-color:#f5f1e8;color:#32281c}
+.cmp-btn.bR.on{background:var(--gold);border-color:var(--gold);color:#f5f1e8}
+.cmp-p{text-align:center;font-family:var(--mono);font-size:14.5px;font-weight:600;color:#f5f1e8;
+  text-shadow:0 1px 6px rgba(0,0,0,.45);white-space:nowrap}
+.cmp-range{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;touch-action:none;-webkit-appearance:none;appearance:none;z-index:3}
+.cmp-range::-webkit-slider-thumb{-webkit-appearance:none;width:60px;height:100%}
+.cmp-range::-moz-range-thumb{width:60px;height:100%;border:none;background:transparent}
+.cmp-grid{display:grid;gap:16px}
+.cmp-lab{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:8px}
+@media(min-width:1001px){.cmp-grid{grid-template-columns:repeat(3,1fr)}}
+.cmp-note{font-size:13.5px;color:var(--ink-faint);margin-top:10px;text-align:center}
+.cmp-desc{font-size:13.5px;color:var(--ink-soft);margin-top:9px;line-height:1.5}
+.cmp-lab{display:flex;align-items:center;gap:8px}
+.cmp-ico{width:26px;height:26px;color:var(--gold);flex-shrink:0}
+.cmp-price{margin-top:10px;display:flex;flex-direction:column;gap:3px}
+.cmp-price .p1{font-family:var(--mono);font-size:14px;color:var(--ink-soft)}
+.cmp-price .p1 b{font-size:19px;color:var(--ink);font-weight:600}
+.cmp-price .p2{font-family:var(--mono);font-size:11.5px;color:var(--gold);letter-spacing:.02em}
+.sumisura{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:16px;
+  border:1px solid var(--gold-warm);border-radius:var(--r-card);padding:20px 24px;background:rgba(154,58,71,.06);
+  transition:background .25s,transform .25s}
+.sumisura:hover{background:rgba(154,58,71,.11);transform:translateY(-2px)}
+.sm-lab{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:5px}
+.sm-txt{font-size:16px;color:var(--ink-soft)}
+.sm-txt b{color:var(--ink);font-weight:600}
+.sm-arrow{font-size:22px;color:var(--gold);flex-shrink:0}
+footer{border-top:1px solid var(--line-soft);padding:40px 0;background:var(--paper)}
+.foot{margin-bottom:18px}
+.fsocial{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--ink-soft)}
+.fsocial:hover{color:var(--gold)}
+.legal p{font-size:12.5px;color:var(--ink-faint);line-height:1.7}
+.plink{background:none;border:none;padding:0;font:inherit;color:var(--gold);text-decoration:underline;cursor:pointer}
+.consent{font-size:12.5px;color:var(--ink-faint);margin-top:-6px}
+.hp-field{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none}
+.pdlg{border:none;border-radius:14px;padding:0;max-width:640px;width:calc(100% - 40px);background:var(--plaster);color:var(--ink)}
+.pdlg::backdrop{background:rgba(24,18,12,.55)}
+.pdlg-in{padding:26px 26px 30px;max-height:80vh;overflow:auto}
+.pdlg-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.pdlg-head h3{font-size:20px;font-weight:600;letter-spacing:-.02em}
+.pdlg-x{background:none;border:1px solid var(--line);border-radius:50%;width:34px;height:34px;cursor:pointer;color:var(--ink-soft);font-size:14px}
+.pdlg h4{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin:20px 0 8px}
+.pdlg p{font-size:14px;color:var(--ink-soft);line-height:1.65}
+.pdate{margin-top:20px;font-size:12px !important;color:var(--ink-faint) !important}
+.ckbar{position:fixed;left:12px;right:12px;bottom:64px;z-index:200;background:var(--plaster);
+  border:1px solid var(--line);border-radius:14px;padding:17px 19px;box-shadow:0 16px 46px rgba(40,30,18,.3)}
+.ckbar p{font-size:13.5px;color:var(--ink-soft);line-height:1.55;margin-bottom:13px}
+.ckbar p a,.ckbar p .plink{color:var(--gold)}
+.ckbtns{display:flex;gap:10px}
+.ckbtns .btn{flex:1}
+#ckYes{background:#47714f;color:#f5f1e8;border-color:#47714f}
+#ckYes:hover{background:#3c5f43}
+.ckbtns .ck-no{background:transparent;border-color:var(--line);color:var(--ink-soft);flex:0 0 auto;padding-left:18px;padding-right:18px}
+@media(min-width:721px){.ckbar{left:auto;right:24px;bottom:24px;max-width:392px}}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.foot p{font-size:13px;color:var(--ink-faint)}
+
+.fab{position:fixed;right:24px;bottom:24px;z-index:70;width:56px;height:56px;border-radius:50%;
+  background:var(--wa);color:#fff;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 12px 30px rgba(70,55,35,.24);transition:transform .2s}
+.fab:hover{transform:scale(1.06)}
+.dock{display:none}
+
+.rise{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.22,.7,.25,1),transform .7s cubic-bezier(.22,.7,.25,1)}
+.rise.seen{opacity:1;transform:none}
+.hero .hero-shot.rise{transition-delay:.16s}
+@media(prefers-reduced-motion:reduce){.rise{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}.tile:hover,.fab:hover{transform:none}}
+
+@media(max-width:1000px){
+  .hero-grid{display:flex;flex-direction:column}
+  .hero-say{order:2 !important}
+  .hero-shot{order:1}
+  .talk-grid{grid-template-columns:1fr;gap:40px}
+  .rail{grid-template-columns:1fr 1fr}
+  .rail .stepcell{padding-bottom:26px;border-bottom:1px solid var(--line-soft)}
+  .rail .stepcell:nth-child(2n){border-right:none}
+  .bento{grid-template-columns:1fr 1fr}
+  .tile.big{grid-row:auto;min-height:210px}
+  .honest{grid-template-columns:1fr;gap:34px}
+}
+@media(max-width:720px){
+  .sec{padding:70px 0}
+  .nav{position:fixed;inset:0 0 0 auto;width:82%;max-width:320px;flex-direction:column;justify-content:center;
+    align-items:flex-start;gap:26px;padding:36px;background:var(--plaster);border-left:1px solid var(--line);
+    transform:translateX(100%);transition:transform .32s ease;z-index:75}
+  .nav.open{transform:none}
+  .nav a{font-size:19px;color:var(--ink)}
+  .nav a.btn-solid{color:var(--plaster)}
+  .nav .btn{width:100%}
+  .burger{display:block;z-index:78}
+  .claim-strip,.bento,.rail{grid-template-columns:1fr}
+  .tile.wide{grid-column:auto}
+  .rail .stepcell{border-right:none}
+  .fab{display:none}
+  .dock{display:flex;position:fixed;inset:auto 0 0 0;z-index:75;background:rgba(250,247,240,.97);
+    backdrop-filter:blur(12px);border-top:1px solid var(--line)}
+  .dock a{flex:1;display:flex;align-items:center;justify-content:center;padding:15px 0;font-size:15px;font-weight:600}
+  .dock .primary{background:var(--wa);color:#fff}
+  .dock .second{color:var(--ink)}
+  body{padding-bottom:54px}
+  .voice{flex:0 0 84%}
+}
+
+
+/* ===== pagine galleria ===== */
+.ghead{padding:120px 0 30px;text-align:center;background:var(--paper)}
+.ghead .kick{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:14px}
+.ghead h1{font-size:clamp(30px,6vw,52px);font-weight:600;letter-spacing:-.03em;line-height:1.05;margin-bottom:16px}
+.ghead p{font-size:clamp(15px,2vw,18px);color:var(--ink-soft);line-height:1.6;max-width:56ch;margin:0 auto}
+.gback{display:inline-flex;align-items:center;gap:7px;font-size:14px;color:var(--ink-faint);margin-top:22px}
+.gback:hover{color:var(--gold)}
+.gwrap{padding:20px 0 130px}
+/* masonry via CSS columns */
+.masonry{column-gap:16px}
+.masonry.chat{column-width:270px}
+.masonry.foto{column-width:300px}
+.mitem{break-inside:avoid;margin-bottom:16px;border:1px solid var(--line);border-radius:var(--r-card);overflow:hidden;background:var(--plaster);box-shadow:0 10px 30px -22px rgba(70,55,35,.4);transition:transform .25s,box-shadow .25s}
+.mitem:hover{transform:translateY(-3px);box-shadow:0 18px 40px -24px rgba(70,55,35,.5)}
+.mitem img{display:block;width:100%;height:auto}
+.mcap{padding:11px 14px;font-size:13px;color:var(--ink-soft);line-height:1.5}
+.mcap b{color:var(--gold);font-weight:600}
+/* CTA fisso in fondo, sopra lo scorrimento */
+.gcta{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;align-items:center;justify-content:center;gap:16px;
+  padding:14px 20px;background:linear-gradient(to top,var(--paper) 72%,rgba(242,236,223,0));pointer-events:none}
+.gcta .inner{pointer-events:auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;
+  background:var(--gold);border-radius:999px;padding:11px 12px 11px 22px;box-shadow:0 12px 34px -12px rgba(125,42,53,.6)}
+.gcta .msg{color:#f5f1e8;font-size:14.5px;font-weight:500}
+.gcta .msg b{font-weight:700}
+.gcta .btn-cta{background:#f5f1e8;color:var(--gold);font-weight:600;font-size:14.5px;padding:11px 20px;border-radius:999px;white-space:nowrap;text-decoration:none;transition:transform .2s}
+.gcta .btn-cta:hover{transform:scale(1.04)}
+@media(max-width:560px){
+  .gcta .msg{display:none}
+  .gcta .inner{width:calc(100% - 24px);padding:6px;justify-content:stretch}
+  .gcta .btn-cta{flex:1;text-align:center;padding:14px}
+}
+/* la dock mobile (WhatsApp/Chiama) sotto il CTA per non sovrapporsi: nascondo la dock in queste pagine */
+.dock{display:none !important}
+@media(max-width:900px){.ghead{padding:96px 0 24px}}
+
+</style>
+</head>
+<body>
+<header id="head">
+  <div class="bar">
+    <a class="brand" href="index.html" aria-label="La Botteria della Scala">
+      <img class="logo-c" src="img/logo-colore.png" alt="La Botteria della Scala" width="512" height="119">
+      <img class="logo-w" src="img/logo-bianco.png" alt="" aria-hidden="true" width="512" height="119">
+    </a>
+    <nav class="nav" id="nav">
+      <a href="index.html#processo">Come funziona</a>
+      <a href="index.html#configura">Configura</a>
+      <a href="index.html#voci">Dicono di noi</a>
+      <a href="index.html#contatti">Contatti</a>
+      <!-- MODIFICA-CONTATTI -->
+      <a class="btn btn-solid btn-sm" href="index.html#contatti">Rendering gratuito</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Apri il menu" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+<div class="navbg" id="navbg"></div>
+
+<main>
+  <div class="ghead">
+    <div class="wrap">
+      <div class="kick">Dalle case dei clienti</div>
+      <h1>Ispirazioni</h1>
+      <p>Le botti nelle case dei nostri clienti e nei nostri scatti. Guardale per immaginare la tua, e prendere spunto su forme, finiture e allestimenti. Ne aggiungiamo di nuove continuamente.</p>
+      <a class="gback" href="index.html">← Torna al sito</a>
+    </div>
+  </div>
+
+  <div class="gwrap">
+    <div class="wrap">
+      <div class="masonry foto">
+        <figure class="mitem"><img src="img/ispirazione-01.webp" width="1200" height="1600" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></figure>
+        <figure class="mitem"><img src="img/ispirazione-02.webp" width="1200" height="1600" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></figure>
+        <figure class="mitem"><img src="img/ispirazione-03.webp" width="1200" height="1600" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></figure>
+        <figure class="mitem"><img src="img/ispirazione-04.webp" width="1200" height="1200" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></figure>
+        <figure class="mitem"><img src="img/ispirazione-05.webp" width="880" height="1600" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></figure>
+        <figure class="mitem"><img src="img/ispirazione-06.webp" width="777" height="1600" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></figure>
+        <figure class="mitem"><img src="img/ispirazione-07.webp" width="777" height="1600" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></figure>
+        <figure class="mitem"><img src="img/ispirazione-08.webp" width="1200" height="1600" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></figure>
+        <figure class="mitem"><img src="img/ispirazione-09.webp" width="1200" height="1600" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></figure>
+        <figure class="mitem"><img src="img/ispirazione-10.webp" width="1200" height="1600" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></figure>
+        <figure class="mitem"><img src="img/ispirazione-11.webp" width="1200" height="1600" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></figure>
+        <figure class="mitem"><img src="img/ispirazione-12.webp" width="720" height="1600" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></figure>
+        <figure class="mitem"><img src="img/ispirazione-13.webp" width="740" height="1600" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></figure>
+        <figure class="mitem"><img src="img/ispirazione-14.webp" width="1200" height="1600" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></figure>
+        <figure class="mitem"><img src="img/ispirazione-15.webp" width="1400" height="1400" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></figure>
+        <figure class="mitem"><img src="img/ispirazione-16.webp" width="1200" height="1600" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></figure>
+        <figure class="mitem"><img src="img/ispirazione-17.webp" width="1200" height="1600" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></figure>
+        <figure class="mitem"><img src="img/ispirazione-18.webp" width="1200" height="1600" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></figure>
+        <figure class="mitem"><img src="img/ispirazione-19.webp" width="1200" height="1600" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></figure>
+        <figure class="mitem"><img src="img/ispirazione-20.webp" width="1067" height="1600" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></figure>
+        <figure class="mitem"><img src="img/ispirazione-21.webp" width="810" height="1080" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></figure>
+        <figure class="mitem"><img src="img/ispirazione-22.webp" width="1200" height="1600" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></figure>
+        <figure class="mitem"><img src="img/ispirazione-23.webp" width="1170" height="1560" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></figure>
+        <figure class="mitem"><img src="img/ispirazione-24.webp" width="1200" height="1600" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></figure>
+        <figure class="mitem"><img src="img/ispirazione-25.webp" width="1200" height="1600" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></figure>
+        <figure class="mitem"><img src="img/ispirazione-26.webp" width="1200" height="1600" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></figure>
+        <figure class="mitem"><img src="img/ispirazione-27.webp" width="1200" height="1600" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></figure>
+        <figure class="mitem"><img src="img/ispirazione-28.webp" width="1600" height="1067" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></figure>
+        <figure class="mitem"><img src="img/ispirazione-29.webp" width="1600" height="1201" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></figure>
+        <figure class="mitem"><img src="img/ispirazione-30.webp" width="1201" height="1600" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></figure>
+        <figure class="mitem"><img src="img/ispirazione-31.webp" width="1600" height="1599" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></figure>
+        <figure class="mitem"><img src="img/ispirazione-32.webp" width="810" height="1080" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></figure>
+        <figure class="mitem"><img src="img/ispirazione-33.webp" width="828" height="1104" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></figure>
+        <figure class="mitem"><img src="img/ispirazione-34.webp" width="1200" height="1600" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></figure>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div class="gcta">
+  <div class="inner">
+    <span class="msg">Immagina già dove metteresti la tua.</span>
+    <a class="btn-cta" href="index.html#contatti">Crea la tua botte →</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <span class="brand"><img class="logo-c" src="img/logo-colore.png" alt="La Botteria della Scala" style="height:34px;width:auto" width="512" height="119" loading="lazy" decoding="async"></span>
+      <a class="fsocial" href="https://www.instagram.com/labotteriadellascala" target="_blank" rel="noopener" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.6"/><circle cx="17.2" cy="6.8" r="1.3" fill="currentColor"/></svg><span>@labotteriadellascala</span></a>
+    </div>
+    <div class="legal">
+      <p>Steel Head di Andrea Canovi · Via Caduti sul Lavoro 22, 37063 Isola della Scala (VR) · P.IVA 04775640230</p>
+      <p>Artigianato italiano su misura · <button type="button" class="plink" onclick="document.getElementById('privacyDlg').showModal()">Privacy &amp; Cookie Policy</button> · <button type="button" class="plink" onclick="lbdsCookieReopen()">Gestisci cookie</button></p>
+    </div>
+  </div>
+</footer>
+<dialog id="privacyDlg" class="pdlg">
+  <div class="pdlg-in">
+    <div class="pdlg-head">
+      <h3>Privacy &amp; Cookie Policy</h3>
+      <button type="button" class="pdlg-x" onclick="document.getElementById('privacyDlg').close()" aria-label="Chiudi">✕</button>
+    </div>
+    <h4>Titolare del trattamento</h4>
+    <p>Steel Head di Andrea Canovi, Via Caduti sul Lavoro 22, 37063 Isola della Scala (VR), P.IVA 04775640230 — email: info@labotteriadellascala.it</p>
+    <h4>Quali dati raccogliamo e perché</h4>
+    <p>Attraverso il modulo di contatto raccogliamo i dati che ci fornisci volontariamente: nome, recapito (numero WhatsApp o indirizzo email) e le preferenze sul prodotto (forma, zona refrigerata, destinatario). Li usiamo esclusivamente per ricontattarti, preparare il progetto e il rendering richiesti e gestire l'eventuale ordine. Base giuridica: esecuzione di misure precontrattuali adottate su tua richiesta (art. 6, par. 1, lett. b GDPR).</p>
+    <h4>Come vengono trattati</h4>
+    <p>Il modulo è gestito tramite il servizio FormSubmit, che inoltra i dati alla nostra casella email e agisce come responsabile esterno del trattamento. I dati non vengono diffusi né ceduti a terzi per finalità commerciali; possono essere comunicati ai corrieri esclusivamente per la consegna. Conserviamo i dati per il tempo necessario a gestire la richiesta e gli eventuali obblighi contrattuali e fiscali.</p>
+    <h4>I tuoi diritti</h4>
+    <p>Puoi chiedere in ogni momento accesso, rettifica, cancellazione, limitazione o portabilità dei tuoi dati, oppure opporti al trattamento, scrivendo a info@labotteriadellascala.it. Hai inoltre diritto di proporre reclamo al Garante per la protezione dei dati personali.</p>
+    <h4>Cookie</h4>
+    <p>Previo tuo consenso, questo sito utilizza il pixel di Meta (Meta Platforms Ireland Ltd) e Google Analytics 4 (Google Ireland Ltd) per misurare le visite e l'efficacia delle campagne pubblicitarie. Questi strumenti si attivano solo se premi «Accetta» nel banner; se premi «Rifiuta» non viene installato alcun cookie di misurazione e la navigazione resta pienamente disponibile. Puoi cambiare idea cancellando i cookie del browser. Restano attivi i soli cookie tecnici necessari al funzionamento del sito.</p>
+    <p class="pdate">Ultimo aggiornamento: agosto 2026</p>
+  </div>
+</dialog>
+<script>
+const head=document.getElementById('head');
+addEventListener('scroll',()=>head.classList.toggle('on',scrollY>24),{passive:true});
+const burger=document.getElementById('burger'),nav=document.getElementById('nav'),navbg=document.getElementById('navbg');
+const setMenu=o=>{nav.classList.toggle('open',o);navbg.classList.toggle('open',o);document.body.classList.toggle('menu-open',o);burger.setAttribute('aria-expanded',o);};
+burger.addEventListener('click',()=>setMenu(!nav.classList.contains('open')));
+navbg.addEventListener('click',()=>setMenu(false));
+nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
+function lbdsCookieReopen(){var d=document.getElementById('privacyDlg');if(d&&d.open)d.close();}
+</script>
+</body>
+</html>
