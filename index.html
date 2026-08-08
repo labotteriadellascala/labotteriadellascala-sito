@@ -799,6 +799,7 @@ document.querySelectorAll('.cmp').forEach(cmp=>{
       var r = function(name){ var el = form.querySelector('[name="'+name+'"]:checked'); return el ? el.value : ''; };
       var payload = {
         p_nome: g('nome'), p_contatto: (g('email') + ' · ' + g('telefono')),
+        p_email: g('email'), p_telefono: g('telefono'),
         p_forma: r('forma'), p_refrigerata: r('refrigerata'), p_per_chi: r('per_chi'),
         p_note: g('racconto'),
         p_fonte_utm: g('fonte_utm'), p_mezzo_utm: g('mezzo_utm'), p_campagna_utm: g('campagna_utm'),
