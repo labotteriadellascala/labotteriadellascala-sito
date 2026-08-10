@@ -505,6 +505,14 @@ footer{border-top:1px solid var(--line-soft);padding:40px 0;background:var(--pap
     <p class="pdate">Ultimo aggiornamento: agosto 2026</p>
   </div>
 </dialog>
+<!-- Consenso cookie + tracciamento (Meta Pixel + GA4) -->
+<div class="ckbar" id="ckbar" hidden>
+  <p>Usiamo cookie di misurazione per capire cosa funziona e mostrarti progetti in linea con i tuoi interessi. Ci dai una mano? <button type="button" class="plink" onclick="document.getElementById('privacyDlg').showModal()">Leggi l'informativa</button></p>
+  <div class="ckbtns">
+    <button type="button" class="btn btn-solid btn-sm" id="ckYes">Accetta</button>
+    <button type="button" class="btn btn-sm ck-no" id="ckNo">Rifiuta</button>
+  </div>
+</div>
 <script>
 const head=document.getElementById('head');
 addEventListener('scroll',()=>head.classList.toggle('on',scrollY>24),{passive:true});
@@ -513,7 +521,48 @@ const setMenu=o=>{nav.classList.toggle('open',o);navbg.classList.toggle('open',o
 burger.addEventListener('click',()=>setMenu(!nav.classList.contains('open')));
 navbg.addEventListener('click',()=>setMenu(false));
 nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
-function lbdsCookieReopen(){var d=document.getElementById('privacyDlg');if(d&&d.open)d.close();}
+// ---- consenso e caricamento tracker (Meta Pixel + GA4), solo dopo "Accetta" ----
+function loadTracking(){
+  if(window.__trk) return; window.__trk = true;
+  // Meta Pixel
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','3500501163531510');
+  fbq('track','PageView');
+  // GA4
+  var g=document.createElement('script');g.async=true;
+  g.src='https://www.googletagmanager.com/gtag/js?id=G-RD4JSPQP91';
+  document.head.appendChild(g);
+  window.dataLayer=window.dataLayer||[];
+  function gtag(){dataLayer.push(arguments);}
+  window.gtag=gtag;
+  gtag('js',new Date());
+  gtag('config','G-RD4JSPQP91');
+}
+function lbdsCookieReopen(){
+  var dlg=document.getElementById('privacyDlg'); if(dlg&&dlg.open) dlg.close();
+  var bar=document.getElementById('ckbar'); if(bar) bar.hidden=false;
+}
+(function(){
+  var bar=document.getElementById('ckbar');
+  if(!bar) return;
+  var c=null;
+  try{ c=localStorage.getItem('lbds_consent'); }catch(e){}
+  if(c==='yes'){ loadTracking(); }
+  else { bar.hidden=false; }
+  if(c==='no'){ bar.hidden=true; }
+  document.getElementById('ckYes').addEventListener('click',function(){
+    try{ localStorage.setItem('lbds_consent','yes'); }catch(e){}
+    bar.hidden=true; loadTracking();
+  });
+  document.getElementById('ckNo').addEventListener('click',function(){
+    try{ localStorage.setItem('lbds_consent','no'); }catch(e){}
+    bar.hidden=true;
+  });
+})();
 </script>
 </body>
 </html>
