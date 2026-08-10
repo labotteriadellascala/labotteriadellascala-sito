@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Il tuo preventivo · La Botteria della Scala</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --oak:#4a3524; --oak-soft:#6e5238; --steel:#2b2f34; --steel-soft:#5a6169;
+    --copper:#a86a34; --copper-deep:#8a5527; --paper:#ece5d9; --card:#f7f3ea;
+    --line:#d9cfbd; --line-strong:#c4b79e; --ok:#3f7d4e; --danger:#a23b2f;
+    --shadow:0 1px 2px rgba(43,47,52,.06),0 8px 24px rgba(74,53,36,.07); --radius:10px;
+    --serif:'Fraunces',Georgia,'Times New Roman',serif;
+    --sans:system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:var(--sans);color:var(--steel);background:var(--paper);line-height:1.5;-webkit-text-size-adjust:100%}
+  .wrap{max-width:820px;margin:0 auto;padding:20px 16px 60px}
+  .brandbar{display:flex;align-items:center;gap:12px;border-bottom:3px solid var(--copper);padding:14px 0;margin-bottom:20px}
+  .brandbar .co{font-family:var(--serif);font-size:20px;font-weight:600;color:var(--oak);flex:1}
+  .brandbar .co small{display:block;font-family:var(--sans);font-weight:400;font-size:11px;color:var(--steel-soft);margin-top:2px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin:0 0 16px;overflow:hidden}
+  .card > h2{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--oak-soft);margin:0;padding:12px 16px;background:#f1eadd;border-bottom:1px solid var(--line)}
+  .card .body{padding:16px}
+  .docmeta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;align-items:flex-start}
+  .docmeta .no .lbl{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--steel-soft)}
+  .docmeta .no .val{font-family:var(--serif);font-size:22px;color:var(--oak)}
+  .docmeta .no small{display:block;font-size:12px;color:var(--steel-soft)}
+  table.t{width:100%;border-collapse:collapse;font-size:13.5px}
+  table.t th{text-align:left;font-size:9.5px;letter-spacing:.6px;text-transform:uppercase;color:var(--steel-soft);border-bottom:1.5px solid var(--copper);padding:8px 6px}
+  table.t th.r,table.t td.r{text-align:right;font-variant-numeric:tabular-nums}
+  table.t td{padding:9px 6px;border-bottom:1px solid #e9e1d1;vertical-align:top}
+  table.t td .sub{display:block;color:var(--steel-soft);font-size:11px}
+  .tot{max-width:340px;margin-left:auto;margin-top:8px}
+  .tot .row{display:flex;justify-content:space-between;font-size:14px;padding:3px 0;font-variant-numeric:tabular-nums}
+  .tot .row.sc{color:var(--copper-deep)}
+  .tot .grand{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--oak);border-top:1.5px solid var(--copper);margin-top:6px;padding-top:8px}
+  .tot .small{font-size:12px;color:var(--steel-soft)}
+  .imgs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .imgs img{width:100%;border:1px solid var(--line);border-radius:8px;display:block}
+  .misure b{font-weight:600}
+  .note-txt{white-space:pre-wrap;font-size:13.5px}
+  label{display:block;font-size:11px;font-weight:600;letter-spacing:.4px;text-transform:uppercase;color:var(--steel-soft);margin:0 0 4px}
+  input,textarea{width:100%;font-family:var(--sans);font-size:16px;color:var(--steel);background:#fffdf8;border:1px solid var(--line-strong);border-radius:8px;padding:10px}
+  input:focus,textarea:focus{border-color:var(--copper);outline:none;box-shadow:0 0 0 3px rgba(168,106,52,.12)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+  @media(max-width:560px){.grid2,.grid3{grid-template-columns:1fr}}
+  .field{margin-bottom:12px}
+  .hint{font-size:12px;color:var(--steel-soft);margin-top:6px}
+  button{font-family:var(--sans);cursor:pointer;border:0;border-radius:8px;font-size:15px;font-weight:600;padding:12px 18px}
+  .btn-primary{background:var(--copper);color:#fff;border:1px solid var(--copper-deep);width:100%}
+  .btn-primary:hover{background:var(--copper-deep)}
+  .btn-ghost{background:transparent;color:var(--oak-soft);border:1px solid var(--line-strong)}
+  .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+  .banner{border-radius:10px;padding:14px 16px;font-size:14px;margin-bottom:16px}
+  .banner.ok{background:#e8f2ea;border:1px solid #bcdcc5;color:var(--ok)}
+  .banner.warn{background:#f6efe0;border:1px solid var(--line-strong);color:var(--oak-soft)}
+  .banner.err{background:#f6e7e3;border:1px solid #e3bcb2;color:var(--danger)}
+  .center{text-align:center;padding:60px 16px;color:var(--steel-soft)}
+  /* honeypot */
+  .hp-field{position:absolute;left:-9999px;top:-9999px;height:0;overflow:hidden}
+  @media print{
+    @page{margin:14mm}
+    .no-print{display:none !important}
+    body{background:#fff}
+    .card{box-shadow:none;background:#fff;border:none}
+    .card > h2{background:#fff;padding-left:0;padding-right:0}
+    .card .body{padding:0}
+    .wrap{padding:0}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="brandbar">
+    <div class="co">Steel Head — La Botteria della Scala
+      <small>P.IVA 04775640230 · Isola della Scala (VR) · info@steelhead.it</small>
+    </div>
+  </div>
+
+  <div id="stato-loading" class="center">Carico il preventivo…</div>
+
+  <div id="stato-errore" class="center" style="display:none">
+    <div class="banner err" id="errore-msg" style="display:inline-block"></div>
+  </div>
+
+  <div id="vista" style="display:none">
+    <div id="esito-banner"></div>
+
+    <div class="card">
+      <h2>Preventivo</h2>
+      <div class="body">
+        <div class="docmeta">
+          <div class="misure">Preventivo per la tua botte su misura, fatta a mano.</div>
+          <div class="no">
+            <div class="lbl">Numero</div>
+            <div class="val" id="d-num">—</div>
+            <small id="d-scad"></small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Voci</h2>
+      <div class="body" style="overflow-x:auto">
+        <table class="t">
+          <thead><tr><th>Descrizione</th><th class="r">Q.tà</th><th class="r">Prezzo</th><th class="r">Sconto</th><th class="r">Importo</th></tr></thead>
+          <tbody id="d-righe"></tbody>
+        </table>
+        <div class="tot">
+          <div class="row"><span>Importo a listino</span><span id="t-listino">€ 0,00</span></div>
+          <div class="row sc"><span>Sconto</span><span id="t-sconto">− € 0,00</span></div>
+          <div class="row grand"><span>Totale</span><span id="t-totale">€ 0,00</span></div>
+          <div class="row small"><span>di cui imponibile</span><span id="t-imponibile">€ 0,00</span></div>
+          <div class="row small"><span id="t-ivalbl">di cui IVA</span><span id="t-iva">€ 0,00</span></div>
+        </div>
+        <div class="hint">Prezzi comprensivi di IVA.</div>
+      </div>
+    </div>
+
+    <div class="card" id="card-misure" style="display:none">
+      <h2>Misure e specifiche</h2>
+      <div class="body misure" id="d-misure"></div>
+    </div>
+
+    <div class="card" id="card-rendering" style="display:none">
+      <h2>Rendering</h2>
+      <div class="body"><div class="imgs" id="d-imgs"></div></div>
+    </div>
+
+    <div class="card" id="card-note" style="display:none">
+      <h2>Note</h2>
+      <div class="body note-txt" id="d-note"></div>
+    </div>
+
+    <!-- Accettazione -->
+    <div class="card no-print" id="card-accetta" style="display:none">
+      <h2>Accetta il preventivo</h2>
+      <div class="body">
+        <p style="margin-top:0;font-size:14px;color:var(--steel-soft)">Compila i tuoi dati e conferma. L'accettazione non è un pagamento: ti ricontattiamo noi per i passi successivi.</p>
+        <div class="field"><label>Nome / Ragione sociale *</label><input id="a-nome" autocomplete="name"></div>
+        <div class="grid2">
+          <div class="field"><label>Email *</label><input id="a-email" type="email" autocomplete="email"></div>
+          <div class="field"><label>Telefono *</label><input id="a-tel" type="tel" autocomplete="tel"></div>
+        </div>
+        <div class="field"><label>Indirizzo</label><input id="a-ind" autocomplete="street-address"></div>
+        <div class="grid3">
+          <div class="field"><label>CAP</label><input id="a-cap" inputmode="numeric"></div>
+          <div class="field"><label>Città</label><input id="a-citta"></div>
+          <div class="field"><label>Prov.</label><input id="a-prov" maxlength="2"></div>
+        </div>
+        <div class="field"><label>Codice Fiscale / P.IVA</label><input id="a-cf"></div>
+        <div class="grid2">
+          <div class="field"><label>Codice SDI <span style="text-transform:none;color:var(--steel-soft)">(fatturazione, facoltativo)</span></label><input id="a-sdi" maxlength="7"></div>
+          <div class="field"><label>PEC <span style="text-transform:none;color:var(--steel-soft)">(alternativa allo SDI)</span></label><input id="a-pec" type="email"></div>
+        </div>
+        <div class="hp-field" aria-hidden="true"><label>Azienda</label><input type="text" id="azienda_extra" tabindex="-1" autocomplete="off"></div>
+        <div class="actions">
+          <button class="btn-primary" id="btn-accetta" onclick="accetta()">Accetto il preventivo</button>
+        </div>
+        <div id="accetta-msg" style="margin-top:12px"></div>
+      </div>
+    </div>
+
+    <div class="actions no-print" style="margin-top:4px">
+      <button class="btn-ghost" onclick="window.print()">Scarica PDF / Stampa</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+"use strict";
+var SUPABASE_URL = 'https://wdlfzdjzynlnkqjhectg.supabase.co';
+var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndkbGZ6ZGp6eW5sbmtxamhlY3RnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyMjgxNzMsImV4cCI6MjA5NTgwNDE3M30.LZJLwjtOTqkVhedNl3OfXyFmXCPB2dPYjiROhpnT3HE';
+var HDRS = { 'Content-Type':'application/json', 'apikey':SUPABASE_ANON_KEY, 'Authorization':'Bearer '+SUPABASE_ANON_KEY };
+
+function rpc(name, body){
+  return fetch(SUPABASE_URL + '/rest/v1/rpc/' + name, { method:'POST', headers:HDRS, body:JSON.stringify(body) })
+    .then(function(r){ return r.json(); });
+}
+function euro(n){ return '€ ' + (Number(n)||0).toLocaleString('it-IT',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+function el(id){ return document.getElementById(id); }
+function getToken(){ try{ return new URLSearchParams(location.search).get('t') || ''; }catch(e){ return ''; } }
+function fmtData(d){ if(!d) return ''; var p=String(d).slice(0,10).split('-'); return p.length===3 ? (p[2]+'/'+p[1]+'/'+p[0]) : d; }
+
+var TOKEN = getToken();
+var PREV = null;
+
+function mostra(id){ ['stato-loading','stato-errore','vista'].forEach(function(x){ var e=el(x); if(e) e.style.display = (x===id?'':'none'); }); }
+function errore(msg){ el('errore-msg').textContent = msg; mostra('stato-errore'); }
+
+function render(p){
+  el('d-num').textContent = p.numero || '—';
+  if(p.valido_fino) el('d-scad').textContent = (p.stato==='scaduto' ? 'Scaduto il ' : 'Valido fino al ') + fmtData(p.valido_fino);
+
+  var righe = Array.isArray(p.righe) ? p.righe : [];
+  var listino = 0;
+  el('d-righe').innerHTML = righe.map(function(r){
+    var prezzo = (r.prezzo!=null ? r.prezzo : r.listino) || 0;
+    var qta = r.qta!=null ? r.qta : 1;
+    var sconto = r.sconto || 0;
+    var imp = r.totApp!=null ? r.totApp : Math.max(0, qta*prezzo - sconto);
+    listino += qta*prezzo;
+    return '<tr><td>' + (esc(r.desc)||'—') + (sconto>0 ? '<span class="sub">sconto ' + euro(sconto) + '</span>' : '') + '</td>'
+      + '<td class="r">' + Number(qta).toLocaleString('it-IT',{maximumFractionDigits:2}) + '</td>'
+      + '<td class="r">' + euro(prezzo) + '</td>'
+      + '<td class="r">' + (sconto>0 ? '− ' + euro(sconto) : '—') + '</td>'
+      + '<td class="r">' + euro(imp) + '</td></tr>';
+  }).join('') || '<tr><td colspan="5">—</td></tr>';
+
+  var totale = p.totale!=null ? p.totale : 0;
+  var imponibile = p.imponibile!=null ? p.imponibile : totale;
+  var iva = totale - imponibile;
+  var scontoTot = p.sconto_totale!=null ? p.sconto_totale : Math.max(0, listino - totale);
+  el('t-listino').textContent = euro(listino || (totale + scontoTot));
+  el('t-sconto').textContent = '− ' + euro(scontoTot);
+  el('t-totale').textContent = euro(totale);
+  el('t-imponibile').textContent = euro(imponibile);
+  el('t-ivalbl').textContent = 'di cui IVA ' + (p.iva_percent!=null ? Number(p.iva_percent).toLocaleString('it-IT') : '22') + '%';
+  el('t-iva').textContent = euro(iva);
+
+  var m = p.misure || {};
+  var misure = [ m.larg&&('L '+m.larg+' cm'), m.prof&&('P '+m.prof+' cm'), m.alt&&('H '+m.alt+' cm'), m.diam&&('Ø '+m.diam+' cm') ].filter(Boolean).join(' · ');
+  if(misure || m.note){
+    el('card-misure').style.display='';
+    el('d-misure').innerHTML = (misure?'<div><b>'+esc(misure)+'</b></div>':'') + (m.note?'<div style="margin-top:6px">'+esc(m.note)+'</div>':'');
+  }
+  var allegati = Array.isArray(p.allegati) ? p.allegati : [];
+  if(allegati.length){
+    el('card-rendering').style.display='';
+    el('d-imgs').innerHTML = allegati.map(function(a){ return '<img src="'+esc(a.url)+'" alt="rendering">'; }).join('');
+  }
+  if(p.note){ el('card-note').style.display=''; el('d-note').textContent = p.note; }
+
+  // Stato accettazione
+  if(p.stato==='accettato' || p.gia_accettato){
+    el('esito-banner').innerHTML = '<div class="banner ok">✔ Questo preventivo è già stato accettato. Grazie! Ti ricontattiamo noi per i passi successivi.</div>';
+  } else if(p.stato==='scaduto'){
+    el('esito-banner').innerHTML = '<div class="banner warn">Questo preventivo è scaduto. Scrivici e te ne prepariamo uno aggiornato.</div>';
+  } else {
+    el('card-accetta').style.display='';
+  }
+  mostra('vista');
+}
+
+function accetta(){
+  var g = function(id){ var e=el(id); return e ? e.value.trim() : ''; };
+  var nome=g('a-nome'), email=g('a-email'), tel=g('a-tel');
+  if(!nome || (!email && !tel)){ el('accetta-msg').innerHTML = '<div class="banner err">Inserisci almeno nome e un recapito (email o telefono).</div>'; return; }
+  var dati = { nome:nome, email:email, telefono:tel, indirizzo:g('a-ind'), cap:g('a-cap'), citta:g('a-citta'), prov:g('a-prov'), cf_piva:g('a-cf'), sdi:g('a-sdi'), pec:g('a-pec') };
+  var hp = (el('azienda_extra')||{}).value || '';
+  var btn = el('btn-accetta'); btn.disabled=true; btn.textContent='Invio in corso…';
+  rpc('accetta_preventivo', { p_token:TOKEN, p_dati:dati, p_honeypot:hp }).then(function(res){
+    if(res && res.ok){
+      el('card-accetta').style.display='none';
+      el('esito-banner').innerHTML = '<div class="banner ok">✔ Preventivo accettato, grazie! Ti ricontattiamo noi al più presto.</div>';
+      window.scrollTo({top:0,behavior:'smooth'});
+    } else {
+      var msg = res && res.err==='scaduto' ? 'Il preventivo è scaduto.'
+              : res && res.err==='non_disponibile' ? 'Questo preventivo non è più accettabile.'
+              : res && res.err==='non_trovato' ? 'Preventivo non trovato.'
+              : 'Non è stato possibile registrare l\'accettazione. Riprova.';
+      el('accetta-msg').innerHTML = '<div class="banner err">'+msg+'</div>';
+      btn.disabled=false; btn.textContent='Accetto il preventivo';
+    }
+  }).catch(function(){
+    el('accetta-msg').innerHTML = '<div class="banner err">Problema di connessione. Riprova tra poco.</div>';
+    btn.disabled=false; btn.textContent='Accetto il preventivo';
+  });
+}
+
+(function init(){
+  if(!TOKEN){ errore('Link non valido: manca il codice del preventivo.'); return; }
+  rpc('preventivo_pubblico', { p_token:TOKEN }).then(function(p){
+    if(!p){ errore('Preventivo non trovato o non più disponibile.'); return; }
+    PREV = p; render(p);
+  }).catch(function(){ errore('Impossibile caricare il preventivo. Riprova più tardi.'); });
+})();
+</script>
+</body>
+</html>
