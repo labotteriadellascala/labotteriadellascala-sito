@@ -119,10 +119,12 @@
           <div class="row"><span>Importo a listino</span><span id="t-listino">€ 0,00</span></div>
           <div class="row sc"><span>Sconto</span><span id="t-sconto">− € 0,00</span></div>
           <div class="row grand"><span>Totale</span><span id="t-totale">€ 0,00</span></div>
-          <div class="row small"><span>di cui imponibile</span><span id="t-imponibile">€ 0,00</span></div>
-          <div class="row small"><span id="t-ivalbl">di cui IVA</span><span id="t-iva">€ 0,00</span></div>
+          <div id="iva-block">
+            <div class="row small"><span>di cui imponibile</span><span id="t-imponibile">€ 0,00</span></div>
+            <div class="row small"><span id="t-ivalbl">di cui IVA</span><span id="t-iva">€ 0,00</span></div>
+          </div>
         </div>
-        <div class="hint">Prezzi comprensivi di IVA.</div>
+        <div class="hint" id="iva-hint">Prezzi comprensivi di IVA.</div>
       </div>
     </div>
 
@@ -228,6 +230,10 @@ function render(p){
   el('t-imponibile').textContent = euro(imponibile);
   el('t-ivalbl').textContent = 'di cui IVA ' + (p.iva_percent!=null ? Number(p.iva_percent).toLocaleString('it-IT') : '22') + '%';
   el('t-iva').textContent = euro(iva);
+  // Flag "IVA esposta": se spento (deciso da Steel Head), il cliente non vede nulla dell'IVA
+  var ivaEsposta = p.iva_esposta !== false;
+  el('iva-block').style.display = ivaEsposta ? '' : 'none';
+  el('iva-hint').style.display = ivaEsposta ? '' : 'none';
 
   var m = p.misure || {};
   var misure = [ m.larg&&('L '+m.larg+' cm'), m.prof&&('P '+m.prof+' cm'), m.alt&&('H '+m.alt+' cm'), m.diam&&('Ø '+m.diam+' cm') ].filter(Boolean).join(' · ');
