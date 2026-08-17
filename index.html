@@ -455,6 +455,40 @@ footer{border-top:1px solid var(--line-soft);padding:40px 0;background:var(--pap
   </div>
 </section>
 
+<!-- 1b. PROVA SOCIALE — recensioni (screenshot) in alto -->
+<style>
+/* Prova sociale in alto: carosello screenshot recensioni (mobile-first) */
+.rvh{padding:36px 0 30px}
+.rvh-in{text-align:center}
+.rvh .label{display:block;margin-bottom:12px}
+.rvh-title{font-size:clamp(24px,5.4vw,40px);margin-bottom:8px}
+.rvh-sub{color:var(--ink-soft);font-size:15px;line-height:1.55;max-width:46ch;margin:0 auto 20px}
+.rvh-track{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:14px;scrollbar-width:none}
+.rvh-track::-webkit-scrollbar{display:none}
+.rvh-card{flex:0 0 auto;width:158px;height:250px;scroll-snap-align:center;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#0e0e0e;box-shadow:0 14px 34px -22px rgba(70,55,35,.55)}
+.rvh-card img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.rvh-cta{margin-top:2px}
+@media(min-width:721px){
+  .rvh-track{justify-content:center;overflow-x:visible;flex-wrap:wrap;padding-bottom:8px}
+  .rvh-card{width:200px;height:300px}
+}
+.rvh--photo .rvh-card img{object-position:center}
+</style>
+<section class="sec rvh" aria-label="Recensioni dei clienti">
+  <div class="wrap rvh-in">
+    <span class="label">Riprova sociale</span>
+    <h2 class="display h2 rvh-title">Oltre 1.500 clienti si sono affidati a noi</h2>
+    <p class="rvh-sub">I messaggi che riceviamo quando la botte entra in casa. Reali, così come ci sono arrivati.</p>
+    <div class="rvh-track">
+      <a class="rvh-card" href="recensioni.html" aria-label="Leggi le recensioni dei clienti"><img src="img/rec-30.webp" width="640" height="1096" alt="Messaggio di un cliente" loading="lazy" decoding="async"></a>
+      <a class="rvh-card" href="recensioni.html" aria-label="Leggi le recensioni dei clienti"><img src="img/rec-27.webp" width="640" height="1004" alt="Messaggio di un cliente" loading="lazy" decoding="async"></a>
+      <a class="rvh-card" href="recensioni.html" aria-label="Leggi le recensioni dei clienti"><img src="img/rec-17.webp" width="640" height="1211" alt="Messaggio di un cliente" loading="lazy" decoding="async"></a>
+      <a class="rvh-card" href="recensioni.html" aria-label="Leggi le recensioni dei clienti"><img src="img/rec-19.webp" width="640" height="1051" alt="Messaggio di un cliente" loading="lazy" decoding="async"></a>
+    </div>
+    <a class="btn btn-solid btn-sm rvh-cta" href="recensioni.html">Leggi tutte le recensioni →</a>
+  </div>
+</section>
+
 <!-- 2. COS'È -->
 <section class="sec">
   <div class="wrap">
@@ -569,11 +603,27 @@ footer{border-top:1px solid var(--line-soft);padding:40px 0;background:var(--pap
   </div>
 </section>
 
+<!-- 4b. ISPIRAZIONI — foto dei clienti a casa loro -->
+<section class="sec rvh rvh--photo" aria-label="Le botti dei clienti a casa loro">
+  <div class="wrap rvh-in">
+    <span class="label">Dalle case dei clienti</span>
+    <h2 class="display h2 rvh-title">Le botti dei nostri clienti, a casa loro</h2>
+    <p class="rvh-sub">Come sta davvero la botte negli spazi di chi l'ha scelta. Prendi spunto per la tua.</p>
+    <div class="rvh-track">
+      <a class="rvh-card" href="ispirazioni.html" aria-label="Guarda le ispirazioni dei clienti"><img src="img/ispirazione-08.webp" width="1200" height="1600" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></a>
+      <a class="rvh-card" href="ispirazioni.html" aria-label="Guarda le ispirazioni dei clienti"><img src="img/ispirazione-14.webp" width="1200" height="1600" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></a>
+      <a class="rvh-card" href="ispirazioni.html" aria-label="Guarda le ispirazioni dei clienti"><img src="img/ispirazione-20.webp" width="1067" height="1600" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></a>
+      <a class="rvh-card" href="ispirazioni.html" aria-label="Guarda le ispirazioni dei clienti"><img src="img/ispirazione-03.webp" width="1200" height="1600" alt="Botte di un cliente nella sua casa" loading="lazy" decoding="async"></a>
+    </div>
+    <a class="btn btn-solid btn-sm rvh-cta" href="ispirazioni.html">Guarda tutte le ispirazioni →</a>
+  </div>
+</section>
+
 <!-- 5. PROVA -->
 <section class="sec sec-sand" id="voci">
   <div class="wrap">
     <div class="figures rise">
-      <div><div class="n display">1000+</div><div class="k">Mobili consegnati</div></div>
+      <div><div class="n display">1.500</div><div class="k">Mobili consegnati</div></div>
       <a class="figlink" href="https://www.instagram.com/labotteriadellascala" target="_blank" rel="noopener"><div class="n display">85.000</div><div class="k">Persone nella community <svg width="15" height="15" viewBox="0 0 24 24" fill="none" style="vertical-align:-2px"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.3" fill="currentColor"/></svg> @labotteriadellascala</div></a>
       <div><div class="n display">20-40</div><div class="k">Giorni di lavorazione</div></div>
     </div>
@@ -594,22 +644,6 @@ footer{border-top:1px solid var(--line-soft);padding:40px 0;background:var(--pap
         </ul>
       </div>
     </div>
-    <div class="voices-top rise">
-      <h2 class="display h2" style="font-size:clamp(24px,2.8vw,34px)">Le parole dei clienti</h2>
-      <span>Trascritte dai messaggi che riceviamo</span>
-    </div>
-    <!-- MODIFICA-RECENSIONE -->
-    <div class="voices rise">
-      <article class="voice"><div class="said"><blockquote>«Arrivata con un giorno di anticipo! Stupenda, incisione perfetta. Ha superato le mie aspettative.»</blockquote><cite>Da un messaggio WhatsApp</cite></div></article>
-      <article class="voice"><div class="said"><blockquote>«Tutte le persone venute a casa nostra per Natale hanno fatto i complimenti per la bellissima botte!»</blockquote><cite>Da Instagram</cite></div></article>
-      <article class="voice"><div class="said"><blockquote>«È una meraviglia, quello che cercavo da tempo. Avete accontentato ogni mia richiesta particolare: ne è uscito un capolavoro.»</blockquote><cite>Da un messaggio WhatsApp</cite></div></article>
-      <article class="voice"><div class="said"><blockquote>«Vi ringrazio per l'opera che avete fatto. I genitori sono rimasti a bocca aperta.»</blockquote><cite>Da un messaggio WhatsApp</cite></div></article>
-      <article class="voice"><div class="said"><blockquote>«Fantastica. Si è fatta attendere, ma ne è valsa la pena!»</blockquote><cite>Da un messaggio WhatsApp</cite></div></article>
-      <article class="voice"><div class="said"><blockquote>«La cantinetta è arrivata: siamo molto soddisfatti, è molto bella e sta benissimo in casa.»</blockquote><cite>Da un messaggio WhatsApp</cite></div></article>
-      <article class="voice"><div class="said"><blockquote>«Vi faccio pubblicità ovunque: è una cosa che tutti dovrebbero avere in casa.»</blockquote><cite>Da Instagram</cite></div></article>
-      <article class="voice"><div class="said"><blockquote>«Gentile e corretto come pochi.»</blockquote><cite>Da un messaggio WhatsApp</cite></div></article>
-    </div>
-
     <div class="warranty rise">
       <div class="w-lab">Garanzia</div>
       <p>Se non sei soddisfatto della tua botte <b>(praticamente impossibile)</b>, hai <b>15 giorni</b> per restituirla, senza costi aggiuntivi. Arriva danneggiata? Ti mandiamo il corriere a ritirarla e <b>te la sostituiamo, tutto a nostre spese</b>.</p>
