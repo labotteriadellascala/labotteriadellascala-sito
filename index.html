@@ -745,7 +745,7 @@ footer{border-top:1px solid var(--line-soft);padding:40px 0;background:var(--pap
     <h4>I tuoi diritti</h4>
     <p>Puoi chiedere in ogni momento accesso, rettifica, cancellazione, limitazione o portabilità dei tuoi dati, oppure opporti al trattamento, scrivendo a info@labotteriadellascala.it. Hai inoltre diritto di proporre reclamo al Garante per la protezione dei dati personali.</p>
     <h4>Cookie</h4>
-    <p>Previo tuo consenso, questo sito utilizza il pixel di Meta (Meta Platforms Ireland Ltd) e Google Analytics 4 (Google Ireland Ltd) per misurare le visite e l'efficacia delle campagne pubblicitarie. Questi strumenti si attivano solo se premi «Accetta» nel banner; se premi «Rifiuta» non viene installato alcun cookie di misurazione e la navigazione resta pienamente disponibile. Puoi cambiare idea cancellando i cookie del browser. Restano attivi i soli cookie tecnici necessari al funzionamento del sito.</p>
+    <p>Previo tuo consenso, questo sito utilizza il pixel di Meta (Meta Platforms Ireland Ltd), Google Analytics 4 (Google Ireland Ltd) e Microsoft Clarity (Microsoft Ireland Operations Ltd) per misurare le visite e l'efficacia delle campagne pubblicitarie. Microsoft Clarity ci aiuta a capire come i visitatori usano il sito, tramite mappe di calore e registrazioni anonime di sessione, e i relativi dati sono trattati da Microsoft. Questi strumenti si attivano solo se premi «Accetta» nel banner; se premi «Rifiuta» non viene installato alcun cookie di misurazione e la navigazione resta pienamente disponibile. Puoi cambiare idea cancellando i cookie del browser. Restano attivi i soli cookie tecnici necessari al funzionamento del sito.</p>
     <p class="pdate">Ultimo aggiornamento: agosto 2026</p>
   </div>
 </dialog>
@@ -889,6 +889,12 @@ function loadTracking(){
   window.gtag=gtag;
   gtag('js',new Date());
   gtag('config','G-RD4JSPQP91');
+  // Microsoft Clarity
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window,document,"clarity","script","y3tsgk7bp7");
 }
 function lbdsCookieReopen(){
   var dlg=document.getElementById('privacyDlg'); if(dlg&&dlg.open) dlg.close();
