@@ -70,19 +70,18 @@ Regole per aggiungere/gestire foto:
 
 ## 5. Menu e navigazione
 
-Il menu è **ridotto e identico su tutte le pagine**, 3 voci:
-1. **Recensioni** → `recensioni.html`
-2. **Ispirazioni** → `ispirazioni.html`
-3. **Rendering gratuito** (pulsante pieno) → il form contatti
+Il menu è **ridotto e identico su tutte le pagine**, 4 voci:
+1. **Home** → `index.html`
+2. **Recensioni** → `recensioni.html`
+3. **Ispirazioni** → `ispirazioni.html`
+4. **Rendering gratuito** (pulsante pieno) → il form contatti
 
 Dettaglio link "Rendering gratuito":
 - Su `index.html` → `#contatti` (scroll interno).
 - Sulle pagine galleria → `index.html#contatti` (torna alla home e scrolla al form).
 
-Sulla homepage, **sopra il form** ci sono due pulsanti che rimandano alle gallerie:
-- "Vedi tutti i messaggi dei clienti →" → `recensioni.html`
-- "Guarda le botti nelle case dei clienti →" → `ispirazioni.html`
-(Devono stare **sopra il form**, su sfondo chiaro. NON dentro il riquadro Garanzia bordeaux: lì il testo bordeaux su sfondo bordeaux diventa invisibile.)
+Le gallerie sono collegate dalla homepage tramite **due sezioni-carosello in alto** (mobile-first, classi `rvh`/`rvh--photo`): **recensioni** (screenshot `rec-*.webp`) subito dopo l'hero, **ispirazioni** (foto clienti `ispirazione-*.webp`) dopo la sezione "Configura". Ognuna ha il proprio pulsante ("Leggi tutte le recensioni →" / "Guarda tutte le ispirazioni →").
+*(I due pulsanti che prima stavano sopra il form contatti — "Vedi tutti i messaggi" / "Guarda le botti nelle case" — sono stati rimossi perché ridondanti con questi caroselli.)*
 
 Se si aggiungono pagine, aggiornare il menu in **tutte e tre** le pagine per tenerlo coerente.
 
