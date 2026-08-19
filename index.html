@@ -300,7 +300,7 @@ form{display:flex;flex-direction:column;gap:20px}
 .cmp.anim .top{transition:clip-path .55s cubic-bezier(.25,.8,.3,1)}
 .cmp.anim .cmp-line,.cmp.anim .grip{transition:left .55s cubic-bezier(.25,.8,.3,1)}
 .cmp-bar{position:absolute;left:0;right:0;bottom:0;z-index:4;display:grid;
-  grid-template-columns:1fr auto 1fr;grid-template-areas:"p p p" "l . r";row-gap:8px;align-items:center;
+  grid-template-columns:1fr auto 1fr;grid-template-areas:"l . r";align-items:center;
   padding:12px 12px 11px;background:linear-gradient(to top,rgba(22,17,12,.85),rgba(22,17,12,.5) 62%,transparent)}
 .cmp-bar .bL{grid-area:l;justify-self:start}
 .cmp-bar .bR{grid-area:r;justify-self:end}
@@ -322,10 +322,10 @@ form{display:flex;flex-direction:column;gap:20px}
 .cmp-desc{font-size:13.5px;color:var(--ink-soft);margin-top:9px;line-height:1.5}
 .cmp-lab{display:flex;align-items:center;gap:8px}
 .cmp-ico{width:26px;height:26px;color:var(--gold);flex-shrink:0}
-.cmp-price{margin-top:10px;display:flex;flex-direction:column;gap:3px}
-.cmp-price .p1{font-family:var(--mono);font-size:14px;color:var(--ink-soft)}
-.cmp-price .p1 b{font-size:19px;color:var(--ink);font-weight:600}
-.cmp-price .p2{font-family:var(--mono);font-size:11.5px;color:var(--gold);letter-spacing:.02em}
+.cmp-price{margin-top:12px;display:flex;flex-direction:column;gap:5px}
+.cmp-price .p1{font-family:var(--mono);font-size:13.5px;color:var(--ink-soft);letter-spacing:.02em}
+.cmp-price .p1 b{font-size:20px;color:var(--ink);font-weight:600;letter-spacing:0;margin-left:5px}
+.cmp-price .p1.ref b{color:var(--gold)}
 .sumisura{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:16px;
   border:1px solid var(--gold-warm);border-radius:var(--r-card);padding:20px 24px;background:rgba(154,58,71,.06);
   transition:background .25s,transform .25s}
@@ -546,9 +546,12 @@ footer{border-top:1px solid var(--line-soft);padding:40px 0;background:var(--pap
             <input type="range" class="cmp-range" min="2" max="98" value="50" step="0.5" aria-label="Confronta Intera: scaffale aperto e cantinetta refrigerata">
             <div class="cmp-bar">
               <button type="button" class="cmp-btn bL">Non refrigerata</button>
-              <span class="cmp-p"></span>
               <button type="button" class="cmp-btn bR">Refrigerata</button>
             </div>
+          </div>
+          <div class="cmp-price">
+            <span class="p1">Non refrigerata <b>550 – 850 €</b></span>
+            <span class="p1 ref">Con cantinetta <b>1.050 – 1.200 €</b></span>
           </div>
           <p class="cmp-desc">Quando hai spazio e vuoi il pezzo che si fa notare.</p>
         </div>
@@ -562,9 +565,12 @@ footer{border-top:1px solid var(--line-soft);padding:40px 0;background:var(--pap
             <input type="range" class="cmp-range" min="2" max="98" value="50" step="0.5" aria-label="Confronta Mezza: scaffale aperto e cantinetta refrigerata">
             <div class="cmp-bar">
               <button type="button" class="cmp-btn bL">Non refrigerata</button>
-              <span class="cmp-p"></span>
               <button type="button" class="cmp-btn bR">Refrigerata</button>
             </div>
+          </div>
+          <div class="cmp-price">
+            <span class="p1">Non refrigerata <b>450 – 750 €</b></span>
+            <span class="p1 ref">Con cantinetta <b>950 – 1.100 €</b></span>
           </div>
           <p class="cmp-desc">Elegante e salvaspazio, perfetta contro una parete.</p>
         </div>
@@ -578,9 +584,12 @@ footer{border-top:1px solid var(--line-soft);padding:40px 0;background:var(--pap
             <input type="range" class="cmp-range" min="2" max="98" value="50" step="0.5" aria-label="Confronta Ad angolo: scaffale aperto e cantinetta refrigerata">
             <div class="cmp-bar">
               <button type="button" class="cmp-btn bL">Non refrigerata</button>
-              <span class="cmp-p"></span>
               <button type="button" class="cmp-btn bR">Refrigerata</button>
             </div>
+          </div>
+          <div class="cmp-price">
+            <span class="p1">Non refrigerata <b>450 – 750 €</b></span>
+            <span class="p1 ref">Con cantinetta <b>950 – 1.100 €</b></span>
           </div>
           <p class="cmp-desc">Sfrutta l'angolo che non sapevi come riempire.</p>
         </div>
@@ -814,7 +823,7 @@ document.querySelectorAll('.cmp').forEach(cmp=>{
   const apply=()=>{
     cmp.style.setProperty('--x',rng.value+'%');
     const normale = rng.value>=50;
-    pTxt.textContent = normale ? cmp.dataset.p1 : cmp.dataset.p2;
+    if(pTxt) pTxt.textContent = normale ? cmp.dataset.p1 : cmp.dataset.p2;
     bL.classList.toggle('on',normale);
     bR.classList.toggle('on',!normale);
   };
