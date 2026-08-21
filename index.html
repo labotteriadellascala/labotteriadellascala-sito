@@ -130,11 +130,11 @@ body.menu-open{overflow:hidden}
 .hero-shot{position:relative;height:63dvh;min-height:430px;overflow:hidden;background:var(--sand)}
 .hero-shot img{width:100%;height:100%;object-fit:cover;object-position:center 32%}
 .hero-shot::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(30,22,14,.42) 0%,rgba(30,22,14,0) 24%);pointer-events:none}
-.hero-say{padding:26px 0 40px}
+.hero-say{padding-top:26px;padding-bottom:40px}
 .hero .label{display:block;margin-bottom:14px}
 .hero h1{margin-bottom:14px}
 .hero .body-lg{max-width:46ch;margin-bottom:24px}
-.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
 /* header leggibile sopra la foto (mobile) */
 header:not(.on) .brand{color:#f5f1e8}
 header:not(.on) .nav>a{color:rgba(250,246,239,.88)}
@@ -403,9 +403,11 @@ footer{border-top:1px solid var(--line-soft);padding:40px 0;background:var(--pap
   .fab{display:none}
   .dock{display:flex;position:fixed;inset:auto 0 0 0;z-index:75;background:rgba(250,247,240,.97);
     backdrop-filter:blur(12px);border-top:1px solid var(--line)}
-  .dock a{flex:1;display:flex;align-items:center;justify-content:center;padding:15px 0;font-size:15px;font-weight:600}
-  .dock .primary{background:var(--wa);color:#fff}
-  .dock .second{color:var(--ink)}
+  .dock a{flex:1;display:flex;align-items:center;justify-content:center;padding:9px 0;font-size:14px;font-weight:600;text-align:center;min-width:0}
+  .dock .primary{background:var(--wa);color:#fff;flex:0 0 auto;padding:9px 24px}
+  .dock .second{color:var(--ink);flex:1;flex-direction:column;align-items:center;justify-content:center;gap:1px;line-height:1.15;text-align:center;min-width:0}
+  .dock .second .t{font-size:13.5px;font-weight:600;letter-spacing:0;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .dock .second .s{font-size:11px;font-weight:500;color:var(--ink-soft);max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   body{padding-bottom:54px}
   .voice{flex:0 0 84%}
 }
@@ -448,8 +450,7 @@ footer{border-top:1px solid var(--line-soft);padding:40px 0;background:var(--pap
       <p class="body-lg">Una botte rivisitata in chiave moderna, su misura per il tuo spazio. La vedi in 3D prima di decidere.</p>
       <div class="hero-cta">
         <!-- MODIFICA-CONTATTI -->
-        <a class="btn btn-solid" href="#contatti">Rendering gratuito</a>
-        <a class="btn btn-line" href="#configura">Guarda le forme</a>
+        <a class="btn btn-solid btn-sm" href="#configura">Guarda le forme</a>
       </div>
     </div>
   </div>
@@ -486,39 +487,6 @@ footer{border-top:1px solid var(--line-soft);padding:40px 0;background:var(--pap
       <a class="rvh-card" href="recensioni.html" aria-label="Leggi le recensioni dei clienti"><img src="img/rec-19.webp" width="640" height="1051" alt="Messaggio di un cliente" loading="lazy" decoding="async"></a>
     </div>
     <a class="btn btn-solid btn-sm rvh-cta" href="recensioni.html">Leggi tutte le recensioni →</a>
-  </div>
-</section>
-
-<!-- 2. COS'È -->
-<section class="sec">
-  <div class="wrap">
-    <div class="claim rise">
-      <!-- MODIFICA-TESTO -->
-      <p class="big display" style="font-weight:500">Creiamo mobili bar a forma di botte, su misura per la tua casa. <strong>Vino, calore e convivialità</strong>, racchiusi in una botte rivisitata in chiave moderna.</p>
-      <p class="body">Elegante, funzionale, adatta ad ogni stile d'arredo. Intera, mezza o ad angolo, <b class="hl">nelle dimensioni che servono a te</b>. Fatta a mano, pensata con te.</p>
-    </div>
-    <div class="claim-strip rise">
-      <!-- MODIFICA-FOTO · tre scatti di atmosfera 3:2 -->
-      <figure><img src="img/dettaglio-costruzione.webp" width="900" height="600" loading="lazy" decoding="async" alt="Dettaglio del legno lavorato a mano"></figure>
-      <figure><img src="img/dettaglio-ripiano.webp" width="900" height="601" loading="lazy" decoding="async" alt="Interno con bottiglie e calici"></figure>
-      <figure><img src="img/incisione-laser.webp" width="900" height="600" loading="lazy" decoding="async" alt="Incisione laser personalizzata sul ripiano"></figure>
-    </div>
-  </div>
-</section>
-
-<!-- 3. PROCESSO -->
-<section class="sec sec-sand" id="processo">
-  <div class="wrap">
-    <div class="rise" style="max-width:640px">
-      <h2 class="display h2">Come nasce la tua botte</h2>
-      <p class="body" style="margin-top:16px">Tre passi, zero sorprese. La vedi finita prima di decidere, e il saldo si paga solo a botte pronta.</p>
-    </div>
-    <div class="rail rise">
-      <div class="stepcell"><div class="num">01</div><h3 class="h3">Come ti immagini il tuo angolo bar ideale?</h3><p>Compila il form sottostante e raccontaci cosa ti immagini, verrai ricontattato per definire tutti i dettagli. Non ti preoccupare se parti da zero, ti guideremo noi in tutte le fasi.</p></div>
-      <div class="stepcell"><div class="num">02</div><h3 class="h3">Ricevi il rendering 3D</h3><p>Ti mostriamo la tua botte in 3D, com'è davvero, prima di qualsiasi impegno. La aggiustiamo insieme finché non è come la vuoi. È gratis.</p></div>
-      <div class="stepcell"><div class="num">03</div><h3 class="h3">La costruiamo e arriva a casa</h3><p>Confermi con una piccola caparra e la realizziamo nel nostro laboratorio, a Verona, in 20-40 giorni (salvo diverse indicazioni o richieste). <b class="hl">Le modalità di saldo le decidi tu: Avviso di merce pronta, contrassegno o rate senza interessi con Klarna.</b> Consegna concordata in tutta Italia.</p></div>
-      
-    </div>
   </div>
 </section>
 
@@ -628,52 +596,6 @@ footer{border-top:1px solid var(--line-soft);padding:40px 0;background:var(--pap
   </div>
 </section>
 
-<!-- 5. PROVA -->
-<section class="sec sec-sand" id="voci">
-  <div class="wrap">
-    <div class="figures rise">
-      <div><div class="n display">1.500</div><div class="k">Mobili consegnati</div></div>
-      <a class="figlink" href="https://www.instagram.com/labotteriadellascala" target="_blank" rel="noopener"><div class="n display">85.000</div><div class="k">Persone nella community <svg width="15" height="15" viewBox="0 0 24 24" fill="none" style="vertical-align:-2px"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.3" fill="currentColor"/></svg> @labotteriadellascala</div></a>
-      <div><div class="n display">20-40</div><div class="k">Giorni di lavorazione</div></div>
-    </div>
-    <div class="honest rise">
-      <div class="yes">
-        <h4>Perché sceglierci</h4>
-        <ul>
-          <li><b>Personalizzazione totale.</b> Ogni pezzo è cucito su misura: dimensioni, finiture, spazi interni. Niente mobili in serie.</li>
-          <li><b>Accessibile, senza compromessi.</b> Rendiamo possibile a tutti l'angolo bar dei propri sogni. Qualità alta, prezzo giusto.</li>
-          <li><b>Assistenza garantita.</b> Siamo prima di tutto persone: in prima linea, prima e dopo l'acquisto. Non sei mai lasciato solo.</li>
-        </ul>
-      </div>
-      <div class="no">
-        <h4>Cosa non siamo</h4>
-        <ul>
-          <li><b>Veloci come una fabbrica.</b> Non spediamo in 24 ore: ogni botte richiede tempo, e una lista d'attesa da rispettare.</li>
-          <li><b>Perfettini come l'industria.</b> Lavoriamo solo legno vero: venature e sfumature variano da pezzo a pezzo. Per noi è la firma dell'artigianalità.</li>
-        </ul>
-      </div>
-    </div>
-    <div class="warranty rise">
-      <div class="w-lab">Garanzia</div>
-      <p>Se non sei soddisfatto della tua botte <b>(praticamente impossibile)</b>, hai <b>15 giorni</b> per restituirla, senza costi aggiuntivi. Arriva danneggiata? Ti mandiamo il corriere a ritirarla e <b>te la sostituiamo, tutto a nostre spese</b>.</p>
-    </div>
-  </div>
-</section>
-
-<!-- 6. CHI SIAMO -->
-<section class="sec">
-  <div class="wrap duo">
-    <div class="rise">
-      <h2 class="display h2" style="margin-bottom:24px">Più di un angolo bar: il cuore dei tuoi brindisi</h2>
-      <!-- MODIFICA-TESTO -->
-      <p class="body-lg">Tutto è nato da una semplice idea: un angolo bar che non fosse solo un mobile, ma il cuore dei momenti più belli da condividere. Intorno a quella prima creazione sono nati sorrisi, brindisi e una convivialità nuova, così autentica che abbiamo voluto renderla possibile per chiunque.</p>
-      <p class="body-lg">Oggi realizziamo ogni botte interamente a mano, come un lavoro sartoriale. Colori, dimensioni e accessori prendono forma nel progetto che disegniamo per te: tu ci metti i desideri, noi la soluzione. Per questo non ne esistono due identiche, e la tua sarà soltanto tua.</p>
-      <div class="who">Andrea<span>La Botteria della Scala, Isola della Scala (VR)</span></div>
-    </div>
-    
-  </div>
-</section>
-
 <!-- 7. CONTATTI -->
 <section class="sec talk" id="contatti">
   <div class="wrap">
@@ -756,6 +678,91 @@ footer{border-top:1px solid var(--line-soft);padding:40px 0;background:var(--pap
   </div>
 </section>
 
+<!-- Garanzia (sotto il form) -->
+<section class="sec">
+  <div class="wrap">
+    <div class="warranty rise">
+      <div class="w-lab">Garanzia</div>
+      <p>Se non sei soddisfatto della tua botte <b>(praticamente impossibile)</b>, hai <b>15 giorni</b> per restituirla, senza costi aggiuntivi. Arriva danneggiata? Ti mandiamo il corriere a ritirarla e <b>te la sostituiamo, tutto a nostre spese</b>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 2. COS'È -->
+<section class="sec">
+  <div class="wrap">
+    <div class="claim rise">
+      <!-- MODIFICA-TESTO -->
+      <p class="big display" style="font-weight:500">Creiamo mobili bar a forma di botte, su misura per la tua casa. <strong>Vino, calore e convivialità</strong>, racchiusi in una botte rivisitata in chiave moderna.</p>
+      <p class="body">Elegante, funzionale, adatta ad ogni stile d'arredo. Intera, mezza o ad angolo, <b class="hl">nelle dimensioni che servono a te</b>. Fatta a mano, pensata con te.</p>
+    </div>
+    <div class="claim-strip rise">
+      <!-- MODIFICA-FOTO · tre scatti di atmosfera 3:2 -->
+      <figure><img src="img/dettaglio-costruzione.webp" width="900" height="600" loading="lazy" decoding="async" alt="Dettaglio del legno lavorato a mano"></figure>
+      <figure><img src="img/dettaglio-ripiano.webp" width="900" height="601" loading="lazy" decoding="async" alt="Interno con bottiglie e calici"></figure>
+      <figure><img src="img/incisione-laser.webp" width="900" height="600" loading="lazy" decoding="async" alt="Incisione laser personalizzata sul ripiano"></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 3. PROCESSO -->
+<section class="sec sec-sand" id="processo">
+  <div class="wrap">
+    <div class="rise" style="max-width:640px">
+      <h2 class="display h2">Come nasce la tua botte</h2>
+      <p class="body" style="margin-top:16px">Tre passi, zero sorprese. La vedi finita prima di decidere, e il saldo si paga solo a botte pronta.</p>
+    </div>
+    <div class="rail rise">
+      <div class="stepcell"><div class="num">01</div><h3 class="h3">Come ti immagini il tuo angolo bar ideale?</h3><p>Compila il form sottostante e raccontaci cosa ti immagini, verrai ricontattato per definire tutti i dettagli. Non ti preoccupare se parti da zero, ti guideremo noi in tutte le fasi.</p></div>
+      <div class="stepcell"><div class="num">02</div><h3 class="h3">Ricevi il rendering 3D</h3><p>Ti mostriamo la tua botte in 3D, com'è davvero, prima di qualsiasi impegno. La aggiustiamo insieme finché non è come la vuoi. È gratis.</p></div>
+      <div class="stepcell"><div class="num">03</div><h3 class="h3">La costruiamo e arriva a casa</h3><p>Confermi con una piccola caparra e la realizziamo nel nostro laboratorio, a Verona, in 20-40 giorni (salvo diverse indicazioni o richieste). <b class="hl">Le modalità di saldo le decidi tu: Avviso di merce pronta, contrassegno o rate senza interessi con Klarna.</b> Consegna concordata in tutta Italia.</p></div>
+      
+    </div>
+  </div>
+</section>
+
+<!-- 5. PROVA -->
+<section class="sec sec-sand" id="voci">
+  <div class="wrap">
+    <div class="figures rise">
+      <div><div class="n display">1.500</div><div class="k">Mobili consegnati</div></div>
+      <a class="figlink" href="https://www.instagram.com/labotteriadellascala" target="_blank" rel="noopener"><div class="n display">85.000</div><div class="k">Persone nella community <svg width="15" height="15" viewBox="0 0 24 24" fill="none" style="vertical-align:-2px"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.3" fill="currentColor"/></svg> @labotteriadellascala</div></a>
+      <div><div class="n display">20-40</div><div class="k">Giorni di lavorazione</div></div>
+    </div>
+    <div class="honest rise">
+      <div class="yes">
+        <h4>Perché sceglierci</h4>
+        <ul>
+          <li><b>Personalizzazione totale.</b> Ogni pezzo è cucito su misura: dimensioni, finiture, spazi interni. Niente mobili in serie.</li>
+          <li><b>Accessibile, senza compromessi.</b> Rendiamo possibile a tutti l'angolo bar dei propri sogni. Qualità alta, prezzo giusto.</li>
+          <li><b>Assistenza garantita.</b> Siamo prima di tutto persone: in prima linea, prima e dopo l'acquisto. Non sei mai lasciato solo.</li>
+        </ul>
+      </div>
+      <div class="no">
+        <h4>Cosa non siamo</h4>
+        <ul>
+          <li><b>Veloci come una fabbrica.</b> Non spediamo in 24 ore: ogni botte richiede tempo, e una lista d'attesa da rispettare.</li>
+          <li><b>Perfettini come l'industria.</b> Lavoriamo solo legno vero: venature e sfumature variano da pezzo a pezzo. Per noi è la firma dell'artigianalità.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. CHI SIAMO -->
+<section class="sec">
+  <div class="wrap duo">
+    <div class="rise">
+      <h2 class="display h2" style="margin-bottom:24px">Più di un angolo bar: il cuore dei tuoi brindisi</h2>
+      <!-- MODIFICA-TESTO -->
+      <p class="body-lg">Tutto è nato da una semplice idea: un angolo bar che non fosse solo un mobile, ma il cuore dei momenti più belli da condividere. Intorno a quella prima creazione sono nati sorrisi, brindisi e una convivialità nuova, così autentica che abbiamo voluto renderla possibile per chiunque.</p>
+      <p class="body-lg">Oggi realizziamo ogni botte interamente a mano, come un lavoro sartoriale. Colori, dimensioni e accessori prendono forma nel progetto che disegniamo per te: tu ci metti i desideri, noi la soluzione. Per questo non ne esistono due identiche, e la tua sarà soltanto tua.</p>
+      <div class="who">Andrea<span>La Botteria della Scala, Isola della Scala (VR)</span></div>
+    </div>
+    
+  </div>
+</section>
+
 <footer>
   <div class="wrap">
     <div class="foot">
@@ -796,7 +803,7 @@ footer{border-top:1px solid var(--line-soft);padding:40px 0;background:var(--pap
 <div class="navbg" id="navbg"></div>
 <div class="dock">
   <a class="primary" href="https://wa.me/393515466834" target="_blank" rel="noopener">WhatsApp</a>
-  <a class="second" href="tel:+393515466834">Chiama</a>
+  <a class="second" href="#contatti"><span class="t">Configura la tua botte</span><span class="s">ricevi il rendering gratuito</span></a>
 </div>
 
 <script>
