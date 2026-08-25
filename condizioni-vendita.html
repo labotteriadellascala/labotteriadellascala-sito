@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Condizioni di Vendita — La Botteria della Scala</title>
+<meta name="description" content="Condizioni di vendita dei mobili bar artigianali su misura di La Botteria della Scala — Steel Head di Andrea Canovi.">
+<link rel="canonical" href="https://www.labotteriadellascala.it/condizioni-vendita.html">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --plaster:#faf7f0; --paper:#f2ecdf; --sand:#e7dcc8; --sand-2:#d9cbb1;
+  --line:#d3c6ae; --line-soft:#e2d8c4;
+  --ink:#32281c; --ink-soft:#6b5c49; --ink-faint:#95866f;
+  --gold:#7d2a35; --gold-warm:#9c3a47; --wa:#25d366;
+  --r-card:14px;
+  --sans:"Geist",system-ui,-apple-system,sans-serif;
+  --mono:"Geist Mono",ui-monospace,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%;height:auto}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1280px;margin:0 auto;padding:0 28px}
+
+/* pulsanti */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--sans);
+  font-weight:600;font-size:15px;white-space:nowrap;padding:14px 26px;border-radius:999px;
+  border:1px solid transparent;cursor:pointer;transition:background .25s,color .25s,border-color .25s,transform .1s}
+.btn-solid{background:var(--ink);color:var(--plaster)}
+.btn-solid:hover{background:#3a3025}
+.btn-sm{padding:9px 18px;font-size:13.5px}
+
+/* header (pagina a fondo chiaro: testata sempre in chiaro) */
+header{position:fixed;inset:0 0 auto 0;z-index:80;background:rgba(250,247,240,.97);border-bottom:1px solid var(--line-soft)}
+.bar{height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px;max-width:1280px;margin:0 auto;padding:0 28px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand img{height:38px;width:auto;display:block}
+.brand .logo-w{display:none}
+.nav{display:flex;align-items:center;gap:28px}
+.nav a{font-size:14px;color:var(--ink-soft);transition:color .2s;white-space:nowrap}
+.nav a:hover{color:var(--ink)}
+.nav a.btn-solid{color:var(--plaster)}
+.burger{display:none;background:none;border:none;color:var(--ink);cursor:pointer;padding:6px}
+body.menu-open{overflow:hidden}
+.navbg{position:fixed;inset:0;background:rgba(28,21,14,.45);opacity:0;pointer-events:none;transition:opacity .3s;z-index:74}
+.navbg.open{opacity:1;pointer-events:auto}
+
+/* documento legale */
+.doc{max-width:760px;margin:0 auto;padding:118px 0 90px}
+.doc .kick{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.doc h1{font-size:clamp(30px,5.4vw,46px);font-weight:600;letter-spacing:-.02em;line-height:1.1;margin-bottom:12px}
+.doc .seller{font-size:13px;color:var(--ink-faint);line-height:1.6}
+.doc .intro{font-size:16px;color:var(--ink-soft);line-height:1.68;margin:20px 0 6px;padding-bottom:26px;border-bottom:1px solid var(--line-soft)}
+.doc h2{font-size:19px;font-weight:600;letter-spacing:-.01em;color:var(--ink);margin:34px 0 10px}
+.doc p{font-size:15px;color:var(--ink-soft);line-height:1.72;margin-bottom:12px}
+.doc ul{margin:0 0 12px 22px}
+.doc li{font-size:15px;color:var(--ink-soft);line-height:1.7;margin-bottom:6px}
+.doc .back{display:inline-block;margin-top:34px;font-size:14px;color:var(--gold);text-decoration:underline}
+
+/* footer */
+footer{border-top:1px solid var(--line-soft);padding:40px 0;background:var(--paper)}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:18px}
+.fsocial{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--ink-soft)}
+.fsocial:hover{color:var(--gold)}
+.legal p{font-size:12.5px;color:var(--ink-faint);line-height:1.7}
+.plink{background:none;border:none;padding:0;font:inherit;color:var(--gold);text-decoration:underline;cursor:pointer}
+
+/* privacy dialog */
+.pdlg{border:none;border-radius:14px;padding:0;max-width:640px;width:calc(100% - 40px);background:var(--plaster);color:var(--ink)}
+.pdlg::backdrop{background:rgba(24,18,12,.55)}
+.pdlg-in{padding:26px 26px 30px;max-height:80vh;overflow:auto}
+.pdlg-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.pdlg-head h3{font-size:20px;font-weight:600;letter-spacing:-.02em}
+.pdlg-x{background:none;border:1px solid var(--line);border-radius:50%;width:34px;height:34px;cursor:pointer;color:var(--ink-soft);font-size:14px}
+.pdlg h4{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin:20px 0 8px}
+.pdlg p{font-size:14px;color:var(--ink-soft);line-height:1.65}
+.pdate{margin-top:20px;font-size:12px !important;color:var(--ink-faint) !important}
+
+/* cookie */
+.ckbar{position:fixed;left:12px;right:12px;bottom:12px;z-index:200;background:var(--plaster);
+  border:1px solid var(--line);border-radius:14px;padding:17px 19px;box-shadow:0 16px 46px rgba(40,30,18,.3)}
+.ckbar p{font-size:13.5px;color:var(--ink-soft);line-height:1.55;margin-bottom:13px}
+.ckbar p .plink{color:var(--gold)}
+.ckbtns{display:flex;gap:10px}
+.ckbtns .btn{flex:1}
+#ckYes{background:#47714f;color:#f5f1e8;border-color:#47714f}
+#ckYes:hover{background:#3c5f43}
+.ckbtns .ck-no{background:transparent;border-color:var(--line);color:var(--ink-soft);flex:0 0 auto;padding-left:18px;padding-right:18px}
+@media(min-width:721px){.ckbar{left:auto;right:24px;bottom:24px;max-width:392px}}
+
+/* mobile nav */
+@media(max-width:720px){
+  .nav{position:fixed;inset:0 0 0 auto;width:82%;max-width:320px;flex-direction:column;justify-content:center;
+    align-items:flex-start;gap:26px;padding:36px;background:var(--plaster);border-left:1px solid var(--line);
+    transform:translateX(100%);transition:transform .32s ease;z-index:75}
+  .nav.open{transform:none}
+  .nav a{font-size:19px;color:var(--ink)}
+  .nav a.btn-solid{color:var(--plaster)}
+  .nav .btn{width:100%}
+  .burger{display:block;z-index:78}
+}
+</style>
+</head>
+<body>
+<header id="head">
+  <div class="bar">
+    <a class="brand" href="index.html" aria-label="La Botteria della Scala">
+      <img class="logo-c" src="img/logo-colore.png" alt="La Botteria della Scala" width="512" height="119">
+    </a>
+    <nav class="nav" id="nav">
+      <a href="index.html">Home</a>
+      <a href="recensioni.html">Recensioni</a>
+      <a href="ispirazioni.html">Ispirazioni</a>
+      <a class="btn btn-solid btn-sm" href="index.html#contatti">Rendering gratuito</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Apri il menu" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+<div class="navbg" id="navbg"></div>
+
+<main class="wrap">
+  <article class="doc">
+    <div class="kick">Documento</div>
+    <h1>Condizioni di Vendita</h1>
+    <p class="seller">La Botteria della Scala — Steel Head di Andrea Canovi · P.IVA 04775640230 · Isola della Scala (VR)</p>
+
+    <p class="intro">Le presenti condizioni disciplinano la vendita dei nostri mobili bar artigianali realizzati su misura. Il versamento della caparra confirmatoria di cui all'art. 3 costituisce accettazione integrale delle condizioni qui riportate.</p>
+
+    <h2>1. Prodotto e processo d'ordine</h2>
+    <p>I prodotti sono mobili artigianali realizzati su misura in base alle specifiche concordate con il cliente. Ogni ordine segue queste fasi:</p>
+    <ul>
+      <li>contatto e definizione del prodotto, con un range di prezzo indicativo;</li>
+      <li>presentazione del rendering ufficiale;</li>
+      <li>preventivo con offerta finale;</li>
+      <li>accettazione e versamento della caparra confirmatoria.</li>
+    </ul>
+
+    <h2>2. Prezzi</h2>
+    <p>I prezzi si intendono comprensivi di IVA. Il prezzo applicato è quello indicato nel preventivo/conferma d'ordine.</p>
+
+    <h2>3. Caparra confirmatoria</h2>
+    <p>Alla conferma dell'ordine il cliente versa una caparra confirmatoria di € 150, ai sensi dell'art. 1385 c.c. Il versamento della caparra costituisce accettazione integrale delle presenti condizioni e approvazione del rendering e delle specifiche indicati nel preventivo finale.</p>
+    <p>In caso di inadempimento del cliente, il venditore ha facoltà di recedere trattenendo la caparra; in caso di inadempimento del venditore, si applica quanto previsto dall'art. 1385 c.c.</p>
+
+    <h2>4. Rendering e specifiche</h2>
+    <p>Il rendering ha natura indicativa. Il colore e la tonalità, le venature del legno e la finitura possono presentare variazioni rispetto all'immagine: si tratta di caratteristiche del prodotto artigianale realizzato a mano e non di difetti.</p>
+    <p>Sono invece vincolanti le misure, il colore e la configurazione concordati e riportati nel preventivo finale. Qualora, dopo la presentazione del rendering ufficiale, vengano concordate modifiche, il riferimento approvato è il rendering — o la scheda delle specifiche — aggiornato e riportato nel preventivo finale.</p>
+
+    <h2>5. Pagamento del saldo</h2>
+    <p>Il saldo è dovuto ad avviso di merce pronta, con una delle seguenti modalità:</p>
+    <ul>
+      <li>bonifico bancario;</li>
+      <li>Klarna;</li>
+      <li>ritiro a mano, con pagamento al momento del ritiro.</li>
+    </ul>
+
+    <h2>6. Spedizione</h2>
+    <p>Le spese di spedizione, quando dovute, sono quelle indicate nel preventivo/conferma d'ordine e si sommano al saldo. Gli importi si intendono comprensivi di IVA.</p>
+
+    <h2>7. Tempi di produzione e consegna</h2>
+    <p>I tempi di produzione e consegna hanno carattere indicativo e non vincolante e sono quelli riportati nel preventivo. Il venditore si impegna a comunicare tempestivamente eventuali variazioni.</p>
+
+    <h2>8. Garanzia "soddisfatti o rimborsati" e trasporto</h2>
+    <p>Se il cliente non è soddisfatto, entro 15 giorni dal ricevimento del prodotto può comunicare per iscritto la volontà di restituirlo. Il prodotto deve essere restituito integro, non danneggiato né segnato dall'uso. Il rimborso viene effettuato dopo il ricevimento e la verifica dell'integrità del prodotto. Le spese di rientro sono a carico del venditore.</p>
+    <p>Qualora il prodotto arrivi danneggiato, il venditore provvede al ritiro e alla sostituzione a proprie spese.</p>
+
+    <h2>9. Garanzia legale di conformità</h2>
+    <p>Resta ferma, per i consumatori, la garanzia legale di conformità di 24 mesi prevista dal Codice del Consumo, distinta e ulteriore rispetto alla garanzia commerciale di cui all'articolo precedente.</p>
+
+    <h2>10. Trattamento dei dati</h2>
+    <p>I dati personali del cliente sono trattati esclusivamente per l'evasione dell'ordine e per gli adempimenti a esso connessi, nel rispetto della normativa vigente in materia di protezione dei dati personali.</p>
+
+    <h2>11. Foro competente</h2>
+    <p>Per le controversie con i consumatori è competente in via esclusiva il foro del luogo di residenza o di domicilio del consumatore.</p>
+
+    <h2>12. Accettazione</h2>
+    <p>Il versamento della caparra confirmatoria costituisce accettazione integrale e senza riserve delle presenti condizioni di vendita.</p>
+
+    <a class="back" href="index.html">← Torna al sito</a>
+  </article>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <span class="brand"><img class="logo-c" src="img/logo-colore.png" alt="La Botteria della Scala" style="height:34px;width:auto" width="512" height="119" loading="lazy" decoding="async"></span>
+      <a class="fsocial" href="https://www.instagram.com/labotteriadellascala" target="_blank" rel="noopener" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.6"/><circle cx="17.2" cy="6.8" r="1.3" fill="currentColor"/></svg><span>@labotteriadellascala</span></a>
+    </div>
+    <div class="legal">
+      <p>Steel Head di Andrea Canovi · Via Caduti sul Lavoro 22, 37063 Isola della Scala (VR) · P.IVA 04775640230</p>
+      <p>Artigianato italiano su misura · <button type="button" class="plink" onclick="document.getElementById('privacyDlg').showModal()">Privacy &amp; Cookie Policy</button> · <button type="button" class="plink" onclick="lbdsCookieReopen()">Gestisci cookie</button></p>
+    </div>
+  </div>
+</footer>
+<dialog id="privacyDlg" class="pdlg">
+  <div class="pdlg-in">
+    <div class="pdlg-head">
+      <h3>Privacy &amp; Cookie Policy</h3>
+      <button type="button" class="pdlg-x" onclick="document.getElementById('privacyDlg').close()" aria-label="Chiudi">✕</button>
+    </div>
+    <h4>Titolare del trattamento</h4>
+    <p>Steel Head di Andrea Canovi, Via Caduti sul Lavoro 22, 37063 Isola della Scala (VR), P.IVA 04775640230 — email: info@labotteriadellascala.it</p>
+    <h4>Quali dati raccogliamo e perché</h4>
+    <p>Attraverso il modulo di contatto raccogliamo i dati che ci fornisci volontariamente: nome, recapito (numero WhatsApp o indirizzo email) e le preferenze sul prodotto (forma, zona refrigerata, destinatario). Li usiamo esclusivamente per ricontattarti, preparare il progetto e il rendering richiesti e gestire l'eventuale ordine. Base giuridica: esecuzione di misure precontrattuali adottate su tua richiesta (art. 6, par. 1, lett. b GDPR).</p>
+    <h4>Come vengono trattati</h4>
+    <p>Il modulo è gestito tramite il servizio FormSubmit, che inoltra i dati alla nostra casella email e agisce come responsabile esterno del trattamento. I dati non vengono diffusi né ceduti a terzi per finalità commerciali; possono essere comunicati ai corrieri esclusivamente per la consegna. Conserviamo i dati per il tempo necessario a gestire la richiesta e gli eventuali obblighi contrattuali e fiscali.</p>
+    <h4>I tuoi diritti</h4>
+    <p>Puoi chiedere in ogni momento accesso, rettifica, cancellazione, limitazione o portabilità dei tuoi dati, oppure opporti al trattamento, scrivendo a info@labotteriadellascala.it. Hai inoltre diritto di proporre reclamo al Garante per la protezione dei dati personali.</p>
+    <h4>Cookie</h4>
+    <p>Previo tuo consenso, questo sito utilizza il pixel di Meta (Meta Platforms Ireland Ltd) e Google Analytics 4 (Google Ireland Ltd) per misurare le visite e l'efficacia delle campagne pubblicitarie. Questi strumenti si attivano solo se premi «Accetta» nel banner; se premi «Rifiuta» non viene installato alcun cookie di misurazione e la navigazione resta pienamente disponibile. Puoi cambiare idea cancellando i cookie del browser. Restano attivi i soli cookie tecnici necessari al funzionamento del sito.</p>
+    <p class="pdate">Ultimo aggiornamento: agosto 2026</p>
+  </div>
+</dialog>
+<!-- Consenso cookie + tracciamento (Meta Pixel + GA4) -->
+<div class="ckbar" id="ckbar" hidden>
+  <p>Usiamo cookie di misurazione per capire cosa funziona e mostrarti progetti in linea con i tuoi interessi. Ci dai una mano? <button type="button" class="plink" onclick="document.getElementById('privacyDlg').showModal()">Leggi l'informativa</button></p>
+  <div class="ckbtns">
+    <button type="button" class="btn btn-solid btn-sm" id="ckYes">Accetta</button>
+    <button type="button" class="btn btn-sm ck-no" id="ckNo">Rifiuta</button>
+  </div>
+</div>
+<script>
+const burger=document.getElementById('burger'),nav=document.getElementById('nav'),navbg=document.getElementById('navbg');
+const setMenu=o=>{nav.classList.toggle('open',o);navbg.classList.toggle('open',o);document.body.classList.toggle('menu-open',o);burger.setAttribute('aria-expanded',o);};
+burger.addEventListener('click',()=>setMenu(!nav.classList.contains('open')));
+navbg.addEventListener('click',()=>setMenu(false));
+nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
+// ---- consenso e caricamento tracker (Meta Pixel + GA4), solo dopo "Accetta" ----
+function loadTracking(){
+  if(window.__trk) return; window.__trk = true;
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','3500501163531510');
+  fbq('track','PageView');
+  var g=document.createElement('script');g.async=true;
+  g.src='https://www.googletagmanager.com/gtag/js?id=G-RD4JSPQP91';
+  document.head.appendChild(g);
+  window.dataLayer=window.dataLayer||[];
+  function gtag(){dataLayer.push(arguments);}
+  window.gtag=gtag;
+  gtag('js',new Date());
+  gtag('config','G-RD4JSPQP91');
+}
+function lbdsCookieReopen(){
+  var dlg=document.getElementById('privacyDlg'); if(dlg&&dlg.open) dlg.close();
+  var bar=document.getElementById('ckbar'); if(bar) bar.hidden=false;
+}
+(function(){
+  var bar=document.getElementById('ckbar');
+  if(!bar) return;
+  var c=null;
+  try{ c=localStorage.getItem('lbds_consent'); }catch(e){}
+  if(c==='yes'){ loadTracking(); }
+  else if(c!=='no'){ bar.hidden=false; }
+  document.getElementById('ckYes').addEventListener('click',function(){
+    try{ localStorage.setItem('lbds_consent','yes'); }catch(e){}
+    bar.hidden=true; loadTracking();
+  });
+  document.getElementById('ckNo').addEventListener('click',function(){
+    try{ localStorage.setItem('lbds_consent','no'); }catch(e){}
+    bar.hidden=true;
+  });
+})();
+</script>
+</body>
+</html>
