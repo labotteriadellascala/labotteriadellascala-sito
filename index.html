@@ -880,6 +880,10 @@ document.querySelectorAll('.cmp').forEach(cmp=>{
   document.querySelectorAll('input[name="refrigerata"]').forEach(function(r){
     r.addEventListener('change', function(){ bmTrack('SelezionaRefrigerazione'); });
   });
+  // 4) VisualizzaIspirazioni - click sul carosello ispirazioni in home (pulsante + foto)
+  document.querySelectorAll('.rvh--photo a[href="ispirazioni.html"]').forEach(function(a){
+    a.addEventListener('click', function(){ bmTrack('VisualizzaIspirazioni'); });
+  });
 })();
 </script>
 
