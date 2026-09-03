@@ -884,6 +884,10 @@ document.querySelectorAll('.cmp').forEach(cmp=>{
   document.querySelectorAll('.rvh--photo a[href="ispirazioni.html"]').forEach(function(a){
     a.addEventListener('click', function(){ bmTrack('VisualizzaIspirazioni'); });
   });
+  // 5) VisualizzaRecensioni - click sul carosello recensioni in home (screenshot + pulsante)
+  document.querySelectorAll('.rvh:not(.rvh--photo) a[href="recensioni.html"]').forEach(function(a){
+    a.addEventListener('click', function(){ bmTrack('VisualizzaRecensioni'); });
+  });
 })();
 </script>
 
