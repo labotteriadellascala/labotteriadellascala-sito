@@ -853,6 +853,36 @@ document.querySelectorAll('.cmp').forEach(cmp=>{
 
 </script>
 
+<!-- Eventi custom Meta Pixel (alta intenzione) - trackCustom, gated consenso, dedup per sessione -->
+<script>
+(function(){
+  // Spara un trackCustom UNA sola volta per sessione e SOLO col consenso concesso.
+  // window.__trk diventa true dentro loadTracking(), cioe' dopo "Accetta": stesso gate di PageView.
+  window.__bmPixelFired = window.__bmPixelFired || {};
+  function bmTrack(nome){
+    if(window.__trk !== true || typeof window.fbq !== 'function') return; // gate consenso identico a PageView
+    if(window.__bmPixelFired[nome]) return;                               // dedup once/sessione
+    window.__bmPixelFired[nome] = true;
+    window.fbq('trackCustom', nome);
+  }
+  // 1) VisualizzaForme - click su "Guarda le forme" (hero -> #configura)
+  var btnForme = document.querySelector('a[href="#configura"]');
+  if(btnForme) btnForme.addEventListener('click', function(){ bmTrack('VisualizzaForme'); });
+  // 2) InteragisceConfiguratore - interazione col comparatore in #configura
+  //    (drag dello slider = change, oppure click sui pulsanti Refrigerata/Non refrigerata)
+  document.querySelectorAll('.cmp-range').forEach(function(rng){
+    rng.addEventListener('change', function(){ bmTrack('InteragisceConfiguratore'); });
+  });
+  document.querySelectorAll('.cmp .cmp-btn').forEach(function(b){
+    b.addEventListener('click', function(){ bmTrack('InteragisceConfiguratore'); });
+  });
+  // 3) SelezionaRefrigerazione - scelta refrigerazione NEL FORM (Si'/No/Consigliatemi)
+  document.querySelectorAll('input[name="refrigerata"]').forEach(function(r){
+    r.addEventListener('change', function(){ bmTrack('SelezionaRefrigerazione'); });
+  });
+})();
+</script>
+
 <!-- Lead -> Supabase (in parallelo alla mail FormSubmit, non bloccante) -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
