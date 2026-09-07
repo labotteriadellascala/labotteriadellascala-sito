@@ -40,7 +40,7 @@
 </script>
 
 <!-- ═══════════════════════════════════════════════════════════════════
-     LA BOTTERIA DELLA SCALA — sito vetrina · VERSIONE v10.5
+     LA BOTTERIA DELLA SCALA — sito vetrina · VERSIONE v10.6
      Tutte le immagini sono DEFINITIVE (foto ufficiali, cartella img/).
      Changelog v10.0: immagini esternalizzate e ottimizzate (lazy loading),
      Meta Pixel + GA4 con banner di consenso, cattura UTM nel form,
@@ -50,6 +50,7 @@
      v10.1: banner cookie rialzato sopra WhatsApp/menu, revoca consenso da footer, copy opt-in.
      v10.2: doppio invio lead (email FormSubmit + RPC Supabase keepalive), campo honeypot anti-bot. Config Supabase inserita (URL + anon key del progetto wdlfzdjzynlnkqjhectg).
      v10.5: cattura anche utm_content (quale video) e utm_term (freddo/warm) delle campagne Meta, inviati sia a FormSubmit sia alla RPC Supabase (p_contenuto_utm / p_termine_utm).
+     v10.6: persistenza UTM in localStorage (lbds_attribution) - attribuzione LAST-TOUCH, finestra 90 giorni, non gated dal consenso; il form popola i campi UTM con precedenza URL > localStorage (non scaduto) > vuoto, fallback all'URL se lo storage non e' disponibile.
      Cerca «MODIFICA» per i punti modificabili (contatti, testi).
      ═══════════════════════════════════════════════════════════════════ -->
 
@@ -944,14 +945,48 @@ document.querySelectorAll('.cmp').forEach(cmp=>{
   </div>
 </div>
 <script>
-// ---- cattura UTM nel form ----
+// ---- cattura + persistenza UTM (attribuzione LAST-TOUCH, finestra 90 giorni) ----
 (function(){
-  const p = new URLSearchParams(location.search);
-  const map = {utm_source:'fonte_utm', utm_medium:'mezzo_utm', utm_campaign:'campagna_utm', utm_content:'contenuto_utm', utm_term:'termine_utm'};
-  for(const k in map){
-    const el = document.getElementById(map[k]);
-    if(el && p.get(k)) el.value = p.get(k);
+  var KEY = 'lbds_attribution';
+  var MAXAGE = 90 * 24 * 60 * 60 * 1000; // 90 giorni
+  var UTM = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
+  var map = {utm_source:'fonte_utm', utm_medium:'mezzo_utm', utm_campaign:'campagna_utm', utm_content:'contenuto_utm', utm_term:'termine_utm'};
+  var p = new URLSearchParams(location.search);
+  var hasUrl = UTM.some(function(k){ var v = p.get(k); return v !== null && v !== ''; });
+
+  // Legge il blob salvato, se presente e NON scaduto (altrimenti pulisce e ritorna null).
+  function leggiSalvati(){
+    try {
+      var raw = localStorage.getItem(KEY);
+      if (!raw) return null;
+      var o = JSON.parse(raw);
+      if (!o || typeof o.ts !== 'number' || (Date.now() - o.ts) > MAXAGE) {
+        try { localStorage.removeItem(KEY); } catch(e){}
+        return null;
+      }
+      return o;
+    } catch(e){ return null; }
   }
+
+  // === SCRITTURA (unico punto) — LAST TOUCH: sovrascrive sempre il click precedente. ===
+  //     Per passare a FIRST TOUCH basta scrivere solo se non esiste gia' un blob valido:
+  //     racchiudere il setItem in  if(!leggiSalvati()){ ... }  . Nient'altro da cambiare.
+  if (hasUrl) {
+    var blob = { ts: Date.now() };
+    UTM.forEach(function(k){ var v = p.get(k); blob[k] = (v === null ? '' : v); }); // campo mancante = "" (stessa campagna)
+    try { localStorage.setItem(KEY, JSON.stringify(blob)); } catch(e){ /* storage non disponibile: si prosegue con l'URL */ }
+  }
+
+  // === LETTURA + POPOLAMENTO campi nascosti — precedenza: URL corrente > localStorage (non scaduto) > vuoto ===
+  var salvati = leggiSalvati();
+  UTM.forEach(function(k){
+    var el = document.getElementById(map[k]);
+    if (!el) return;
+    var vUrl = p.get(k);
+    if (vUrl !== null && vUrl !== '') { el.value = vUrl; }              // 1) URL corrente (rete di sicurezza se localStorage ko)
+    else if (salvati && typeof salvati[k] === 'string') { el.value = salvati[k]; } // 2) blob salvato non scaduto
+    // 3) altrimenti resta "" (comportamento odierno)
+  });
 })();
 // ---- consenso e caricamento tracker ----
 function loadTracking(){

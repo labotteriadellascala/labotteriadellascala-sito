@@ -571,5 +571,18 @@ function lbdsCookieReopen(){
   });
 })();
 </script>
+<!-- Persistenza UTM (LAST-TOUCH, 90gg) - solo scrittura; lettura/popolamento avviene sul form in index.html -->
+<script>
+(function(){
+  try{
+    var UTM=['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
+    var p=new URLSearchParams(location.search);
+    if(!UTM.some(function(k){var v=p.get(k);return v!==null&&v!=='';})) return;
+    var blob={ts:Date.now()};
+    UTM.forEach(function(k){var v=p.get(k);blob[k]=(v===null?'':v);});
+    localStorage.setItem('lbds_attribution',JSON.stringify(blob)); // LAST TOUCH: sovrascrive sempre
+  }catch(e){}
+})();
+</script>
 </body>
 </html>
