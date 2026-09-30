@@ -164,6 +164,9 @@
           <div class="field"><label>Codice SDI <span style="text-transform:none;color:var(--steel-soft)">(fatturazione, facoltativo)</span></label><input id="a-sdi" maxlength="7"></div>
           <div class="field"><label>PEC <span style="text-transform:none;color:var(--steel-soft)">(alternativa allo SDI)</span></label><input id="a-pec" type="email"></div>
         </div>
+        <div class="field"><label>Data di consegna richiesta <span style="text-transform:none;color:var(--steel-soft)">(facoltativa)</span></label><input id="a-consegna" type="date">
+          <p style="margin:6px 0 0;font-size:12.5px;color:var(--steel-soft);line-height:1.5">Non è obbligatoria: se non indichi nulla si ritengono validi i tempi di consegna previsti dalle <a href="condizioni-vendita.html" target="_blank" rel="noopener" style="color:var(--copper-deep);text-decoration:underline">Condizioni di vendita</a>. La data indicata è una richiesta, non un impegno: la confermiamo noi in base al piano di produzione.</p>
+        </div>
         <div class="hp-field" aria-hidden="true"><label>Azienda</label><input type="text" id="azienda_extra" tabindex="-1" autocomplete="off"></div>
         <p style="margin:6px 0 14px;font-size:13.5px;color:var(--steel-soft)">Accettando dichiari di aver letto e accettato le <a href="condizioni-vendita.html" target="_blank" rel="noopener" style="color:var(--copper-deep);font-weight:600;text-decoration:underline">Condizioni di vendita</a>; il versamento della caparra ne costituisce accettazione.</p>
         <div class="actions">
@@ -269,6 +272,10 @@ function accetta(){
   var btn = el('btn-accetta'); btn.disabled=true; btn.textContent='Invio in corso…';
   rpc('accetta_preventivo', { p_token:TOKEN, p_dati:dati, p_honeypot:hp }).then(function(res){
     if(res && res.ok){
+      // Data di consegna richiesta (facoltativa): salvata con una RPC dedicata, best-effort.
+      // Se fallisce l'accettazione resta comunque valida (valgono i tempi delle Condizioni).
+      var cons = g('a-consegna');
+      if(cons){ rpc('preventivo_consegna_richiesta', { p_token:TOKEN, p_data:cons }).catch(function(){}); }
       el('card-accetta').style.display='none';
       el('esito-banner').innerHTML = '<div class="banner ok">✔ Preventivo accettato, grazie! Ti ricontattiamo noi al più presto.</div>';
       window.scrollTo({top:0,behavior:'smooth'});
@@ -287,6 +294,9 @@ function accetta(){
 }
 
 (function init(){
+  // La data di consegna richiesta non può essere nel passato: minimo domani
+  var ci = el('a-consegna');
+  if(ci){ var dmin=new Date(); dmin.setDate(dmin.getDate()+1); dmin.setMinutes(dmin.getMinutes()-dmin.getTimezoneOffset()); ci.min = dmin.toISOString().slice(0,10); }
   if(!TOKEN){ errore('Link non valido: manca il codice del preventivo.'); return; }
   rpc('preventivo_pubblico', { p_token:TOKEN }).then(function(p){
     if(!p){ errore('Preventivo non trovato o non più disponibile.'); return; }
