@@ -112,12 +112,12 @@
       <h2>Voci</h2>
       <div class="body" style="overflow-x:auto">
         <table class="t">
-          <thead><tr><th>Descrizione</th><th class="r">Q.tà</th><th class="r">Prezzo</th><th class="r">Sconto</th><th class="r">Importo</th></tr></thead>
+          <thead><tr><th>Descrizione</th><th class="r">Q.tà</th><th class="r">Prezzo</th><th class="r" id="th-sconto">Sconto</th><th class="r">Importo</th></tr></thead>
           <tbody id="d-righe"></tbody>
         </table>
         <div class="tot">
-          <div class="row"><span>Importo a listino</span><span id="t-listino">€ 0,00</span></div>
-          <div class="row sc"><span>Sconto</span><span id="t-sconto">− € 0,00</span></div>
+          <div class="row" id="row-listino"><span>Importo a listino</span><span id="t-listino">€ 0,00</span></div>
+          <div class="row sc" id="row-sconto"><span>Sconto</span><span id="t-sconto">− € 0,00</span></div>
           <div class="row grand"><span>Totale</span><span id="t-totale">€ 0,00</span></div>
           <div id="iva-block">
             <div class="row small"><span>di cui imponibile</span><span id="t-imponibile">€ 0,00</span></div>
@@ -211,6 +211,9 @@ function render(p){
 
   var righe = Array.isArray(p.righe) ? p.righe : [];
   var listino = 0;
+  // Colonna "Sconto" solo se almeno una riga ha uno sconto
+  var conScontoRiga = righe.some(function(r){ return (r.sconto||0) > 0; });
+  el('th-sconto').style.display = conScontoRiga ? '' : 'none';
   el('d-righe').innerHTML = righe.map(function(r){
     var prezzo = (r.prezzo!=null ? r.prezzo : r.listino) || 0;
     var qta = r.qta!=null ? r.qta : 1;
@@ -220,9 +223,9 @@ function render(p){
     return '<tr><td>' + (esc(r.desc)||'—') + (sconto>0 ? '<span class="sub">sconto ' + euro(sconto) + '</span>' : '') + '</td>'
       + '<td class="r">' + Number(qta).toLocaleString('it-IT',{maximumFractionDigits:2}) + '</td>'
       + '<td class="r">' + euro(prezzo) + '</td>'
-      + '<td class="r">' + (sconto>0 ? '− ' + euro(sconto) : '—') + '</td>'
+      + (conScontoRiga ? '<td class="r">' + (sconto>0 ? '− ' + euro(sconto) : '—') + '</td>' : '')
       + '<td class="r">' + euro(imp) + '</td></tr>';
-  }).join('') || '<tr><td colspan="5">—</td></tr>';
+  }).join('') || '<tr><td colspan="' + (conScontoRiga ? 5 : 4) + '">—</td></tr>';
 
   var totale = p.totale!=null ? p.totale : 0;
   var imponibile = p.imponibile!=null ? p.imponibile : totale;
@@ -230,6 +233,10 @@ function render(p){
   var scontoTot = p.sconto_totale!=null ? p.sconto_totale : Math.max(0, listino - totale);
   el('t-listino').textContent = euro(listino || (totale + scontoTot));
   el('t-sconto').textContent = '− ' + euro(scontoTot);
+  // Nessuno sconto → niente "Importo a listino" né "Sconto": il cliente vede solo il Totale
+  var conSconto = scontoTot > 0.005;
+  el('row-listino').style.display = conSconto ? '' : 'none';
+  el('row-sconto').style.display = conSconto ? '' : 'none';
   el('t-totale').textContent = euro(totale);
   el('t-imponibile').textContent = euro(imponibile);
   el('t-ivalbl').textContent = 'di cui IVA ' + (p.iva_percent!=null ? Number(p.iva_percent).toLocaleString('it-IT') : '22') + '%';
