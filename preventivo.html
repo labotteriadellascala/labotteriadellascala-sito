@@ -115,9 +115,15 @@
           <thead><tr><th>Descrizione</th><th class="r">Q.tà</th><th class="r">Prezzo</th><th class="r" id="th-sconto">Sconto</th><th class="r">Importo</th></tr></thead>
           <tbody id="d-righe"></tbody>
         </table>
+        <div id="blocco-incisione" class="no-print" style="border-top:1px solid rgba(0,0,0,.08);margin-top:14px;padding-top:14px">
+          <label style="display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--steel-soft);margin-bottom:6px">Incisione personalizzata <span style="background:var(--copper-deep);color:#fff;border-radius:99px;padding:2px 10px;font-weight:700;letter-spacing:0;text-transform:none">+ € 45,00</span></label>
+          <input id="a-incisione" maxlength="120" placeholder="Es. nome, data, frase da incidere…" style="width:100%" oninput="aggiornaIncisione()">
+          <p style="margin:6px 0 0;font-size:12.5px;color:var(--steel-soft);line-height:1.5"><b>Le incisioni hanno un sovrapprezzo di € 45,00</b> rispetto al preventivo: se scrivi un testo qui sopra, i € 45,00 si aggiungono automaticamente al Totale.</p>
+        </div>
         <div class="tot">
           <div class="row" id="row-listino"><span>Importo a listino</span><span id="t-listino">€ 0,00</span></div>
           <div class="row sc" id="row-sconto"><span>Sconto</span><span id="t-sconto">− € 0,00</span></div>
+          <div class="row" id="row-incisione" style="display:none"><span>Incisione personalizzata</span><span>+ € 45,00</span></div>
           <div class="row grand"><span>Totale</span><span id="t-totale">€ 0,00</span></div>
           <div id="iva-block">
             <div class="row small"><span>di cui imponibile</span><span id="t-imponibile">€ 0,00</span></div>
@@ -259,6 +265,11 @@ function render(p){
   }
   if(p.note){ el('card-note').style.display=''; el('d-note').textContent = p.note; }
 
+  // Incisione: proponibile solo finché il preventivo è accettabile (dopo, il prezzo è chiuso)
+  if(p.stato==='accettato' || p.gia_accettato || p.stato==='scaduto'){
+    var bi = el('blocco-incisione'); if(bi) bi.style.display='none';
+  }
+
   // Stato accettazione
   if(p.stato==='accettato' || p.gia_accettato){
     el('esito-banner').innerHTML = '<div class="banner ok">✔ Questo preventivo è già stato accettato. Grazie! Ti ricontattiamo noi per i passi successivi.</div>';
@@ -270,6 +281,22 @@ function render(p){
   mostra('vista');
 }
 
+// Incisione personalizzata: sovrapprezzo fisso che si somma al Totale se il cliente scrive un testo
+var INCISIONE_PREZZO = 45;
+function aggiornaIncisione(){
+  if(!PREV) return;
+  var attiva = !!((el('a-incisione')||{value:''}).value.trim());
+  var ri = el('row-incisione'); if(ri) ri.style.display = attiva ? '' : 'none';
+  var pct = PREV.iva_percent!=null ? Number(PREV.iva_percent) : 22;
+  var T0 = PREV.totale!=null ? PREV.totale : 0;
+  var I0 = PREV.imponibile!=null ? PREV.imponibile : T0;
+  var add = attiva ? INCISIONE_PREZZO : 0;
+  var addImp = add / (1 + pct/100);
+  el('t-totale').textContent = euro(T0 + add);
+  el('t-imponibile').textContent = euro(I0 + addImp);
+  el('t-iva').textContent = euro((T0 + add) - (I0 + addImp));
+}
+
 function accetta(){
   var g = function(id){ var e=el(id); return e ? e.value.trim() : ''; };
   var nome=g('a-nome'), email=g('a-email'), tel=g('a-tel');
@@ -277,7 +304,20 @@ function accetta(){
   var dati = { nome:nome, email:email, telefono:tel, indirizzo:g('a-ind'), cap:g('a-cap'), citta:g('a-citta'), prov:g('a-prov'), cf_piva:g('a-cf'), sdi:g('a-sdi'), pec:g('a-pec') };
   var hp = (el('azienda_extra')||{}).value || '';
   var btn = el('btn-accetta'); btn.disabled=true; btn.textContent='Invio in corso…';
-  rpc('accetta_preventivo', { p_token:TOKEN, p_dati:dati, p_honeypot:hp }).then(function(res){
+  // Incisione: tocca il prezzo, quindi si salva PRIMA dell'accettazione e in modo
+  // bloccante — se non riesce, l'accettazione non parte (niente totali ambigui).
+  var incisione = g('a-incisione');
+  var passo1 = incisione
+    ? rpc('preventivo_incisione', { p_token:TOKEN, p_testo:incisione })
+    : Promise.resolve({ ok:true });
+  passo1.then(function(r1){
+    if(!(r1 && r1.ok)){
+      el('accetta-msg').innerHTML = '<div class="banner err">Non siamo riusciti a registrare l\'incisione: riprova tra poco (oppure svuota il campo incisione e accetta senza).</div>';
+      btn.disabled=false; btn.textContent='Accetto il preventivo';
+      throw new Error('incisione_fallita');
+    }
+    return rpc('accetta_preventivo', { p_token:TOKEN, p_dati:dati, p_honeypot:hp });
+  }).then(function(res){
     if(res && res.ok){
       // Data di consegna richiesta (facoltativa): salvata con una RPC dedicata, best-effort.
       // Se fallisce l'accettazione resta comunque valida (valgono i tempi delle Condizioni).
@@ -294,7 +334,8 @@ function accetta(){
       el('accetta-msg').innerHTML = '<div class="banner err">'+msg+'</div>';
       btn.disabled=false; btn.textContent='Accetto il preventivo';
     }
-  }).catch(function(){
+  }).catch(function(err){
+    if (err && err.message === 'incisione_fallita') return;   // messaggio già mostrato
     el('accetta-msg').innerHTML = '<div class="banner err">Problema di connessione. Riprova tra poco.</div>';
     btn.disabled=false; btn.textContent='Accetto il preventivo';
   });
