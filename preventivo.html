@@ -53,6 +53,14 @@
   @media(max-width:560px){.grid2,.grid3{grid-template-columns:1fr}}
   .field{margin-bottom:12px}
   .hint{font-size:12px;color:var(--steel-soft);margin-top:6px}
+  /* Incisione: domanda Sì/No */
+  .inc-q{margin:10px 0 8px;font-size:14.5px;font-weight:600;color:var(--steel)}
+  .inc-opts{display:flex;gap:22px;margin:0 0 10px;flex-wrap:wrap}
+  .inc-opts label{display:flex;align-items:center;gap:8px;font-size:14.5px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--steel);margin:0;cursor:pointer}
+  .inc-opts input{width:auto;margin:0;accent-color:var(--copper)}
+  /* Campo obbligatorio mancante */
+  input.manca{border-color:var(--danger);box-shadow:0 0 0 3px rgba(162,59,47,.10)}
+  .inc-opts.manca{outline:2px solid var(--danger);outline-offset:6px;border-radius:4px}
   button{font-family:var(--sans);cursor:pointer;border:0;border-radius:8px;font-size:15px;font-weight:600;padding:12px 18px}
   .btn-primary{background:var(--copper);color:#fff;border:1px solid var(--copper-deep);width:100%}
   .btn-primary:hover{background:var(--copper-deep)}
@@ -117,8 +125,15 @@
         </table>
         <div id="blocco-incisione" class="no-print" style="border-top:1px solid rgba(0,0,0,.08);margin-top:14px;padding-top:14px">
           <label style="display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--steel-soft);margin-bottom:6px">Incisione personalizzata <span style="background:var(--copper-deep);color:#fff;border-radius:99px;padding:2px 10px;font-weight:700;letter-spacing:0;text-transform:none">+ € 45,00</span></label>
-          <input id="a-incisione" maxlength="120" placeholder="Es. nome, data, frase da incidere…" style="width:100%" oninput="aggiornaIncisione()">
-          <p style="margin:6px 0 0;font-size:12.5px;color:var(--steel-soft);line-height:1.5"><b>Le incisioni hanno un sovrapprezzo di € 45,00</b> rispetto al preventivo: se scrivi un testo qui sopra, i € 45,00 si aggiungono automaticamente al Totale.</p>
+          <p class="inc-q">Vuoi incidere una frase personalizzata? *</p>
+          <div class="inc-opts" id="inc-opts">
+            <label><input type="radio" name="incisione-scelta" value="si" onchange="aggiornaIncisione()"> Sì <span style="color:var(--steel-soft)">(+ € 45,00)</span></label>
+            <label><input type="radio" name="incisione-scelta" value="no" onchange="aggiornaIncisione()"> No</label>
+          </div>
+          <div id="incisione-campo" style="display:none">
+            <input id="a-incisione" maxlength="120" placeholder="Es. nome, data, frase da incidere…" style="width:100%">
+            <p style="margin:6px 0 0;font-size:12.5px;color:var(--steel-soft);line-height:1.5">La frase non è obbligatoria adesso: hai <b>15 giorni di tempo</b> per comunicarcela (rispondendo alla nostra email o su WhatsApp).</p>
+          </div>
         </div>
         <div class="tot">
           <div class="row" id="row-listino"><span>Importo a listino</span><span id="t-listino">€ 0,00</span></div>
@@ -153,19 +168,19 @@
     <div class="card no-print" id="card-accetta" style="display:none">
       <h2>Accetta il preventivo</h2>
       <div class="body">
-        <p style="margin-top:0;font-size:14px;color:var(--steel-soft)">Compila i tuoi dati e conferma. L'accettazione non è un pagamento: ti ricontattiamo noi per i passi successivi.</p>
+        <p style="margin-top:0;font-size:14px;color:var(--steel-soft)">Compila i tuoi dati e conferma. L'accettazione non è un pagamento: ti ricontattiamo noi per i passi successivi. I campi con * sono obbligatori.</p>
         <div class="field"><label>Nome / Ragione sociale *</label><input id="a-nome" autocomplete="name"></div>
         <div class="grid2">
           <div class="field"><label>Email *</label><input id="a-email" type="email" autocomplete="email"></div>
           <div class="field"><label>Telefono *</label><input id="a-tel" type="tel" autocomplete="tel"></div>
         </div>
-        <div class="field"><label>Indirizzo</label><input id="a-ind" autocomplete="street-address"></div>
+        <div class="field"><label>Indirizzo *</label><input id="a-ind" autocomplete="street-address"></div>
         <div class="grid3">
-          <div class="field"><label>CAP</label><input id="a-cap" inputmode="numeric"></div>
-          <div class="field"><label>Città</label><input id="a-citta"></div>
-          <div class="field"><label>Prov.</label><input id="a-prov" maxlength="2"></div>
+          <div class="field"><label>CAP *</label><input id="a-cap" inputmode="numeric"></div>
+          <div class="field"><label>Città *</label><input id="a-citta"></div>
+          <div class="field"><label>Prov. *</label><input id="a-prov" maxlength="2"></div>
         </div>
-        <div class="field"><label>Codice Fiscale / P.IVA</label><input id="a-cf"></div>
+        <div class="field"><label>Codice Fiscale / P.IVA *</label><input id="a-cf"></div>
         <div class="grid2">
           <div class="field"><label>Codice SDI <span style="text-transform:none;color:var(--steel-soft)">(fatturazione, facoltativo)</span></label><input id="a-sdi" maxlength="7"></div>
           <div class="field"><label>PEC <span style="text-transform:none;color:var(--steel-soft)">(alternativa allo SDI)</span></label><input id="a-pec" type="email"></div>
@@ -281,11 +296,19 @@ function render(p){
   mostra('vista');
 }
 
-// Incisione personalizzata: sovrapprezzo fisso che si somma al Totale se il cliente scrive un testo
+// Incisione personalizzata: domanda obbligatoria Sì/No. Con "Sì" i € 45,00 si sommano
+// al Totale e compare il campo frase (facoltativo: 15 giorni per comunicarla).
 var INCISIONE_PREZZO = 45;
+var INCISIONE_SEGNAPOSTO = '(frase da comunicare entro 15 giorni)';
+function incisioneScelta(){
+  var r = document.querySelector('input[name="incisione-scelta"]:checked');
+  return r ? r.value : '';
+}
 function aggiornaIncisione(){
   if(!PREV) return;
-  var attiva = !!((el('a-incisione')||{value:''}).value.trim());
+  var attiva = incisioneScelta()==='si';
+  var ic = el('incisione-campo'); if(ic) ic.style.display = attiva ? '' : 'none';
+  var io = el('inc-opts'); if(io) io.classList.remove('manca');
   var ri = el('row-incisione'); if(ri) ri.style.display = attiva ? '' : 'none';
   var pct = PREV.iva_percent!=null ? Number(PREV.iva_percent) : 22;
   var T0 = PREV.totale!=null ? PREV.totale : 0;
@@ -299,20 +322,50 @@ function aggiornaIncisione(){
 
 function accetta(){
   var g = function(id){ var e=el(id); return e ? e.value.trim() : ''; };
-  var nome=g('a-nome'), email=g('a-email'), tel=g('a-tel');
-  if(!nome || (!email && !tel)){ el('accetta-msg').innerHTML = '<div class="banner err">Inserisci almeno nome e un recapito (email o telefono).</div>'; return; }
-  var dati = { nome:nome, email:email, telefono:tel, indirizzo:g('a-ind'), cap:g('a-cap'), citta:g('a-citta'), prov:g('a-prov'), cf_piva:g('a-cf'), sdi:g('a-sdi'), pec:g('a-pec') };
+  // Campi obbligatori: tutti tranne SDI, PEC e data di consegna richiesta.
+  var OBBLIGATORI = [
+    ['a-nome','Nome / Ragione sociale'], ['a-email','Email'], ['a-tel','Telefono'],
+    ['a-ind','Indirizzo'], ['a-cap','CAP'], ['a-citta','Città'], ['a-prov','Prov.'],
+    ['a-cf','Codice Fiscale / P.IVA']
+  ];
+  var mancanti = [];
+  OBBLIGATORI.forEach(function(c){
+    var e = el(c[0]); var vuoto = !g(c[0]);
+    if(e) e.classList.toggle('manca', vuoto);
+    if(vuoto) mancanti.push(c[1]);
+  });
+  var scelta = incisioneScelta();
+  var bloccoInc = el('blocco-incisione');
+  var incVisibile = bloccoInc && bloccoInc.style.display !== 'none';
+  if(incVisibile && !scelta){
+    mancanti.push('Incisione personalizzata (Sì o No)');
+    var io = el('inc-opts'); if(io) io.classList.add('manca');
+  }
+  if(mancanti.length){
+    el('accetta-msg').innerHTML = '<div class="banner err">Compila i campi obbligatori: <b>' + esc(mancanti.join(', ')) + '</b>.</div>';
+    return;
+  }
+  var email = g('a-email');
+  if(email.indexOf('@') < 1){
+    el('a-email').classList.add('manca');
+    el('accetta-msg').innerHTML = '<div class="banner err">Controlla l\'indirizzo email: non sembra valido.</div>';
+    return;
+  }
+  el('accetta-msg').innerHTML = '';
+  var dati = { nome:g('a-nome'), email:email, telefono:g('a-tel'), indirizzo:g('a-ind'), cap:g('a-cap'), citta:g('a-citta'), prov:g('a-prov'), cf_piva:g('a-cf'), sdi:g('a-sdi'), pec:g('a-pec') };
   var hp = (el('azienda_extra')||{}).value || '';
   var btn = el('btn-accetta'); btn.disabled=true; btn.textContent='Invio in corso…';
   // Incisione: tocca il prezzo, quindi si salva PRIMA dell'accettazione e in modo
   // bloccante — se non riesce, l'accettazione non parte (niente totali ambigui).
-  var incisione = g('a-incisione');
+  // "Sì" senza frase → si registra il segnaposto, così il sovrapprezzo resta agganciato
+  // al preventivo e la frase arriva con calma (15 giorni). "No" → niente incisione.
+  var incisione = (incVisibile && scelta==='si') ? (g('a-incisione') || INCISIONE_SEGNAPOSTO) : '';
   var passo1 = incisione
     ? rpc('preventivo_incisione', { p_token:TOKEN, p_testo:incisione })
     : Promise.resolve({ ok:true });
   passo1.then(function(r1){
     if(!(r1 && r1.ok)){
-      el('accetta-msg').innerHTML = '<div class="banner err">Non siamo riusciti a registrare l\'incisione: riprova tra poco (oppure svuota il campo incisione e accetta senza).</div>';
+      el('accetta-msg').innerHTML = '<div class="banner err">Non siamo riusciti a registrare l\'incisione: riprova tra poco (oppure scegli "No" e accetta senza incisione).</div>';
       btn.disabled=false; btn.textContent='Accetto il preventivo';
       throw new Error('incisione_fallita');
     }
